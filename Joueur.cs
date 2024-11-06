@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace BoggleGame
 {
-    public class Program
+    public class Joueur
     {
-        static void Main(string[] args)
-        {
 
-        }
     }
 }
