@@ -1,5 +1,11 @@
-#visual studio
+*.suo
+*.user
 .vs/
+[Bb]in/
+[Oo]bj/
+_UpgradeReport_Files/
+[Pp]ackages/
 
-#To do list
-TODO.md
+Thumbs.db
+Desktop.ini
+.DS_Store
