@@ -8,6 +8,10 @@ namespace BoggleGame
 {
    public class De
     {
+        #region
+        public De()
+        {
 
+        }
     }
 }

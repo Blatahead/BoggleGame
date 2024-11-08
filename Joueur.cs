@@ -8,6 +8,12 @@ namespace BoggleGame
 {
     public class Joueur
     {
-        public Joueur() { }
+        #region Constructeurs
+        public Joueur()
+        {
+            
+        }
+
+        #endregion
     }
 }
