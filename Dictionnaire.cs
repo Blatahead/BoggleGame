@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace BoggleGame
 {
+    /// <summary>
+    /// ytftyffu
+    /// </summary>
     public class Dictionnaire
     {
+        
 
     }
+   
 }
