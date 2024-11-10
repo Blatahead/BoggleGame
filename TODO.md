@@ -1,9 +1,10 @@
 ﻿#TODO List
 - [ ] Cahier des charges (graphique UML)
+
 - [ ] INTERFACE GRAPHIQUE
 
 - [ ] MENU DE CONFIGURATIONS
-	- [ ] Afficher si Dictionnaire trié ou pas 
+	- [ ] Afficher si Dictionnaire.txt trié ou pas
 	- [ ] Langue
 		- [ ] Français (Défaut)
 		- [ ] Set anglais si choisi
@@ -11,7 +12,7 @@
 		- [ ] 4x4 (Défaut)
 		- [ ] Set nouvelle valeur
 	- [ ] Pseudo des joueurs (2 min)
-	- [ ] Temps de partie totale par joueur 
+	- [ ] Temps de partie totale par joueur
 		- [ ] 3 minutes (défaut)
 		- [ ] Set nouvelle valeur
 	- [ ] Temps de plateau par joueur
