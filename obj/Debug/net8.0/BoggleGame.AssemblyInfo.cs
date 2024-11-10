@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BoggleGame")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b38baccee9ad471a7af5df48d946907052113a7d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+38e03016ef353fb8938b41a73ecc9da4a19b5c77")]
 [assembly: System.Reflection.AssemblyProductAttribute("BoggleGame")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BoggleGame")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
