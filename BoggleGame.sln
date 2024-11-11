@@ -9,11 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoggleGameWinForm", "Boggle
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{D9496960-B640-4538-9017-FA611D126870}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Éléments de solution", "Éléments de solution", "{336831CB-9816-4D55-81C2-2569198BD6CA}"
-	ProjectSection(SolutionItems) = preProject
-		C:\Users\ajx20\Downloads\README.md = C:\Users\ajx20\Downloads\README.md
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
