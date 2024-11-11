@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoggleTests", "SolutionBoogleGame\BoggleTests.csproj", "{2A09BD9A-9D89-4D7C-8E4E-ED16B2468DBC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoggleGameWinForm", "BoggleGameWPF\BoggleGameWinForm.csproj", "{F98CAD75-6478-4853-B19C-552B281CD25D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{D9496960-B640-4538-9017-FA611D126870}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Éléments de solution", "Éléments de solution", "{613527A4-F870-4B5E-8EE2-8876357BCE36}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		BoggleGameWPF\README.md = BoggleGameWPF\README.md
+		BoggleGameWPF\TODO.md = BoggleGameWPF\TODO.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A09BD9A-9D89-4D7C-8E4E-ED16B2468DBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A09BD9A-9D89-4D7C-8E4E-ED16B2468DBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A09BD9A-9D89-4D7C-8E4E-ED16B2468DBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A09BD9A-9D89-4D7C-8E4E-ED16B2468DBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F98CAD75-6478-4853-B19C-552B281CD25D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F98CAD75-6478-4853-B19C-552B281CD25D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F98CAD75-6478-4853-B19C-552B281CD25D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F98CAD75-6478-4853-B19C-552B281CD25D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9496960-B640-4538-9017-FA611D126870}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9496960-B640-4538-9017-FA611D126870}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9496960-B640-4538-9017-FA611D126870}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9496960-B640-4538-9017-FA611D126870}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {35010CD5-9414-4D26-A750-7B31718BBA55}
+	EndGlobalSection
+EndGlobal
