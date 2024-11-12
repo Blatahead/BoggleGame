@@ -48,7 +48,7 @@
             Titre.TabIndex = 0;
             Titre.Text = "BoggleGame";
             Titre.TextAlign = ContentAlignment.MiddleCenter;
-            Titre.Click += label1_Click;
+
             // 
             // contextMenuStrip1
             // 
@@ -63,6 +63,7 @@
             newGameBtn.TabIndex = 1;
             newGameBtn.Text = "Nouvelle partie";
             newGameBtn.UseVisualStyleBackColor = true;
+            newGameBtn.Click += newGameBtn_Click;
             // 
             // button2
             // 
@@ -94,7 +95,6 @@
             Controls.Add(Titre);
             Name = "Accueil";
             Text = "Form1";
-            Load += Form1_Load;
             ResumeLayout(false);
         }
 
