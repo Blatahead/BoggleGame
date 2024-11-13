@@ -48,7 +48,6 @@
             Titre.TabIndex = 0;
             Titre.Text = "BoggleGame";
             Titre.TextAlign = ContentAlignment.MiddleCenter;
-
             // 
             // contextMenuStrip1
             // 
