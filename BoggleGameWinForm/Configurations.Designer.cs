@@ -34,6 +34,7 @@
             comboBox1 = new ComboBox();
             label4 = new Label();
             button1 = new Button();
+            label5 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -100,12 +101,25 @@
             button1.Text = "Trier";
             button1.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Young Serif", 15F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.White;
+            label5.Location = new Point(61, 257);
+            label5.Name = "label5";
+            label5.Size = new Size(191, 33);
+            label5.TabIndex = 6;
+            label5.Text = "Taille du plateau :";
+            label5.Click += label5_Click;
+            // 
             // Configurations
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlDarkDark;
             ClientSize = new Size(956, 520);
+            Controls.Add(label5);
             Controls.Add(button1);
             Controls.Add(label4);
             Controls.Add(comboBox1);
@@ -126,5 +140,6 @@
         private ComboBox comboBox1;
         private Label label4;
         private Button button1;
+        private Label label5;
     }
 }
