@@ -9,7 +9,7 @@ namespace BoggleGame
 
         private void newGameBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Molo l'asticot Áa arrive");
+            MessageBox.Show("Merci d'avoir cliqu√© !");
         }
     }
 }
