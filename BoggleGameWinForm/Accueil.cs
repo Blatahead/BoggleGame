@@ -9,7 +9,7 @@ namespace BoggleGame
 
         private void newGameBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Merci d'avoir cliqué ! test de push");
+            MessageBox.Show("Merci d'avoir cliqué ! final test");
         }
     }
 }
