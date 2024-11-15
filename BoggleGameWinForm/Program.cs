@@ -16,14 +16,15 @@ namespace BoggleGame
             Console.WriteLine("Le jeu du Boggle");
             Console.WriteLine();
             Console.WriteLine("Explications:");
-            Console.WriteLine("Chacun son tour, les joueurs vont essayer de réaliser des mots dans un temps imparti sur différents plateaux. \nEn fonction du type de lettres, un joueur peut gagner plus ou moins de point (interdiction de repasser sur les mêmes lettres!).\nEnfin, la partie est terminée après 6 minutes.");
+            Console.WriteLine("Chacun son tour, les joueurs vont essayer de rÃ©aliser des mots dans un temps imparti sur diffÃ©rents plateaux. \nEn fonction du type de lettres, un joueur peut gagner plus ou moins de point (interdiction de repasser sur les mÃªmes lettres!).\nEnfin, la partie est terminÃ©e aprÃ¨s 6 minutes.");
 
-            Console.WriteLine("test");
+            Console.WriteLine("NuclÃ©a");
+           
         }
         /// <summary>
-        /// Méthode de création de plateau
+        /// MÃ©thode de crÃ©ation de plateau
         /// </summary>
-        /// <param name="taille_plateau">taille du plateau renseigné par l'utilisateur</param>
+        /// <param name="taille_plateau">taille du plateau renseignÃ© par l'utilisateur</param>
 
         static int[,] Creation_Plateau(int taille_plateau)
         {
