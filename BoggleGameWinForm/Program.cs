@@ -14,6 +14,7 @@ namespace BoggleGame
             ApplicationConfiguration.Initialize();
             Application.Run(new Accueil());        
         }
+
         /// <summary>
         /// Méthode de création de plateau
         /// </summary>

@@ -9,7 +9,7 @@ namespace BoggleGame
             InitializeComponent();
         }
 
-        private void chargement_Accueil(object sender, EventArgs e)
+        private void Chargement_Accueil(object sender, EventArgs e)
         {
             int hauteur = Screen.PrimaryScreen.Bounds.Height;
             int largeur = Screen.PrimaryScreen.Bounds.Width;
@@ -17,16 +17,23 @@ namespace BoggleGame
             this.Size = new Size(largeur, hauteur);
         }
 
-        private void newGameBtn_Click(object sender, EventArgs e)
+        private void ButtonGameClick(object sender, EventArgs e)
         {
-            MessageBox.Show("Merci d'avoir cliqué ! final test");
+            //MessageBox.Show("Merci d'avoir cliqué ! final test");
+            Partie partie = new Partie();
+            partie.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonRulesClick(object sender, EventArgs e)
         {
             Regles regles = new Regles();
-
             regles.Show();
+        }
+
+        private void buttonConfigClick(object sender, EventArgs e)
+        {
+            Configurations configurations = new Configurations();
+            configurations.Show();
         }
     }
 }

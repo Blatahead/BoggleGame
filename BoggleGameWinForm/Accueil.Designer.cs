@@ -3,12 +3,12 @@
     partial class Accueil
     {
         /// <summary>
-        ///  Required designer variable.
+        ///  Variable designer requise (par défault dans le code)
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        ///  Clean up any resources being used.
+        /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
@@ -20,11 +20,11 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Designer Forms Accueil  
 
         /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
+        ///  Méthode qui s'éxécute au lancement du program avec toutes les 
+        ///  propritétés et méthodes lors du loading
         /// </summary>
         private void InitializeComponent()
         {
@@ -32,8 +32,8 @@
             Titre = new Label();
             contextMenuStrip1 = new ContextMenuStrip(components);
             newGameBtn = new Button();
-            button2 = new Button();
-            button3 = new Button();
+            buttonRules = new Button();
+            buttonConfig = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -42,7 +42,7 @@
             // 
             Titre.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             Titre.BackColor = Color.Transparent;
-            Titre.Font = new Font("Young Serif", 50F, FontStyle.Bold);
+            Titre.Font = new Font("Young Serif", 70F, FontStyle.Bold);
             Titre.ForeColor = SystemColors.ButtonHighlight;
             Titre.Location = new Point(0, 0);
             Titre.Margin = new Padding(0);
@@ -60,52 +60,59 @@
             // newGameBtn
             // 
             newGameBtn.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            newGameBtn.Location = new Point(3, 118);
+            newGameBtn.Font = new Font("Segoe UI", 15F);
+            newGameBtn.Location = new Point(10, 79);
+            newGameBtn.Margin = new Padding(10);
             newGameBtn.Name = "newGameBtn";
-            newGameBtn.Size = new Size(301, 41);
+            newGameBtn.Size = new Size(283, 70);
             newGameBtn.TabIndex = 1;
             newGameBtn.Text = "Nouvelle partie";
             newGameBtn.UseVisualStyleBackColor = true;
-            newGameBtn.Click += newGameBtn_Click;
+            newGameBtn.Click += ButtonGameClick;
             // 
-            // button2
+            // buttonRules
             // 
-            button2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            button2.Location = new Point(310, 118);
-            button2.Name = "button2";
-            button2.Size = new Size(301, 41);
-            button2.TabIndex = 2;
-            button2.Text = "Règles du jeu";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            buttonRules.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            buttonRules.Font = new Font("Segoe UI", 15F);
+            buttonRules.Location = new Point(313, 79);
+            buttonRules.Margin = new Padding(10);
+            buttonRules.Name = "buttonRules";
+            buttonRules.Size = new Size(283, 70);
+            buttonRules.TabIndex = 2;
+            buttonRules.Text = "Règles du jeu";
+            buttonRules.UseVisualStyleBackColor = true;
+            buttonRules.Click += buttonRulesClick;
             // 
-            // button3
+            // buttonConfig
             // 
-            button3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            button3.DialogResult = DialogResult.Cancel;
-            button3.Location = new Point(617, 118);
-            button3.Name = "button3";
-            button3.Size = new Size(290, 41);
-            button3.TabIndex = 3;
-            button3.Text = "Configurations";
-            button3.UseVisualStyleBackColor = true;
+            buttonConfig.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            buttonConfig.Font = new Font("Segoe UI", 15F);
+            buttonConfig.Location = new Point(616, 79);
+            buttonConfig.Margin = new Padding(10);
+            buttonConfig.Name = "buttonConfig";
+            buttonConfig.Size = new Size(286, 70);
+            buttonConfig.TabIndex = 3;
+            buttonConfig.Text = "Configurations";
+            buttonConfig.UseVisualStyleBackColor = true;
+            buttonConfig.Click += buttonConfigClick;
             // 
             // tableLayoutPanel1
             // 
-            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel1.AutoSize = true;
             tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 295F));
-            tableLayoutPanel1.Controls.Add(button2, 1, 0);
-            tableLayoutPanel1.Controls.Add(button3, 1, 0);
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.Controls.Add(buttonRules, 1, 0);
             tableLayoutPanel1.Controls.Add(newGameBtn, 0, 0);
-            tableLayoutPanel1.Location = new Point(0, 214);
+            tableLayoutPanel1.Controls.Add(buttonConfig, 2, 0);
+            tableLayoutPanel1.Cursor = Cursors.Hand;
+            tableLayoutPanel1.Location = new Point(0, 263);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(910, 277);
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Size = new Size(912, 228);
             tableLayoutPanel1.TabIndex = 4;
             // 
             // Accueil
@@ -119,17 +126,18 @@
             Name = "Accueil";
             Text = "Form1";
             WindowState = FormWindowState.Maximized;
-            Load += chargement_Accueil;
+            Load += Chargement_Accueil;
             tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
         private ContextMenuStrip contextMenuStrip1;
         public Label Titre;
         private Button newGameBtn;
-        private Button button2;
-        private Button button3;
+        private Button buttonRules;
+        private Button buttonConfig;
         private TableLayoutPanel tableLayoutPanel1;
     }
 }
