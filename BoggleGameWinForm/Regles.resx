@@ -117,4 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="detailsRegles.Text" xml:space="preserve">
+    <value>Chacun leurs tours, les joueurs vont essayer de former des mots dans un temps imparti sur différents plateaux. 
+
+En fonction des lettres, un joueur peut gagner plus ou moins de point (interdiction de repasser sur les mêmes lettres) que son adversaire.
+
+Enfin, la partie se termine après 6 minutes, soit  3 tours de 2 minutes par joueur (par défaut).
+
+Si vous souhaitez modifier ces paramètres, allez dans l'onglet condifugrations de l'Accueil.</value>
+  </data>
 </root>

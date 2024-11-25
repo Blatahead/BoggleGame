@@ -1,3 +1,5 @@
+using BoggleGameWinForm;
+
 namespace BoggleGame
 {
     internal static class Program
@@ -9,16 +11,7 @@ namespace BoggleGame
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new Accueil());
-
-            Console.WriteLine("Le jeu du Boggle");
-            Console.WriteLine();
-            Console.WriteLine("Explications:");
-            Console.WriteLine("Chacun son tour, les joueurs vont essayer de réaliser des mots dans un temps imparti sur différents plateaux. \nEn fonction du type de lettres, un joueur peut gagner plus ou moins de point (interdiction de repasser sur les mêmes lettres!).\nEnfin, la partie est terminée après 6 minutes.");
-
-            Console.WriteLine("Nucléa");
-            Console.WriteLine("final test");
-           
+            Application.Run(new Accueil());        
         }
         /// <summary>
         /// Méthode de création de plateau
@@ -31,7 +24,6 @@ namespace BoggleGame
             if (taille_plateau > 0)
             {
                 mat = new int[taille_plateau, taille_plateau];
-
             }
             return mat;
 
