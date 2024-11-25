@@ -1,4 +1,5 @@
 using BoggleGameWinForm;
+using System.Diagnostics;
 
 namespace BoggleGame
 {
@@ -27,6 +28,23 @@ namespace BoggleGame
             }
             return mat;
 
+        }
+        static void Temps_de_partie()
+        {
+            DateTime timer = DateTime.Now;
+            TimeSpan durée = TimeSpan.FromMinutes(6);
+            while (true)
+            {
+                TimeSpan elapsed = DateTime.Now - timer;
+                Console.Clear();
+                Console.WriteLine("Temps écoulée: "+elapsed.Seconds+"secondes");
+
+                if (elapsed<durée)
+                {
+                    Console.WriteLine("Votre tour est terminé!");
+                    break;
+                }
+            }
         }
     }
 }
