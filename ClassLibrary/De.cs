@@ -10,7 +10,6 @@ namespace BoggleGame
     {
         int taille_plateau;
 
-
         #region Constructeurs
         public De(int taille_plateau)
         {
@@ -18,11 +17,10 @@ namespace BoggleGame
 
         }
         #endregion
+
         #region Propriétés
         public int Taille_plateau
-            {
-            get { return this.taille_plateau; }
-            }
+        { get { return this.taille_plateau; } }
         #endregion
 
     }

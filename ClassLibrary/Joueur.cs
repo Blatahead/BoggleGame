@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BoggleGame
+namespace ClassLibrary
 {
     public class Joueur
     {
