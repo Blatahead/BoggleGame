@@ -32,8 +32,8 @@
             Titre = new Label();
             contextMenuStrip1 = new ContextMenuStrip(components);
             newGameBtn = new Button();
-            button2 = new Button();
-            button3 = new Button();
+            buttonRules = new Button();
+            buttonConfig = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -60,52 +60,53 @@
             // newGameBtn
             // 
             newGameBtn.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            newGameBtn.Location = new Point(3, 118);
+            newGameBtn.Location = new Point(3, 3);
             newGameBtn.Name = "newGameBtn";
-            newGameBtn.Size = new Size(301, 41);
+            newGameBtn.Size = new Size(297, 50);
             newGameBtn.TabIndex = 1;
             newGameBtn.Text = "Nouvelle partie";
             newGameBtn.UseVisualStyleBackColor = true;
             newGameBtn.Click += newGameBtn_Click;
             // 
-            // button2
+            // buttonRules
             // 
-            button2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            button2.Location = new Point(310, 118);
-            button2.Name = "button2";
-            button2.Size = new Size(301, 41);
-            button2.TabIndex = 2;
-            button2.Text = "Règles du jeu";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            buttonRules.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            buttonRules.Location = new Point(306, 3);
+            buttonRules.Name = "buttonRules";
+            buttonRules.Size = new Size(297, 50);
+            buttonRules.TabIndex = 2;
+            buttonRules.Text = "Règles du jeu";
+            buttonRules.UseVisualStyleBackColor = true;
+            buttonRules.Click += buttonRulesClick;
             // 
-            // button3
+            // buttonConfig
             // 
-            button3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            button3.DialogResult = DialogResult.Cancel;
-            button3.Location = new Point(617, 118);
-            button3.Name = "button3";
-            button3.Size = new Size(290, 41);
-            button3.TabIndex = 3;
-            button3.Text = "Configurations";
-            button3.UseVisualStyleBackColor = true;
+            buttonConfig.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            buttonConfig.Location = new Point(609, 3);
+            buttonConfig.Name = "buttonConfig";
+            buttonConfig.Size = new Size(298, 50);
+            buttonConfig.TabIndex = 3;
+            buttonConfig.Text = "Configurations";
+            buttonConfig.UseVisualStyleBackColor = true;
+            buttonConfig.Click += buttonConfigClick;
             // 
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel1.AutoSize = true;
             tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 295F));
-            tableLayoutPanel1.Controls.Add(button2, 1, 0);
-            tableLayoutPanel1.Controls.Add(button3, 1, 0);
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.Controls.Add(buttonRules, 1, 0);
             tableLayoutPanel1.Controls.Add(newGameBtn, 0, 0);
+            tableLayoutPanel1.Controls.Add(buttonConfig, 2, 0);
+            tableLayoutPanel1.Cursor = Cursors.Hand;
             tableLayoutPanel1.Location = new Point(0, 214);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(910, 277);
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Size = new Size(910, 56);
             tableLayoutPanel1.TabIndex = 4;
             // 
             // Accueil
@@ -122,14 +123,15 @@
             Load += chargement_Accueil;
             tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
         private ContextMenuStrip contextMenuStrip1;
         public Label Titre;
         private Button newGameBtn;
-        private Button button2;
-        private Button button3;
+        private Button buttonRules;
+        private Button buttonConfig;
         private TableLayoutPanel tableLayoutPanel1;
     }
 }
