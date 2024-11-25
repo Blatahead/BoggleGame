@@ -22,11 +22,18 @@ namespace BoggleGame
             MessageBox.Show("Merci d'avoir cliqué ! final test");
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonRulesClick(object sender, EventArgs e)
         {
             Regles regles = new Regles();
 
             regles.Show();
+        }
+
+        private void buttonConfigClick(object sender, EventArgs e)
+        {
+            Configurations configurations = new Configurations();
+
+            configurations.Show();
         }
     }
 }
