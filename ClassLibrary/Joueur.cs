@@ -10,24 +10,36 @@ namespace ClassLibrary
     public class Joueur
     {
         string pseudo;
-        int compteur_bon_mot;
-        int compteur_mauvais_mot;
+        List<string> listeMotsTrouves;
+        int compteurBonsMots;
+        int compteurMauvaisMots;
         #region Constructeurs
-        public Joueur(string pseudo)
+        public Joueur(string pseudo1)
         {
-            this.pseudo = pseudo;
+            this.pseudo = pseudo1;
+        }
+
+        public Joueur(string pseudo1, List<string> listeMotTrouves1, int compteurBonsMots1, int compteurMauvaisMots1)
+        {
+            this.pseudo = pseudo1;
+            this.listeMotsTrouves = listeMotTrouves1;
+            this.compteurBonsMots = compteurBonsMots1;
+            this.compteurMauvaisMots = compteurMauvaisMots1;
         }
         #endregion
         #region Propriétés
+
         public string Pseudo
         { get { return this.pseudo; } }
+
         #endregion
 
+        #region Méthodes
 
         /// <summary>
         /// Fonction qui lance un chrono pour chaque joueur durant son tour
         /// </summary>
-        public void timer()
+        public void TimerJoueur()
         {
             DateTime timer = DateTime.Now;
             TimeSpan durée = TimeSpan.FromMinutes(1);
@@ -35,16 +47,17 @@ namespace ClassLibrary
             {
                 TimeSpan elapsed = DateTime.Now - timer;
                 Console.Clear();
-                Console.WriteLine("Temps écoulée: "+elapsed.Seconds+"secondes");
+                Console.WriteLine("Temps écoulée: " + elapsed.Seconds + "secondes");
 
-                if (elapsed<durée)
+                if (elapsed < durée)
                 {
                     Console.WriteLine("Votre tour est terminé!");
                     break;
                 }
             }
-
         }
+
+        #endregion
     }
 
 }
