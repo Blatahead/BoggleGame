@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using System.Windows.Forms;
-
 using ClassLibrary;
 
 namespace BoggleGameWinForm
@@ -16,19 +15,53 @@ namespace BoggleGameWinForm
     public partial class Partie : Form
     {
         #region Attributs
+        string langue;
+        string taillePlateau;
         Joueur[] joueurs;
-        string currentJoueur;
+        Joueur currentJoueur;
+        TimeSpan dureePartie;
+        TimeSpan tempsEcoule;
+
         #endregion
+
         #region Constructeur
         public Partie()
         {
             InitializeComponent();
 
+            CreationJoueurs creationJoueurs = new CreationJoueurs();
+            if (creationJoueurs.ShowDialog() == DialogResult.OK) // Tant que la création est en cours
+            {
+                this.joueurs = creationJoueurs.JoueursPartie;
+                this.currentJoueur = this.joueurs[0];
+
+                Configurations config = new Configurations();
+                config.ShowDialog();
+                
+                this.langue = config.Langue;
+                this.taillePlateau = config.TaillePlateau;
+
+                MessageBox.Show($"Valeurs enregistrées : \n{this.langue}\n{this.taillePlateau}");
+                
+                this.dureePartie = TimeSpan.FromMinutes(6);
+                this.tempsEcoule = TimeSpan.Zero;
+            }
+            else
+            {
+                this.Close();
+            }
         }
         #endregion
 
         #region Methodes
-        static void Temps_de_partie()
+        ////////////////////////////////////////////////////////////////
+        ////////       FAIRE UNE CLASSE POUR LES TIMER         /////////
+        ////////////////////////////////////////////////////////////////
+        
+        /// <summary>
+        /// Fonction qui lance un chrono de partie global
+        /// </summary
+        static void TimerPartie()
         {
             DateTime timer = DateTime.Now;
             TimeSpan durée = TimeSpan.FromMinutes(6);

@@ -1,4 +1,5 @@
 using BoggleGameWinForm;
+using ClassLibrary;
 
 namespace BoggleGame
 {
@@ -19,21 +20,14 @@ namespace BoggleGame
 
         private void ButtonGameClick(object sender, EventArgs e)
         {
-            //MessageBox.Show("Merci d'avoir cliqué ! final test");
             Partie partie = new Partie();
-            partie.Show();
+            partie.Show(); // Utilisez ShowDialog pour attendre que Partie soit terminée avant de continuer.
         }
 
         private void buttonRulesClick(object sender, EventArgs e)
         {
             Regles regles = new Regles();
             regles.Show();
-        }
-
-        private void buttonConfigClick(object sender, EventArgs e)
-        {
-            Configurations configurations = new Configurations();
-            configurations.Show();
         }
     }
 }

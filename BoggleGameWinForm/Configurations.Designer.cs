@@ -31,10 +31,12 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
-            comboBox1 = new ComboBox();
-            label4 = new Label();
+            comboBoxLangue = new ComboBox();
+            isTrieText = new Label();
             button1 = new Button();
             label5 = new Label();
+            comboBoxTaille = new ComboBox();
+            saveConfigButton = new Button();
             SuspendLayout();
             // 
             // label1
@@ -72,25 +74,26 @@
             label3.TabIndex = 2;
             label3.Text = "Langue :";
             // 
-            // comboBox1
+            // comboBoxLangue
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Français", "Anglais" });
-            comboBox1.Location = new Point(276, 158);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 3;
+            comboBoxLangue.FormattingEnabled = true;
+            comboBoxLangue.Items.AddRange(new object[] { "Anglais", "Français" });
+            comboBoxLangue.Location = new Point(276, 158);
+            comboBoxLangue.Name = "comboBoxLangue";
+            comboBoxLangue.Size = new Size(121, 23);
+            comboBoxLangue.TabIndex = 3;
+            comboBoxLangue.Text = "Sélectionner";
             // 
-            // label4
+            // isTrieText
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Young Serif", 15F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.Red;
-            label4.Location = new Point(276, 201);
-            label4.Name = "label4";
-            label4.Size = new Size(98, 33);
-            label4.TabIndex = 4;
-            label4.Text = "Non trié";
+            isTrieText.AutoSize = true;
+            isTrieText.Font = new Font("Young Serif", 15F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            isTrieText.ForeColor = Color.Red;
+            isTrieText.Location = new Point(276, 201);
+            isTrieText.Name = "isTrieText";
+            isTrieText.Size = new Size(98, 33);
+            isTrieText.TabIndex = 4;
+            isTrieText.Text = "Non trié";
             // 
             // button1
             // 
@@ -113,16 +116,38 @@
             label5.Text = "Taille du plateau :";
             label5.Click += label5_Click;
             // 
+            // comboBoxTaille
+            // 
+            comboBoxTaille.FormattingEnabled = true;
+            comboBoxTaille.Items.AddRange(new object[] { "4x4", "5x5", "6x6", "7x7", "8x8", "9x9", "10x10" });
+            comboBoxTaille.Location = new Point(276, 267);
+            comboBoxTaille.Name = "comboBoxTaille";
+            comboBoxTaille.Size = new Size(121, 23);
+            comboBoxTaille.TabIndex = 7;
+            comboBoxTaille.Text = "Sélectionner";
+            // 
+            // saveConfigButton
+            // 
+            saveConfigButton.Location = new Point(432, 422);
+            saveConfigButton.Name = "saveConfigButton";
+            saveConfigButton.Size = new Size(97, 23);
+            saveConfigButton.TabIndex = 8;
+            saveConfigButton.Text = "Sauvegarder";
+            saveConfigButton.UseVisualStyleBackColor = true;
+            saveConfigButton.Click += saveConfigButton_Click;
+            // 
             // Configurations
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlDarkDark;
             ClientSize = new Size(956, 520);
+            Controls.Add(saveConfigButton);
+            Controls.Add(comboBoxTaille);
             Controls.Add(label5);
             Controls.Add(button1);
-            Controls.Add(label4);
-            Controls.Add(comboBox1);
+            Controls.Add(isTrieText);
+            Controls.Add(comboBoxLangue);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -137,9 +162,11 @@
         private Label label1;
         private Label label2;
         private Label label3;
-        private ComboBox comboBox1;
-        private Label label4;
+        private ComboBox comboBoxLangue;
+        private Label isTrieText;
         private Button button1;
         private Label label5;
+        private ComboBox comboBoxTaille;
+        private Button saveConfigButton;
     }
 }
