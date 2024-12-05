@@ -9,11 +9,17 @@ namespace ClassLibrary
 {
     public class Joueur
     {
+        #region Attributs
+
         string pseudo;
         List<string> listeMotsTrouves;
         int compteurBonsMots;
         int compteurMauvaisMots;
+
+        #endregion
+
         #region Constructeurs
+
         public Joueur(string pseudo1)
         {
             this.pseudo = pseudo1;
@@ -27,6 +33,7 @@ namespace ClassLibrary
             this.compteurMauvaisMots = compteurMauvaisMots1;
         }
         #endregion
+
         #region Propriétés
 
         public string Pseudo

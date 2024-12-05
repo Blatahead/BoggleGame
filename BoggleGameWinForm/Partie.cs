@@ -10,74 +10,140 @@ using System.Threading.Tasks.Dataflow;
 using System.Windows.Forms;
 using ClassLibrary;
 
+
 namespace BoggleGameWinForm
 {
     public partial class Partie : Form
     {
         #region Attributs
+
         string langue;
-        string taillePlateau;
+        int taillePlateau;
         Joueur[] joueurs;
         Joueur currentJoueur;
-        TimeSpan dureePartie;
-        TimeSpan tempsEcoule;
+        private System.Windows.Forms.Timer timer;
+        private TimeSpan tempsRestant;
+        private Plateau plateau;
 
         #endregion
 
         #region Constructeur
+
         public Partie()
         {
             InitializeComponent();
 
+            // Première page : création des joueurs
             CreationJoueurs creationJoueurs = new CreationJoueurs();
-            if (creationJoueurs.ShowDialog() == DialogResult.OK) // Tant que la création est en cours
+            if (creationJoueurs.ShowDialog() == DialogResult.OK)
             {
                 this.joueurs = creationJoueurs.JoueursPartie;
                 this.currentJoueur = this.joueurs[0];
 
+                // Deuxième page imbriquée : configuration des paramètres
                 Configurations config = new Configurations();
-                config.ShowDialog();
-                
-                this.langue = config.Langue;
-                this.taillePlateau = config.TaillePlateau;
+                if (config.ShowDialog() == DialogResult.OK)
+                {
+                    this.langue = config.Langue;
+                    this.taillePlateau = config.TaillePlateau;
+                    this.plateau = new Plateau(this.taillePlateau, "./../../../../Lettres.txt");
 
-                MessageBox.Show($"Valeurs enregistrées : \n{this.langue}\n{this.taillePlateau}");
-                
-                this.dureePartie = TimeSpan.FromMinutes(6);
-                this.tempsEcoule = TimeSpan.Zero;
+                    // Test des paramètres choisis
+                    MessageBox.Show($"Taille du plateau : {this.taillePlateau}");
+                    MessageBox.Show(plateau.ToString());
+
+                    //////////////////////////////////////////////////////////////////////
+                    /// Voir pour faire l'affichage directement dans la classe Plateau ///
+                    //////////////////////////////////////////////////////////////////////
+                    AfficherPlateau(plateau);
+                }
+                else
+                {
+                    MessageBox.Show("Configuration annulée.");
+                    this.Close();
+                }
             }
             else
             {
+                MessageBox.Show("Création des joueurs annulée.");
                 this.Close();
             }
         }
+
         #endregion
 
         #region Methodes
-        ////////////////////////////////////////////////////////////////
-        ////////       FAIRE UNE CLASSE POUR LES TIMER         /////////
-        ////////////////////////////////////////////////////////////////
-        
-        /// <summary>
-        /// Fonction qui lance un chrono de partie global
-        /// </summary
-        static void TimerPartie()
-        {
-            DateTime timer = DateTime.Now;
-            TimeSpan durée = TimeSpan.FromMinutes(6);
-            while (true)
-            {
-                TimeSpan elapsed = DateTime.Now - timer;
-                Console.Clear();
-                Console.WriteLine("Temps écoulée: " + elapsed.Seconds + "secondes");
 
-                if (elapsed < durée)
+        private void AfficherPlateau(Plateau plateau)
+        {
+            ConfigurerTableLayoutPanel(this.taillePlateau);
+            RemplirTableLayoutPanel(plateau);
+        }
+
+        ////////////////////////////////////////////////////////
+        /// voir pour le mettre dans Partir.Designer.cs ???? ///
+        ////////////////////////////////////////////////////////
+        private void ConfigurerTableLayoutPanel(int taille)
+        {
+            PlateauPartie.Controls.Clear();
+            PlateauPartie.RowCount = taille;
+            PlateauPartie.ColumnCount = taille;
+
+            PlateauPartie.RowStyles.Clear();
+            PlateauPartie.ColumnStyles.Clear();
+            for (int i = 0; i < taille; i++)
+            {
+                PlateauPartie.RowStyles.Add(new RowStyle(SizeType.Percent, 100f / taille));
+                PlateauPartie.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f / taille));
+            }
+        }
+
+        private void RemplirTableLayoutPanel(Plateau plateau)
+        {
+            Random rand = new Random();
+            for (int i = 0; i < this.taillePlateau; i++)
+            {
+                for (int j = 0; j < this.taillePlateau; j++)
                 {
-                    Console.WriteLine("Votre tour est terminé!");
-                    break;
+                    // Place une face aléatoire (parmi les 6) dans la grille du plateau
+                    char face = plateau.Matrice[i, j].Faces[rand.Next(6)];
+                    Label label = new Label
+                    {
+                        Text = face.ToString(),
+                        TextAlign = ContentAlignment.MiddleCenter,
+                        Dock = DockStyle.Fill,
+                        BorderStyle = BorderStyle.FixedSingle,
+                        Font = new Font("Arial", 16, FontStyle.Bold) // Plus grand pour la lisibilité
+                    };
+
+                    PlateauPartie.Controls.Add(label, j, i);
                 }
             }
         }
+
+        private void DemarrerTimerPartie()
+        {
+            this.tempsRestant = TimeSpan.FromMinutes(6);
+
+            this.timer = new System.Windows.Forms.Timer
+            {
+                Interval = 1000
+            };
+
+            this.timer.Tick += (s, e) =>
+            {
+                tempsRestant = tempsRestant.Subtract(TimeSpan.FromSeconds(1));
+
+                if (tempsRestant <= TimeSpan.Zero)
+                {
+                    timer.Stop();
+                    MessageBox.Show("Temps écoulé !");
+                }
+            };
+
+            this.timer.Start();
+        }
+
         #endregion
     }
 }

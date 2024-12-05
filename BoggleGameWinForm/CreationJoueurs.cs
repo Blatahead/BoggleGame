@@ -7,7 +7,9 @@ namespace BoggleGameWinForm
 {
     public partial class CreationJoueurs : Form
     {
+        #region Attributs
         private Joueur[] joueursPartie;
+        #endregion
 
         #region Constructeur
         public CreationJoueurs()
