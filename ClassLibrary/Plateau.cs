@@ -106,18 +106,18 @@ namespace ClassLibrary
         ///////////////////////
         /// Ne pas ovveride ///
         ///////////////////////
-        public override string ToString()
+        public string toString()
         {
-            StringBuilder sb = new StringBuilder();
+            string lignes = "";
             for (int i = 0; i < this.taille; i++)
             {
                 for (int j = 0; j < this.taille; j++)
                 {
-                    sb.Append($"{this.matrice[i, j].FaceVisible} ");
+                    lignes += $"{this.matrice[i, j].FaceVisible}";
                 }
-                sb.AppendLine();
+                lignes += "\n";
             }
-            return sb.ToString();
+            return lignes;
         }
 
         #endregion

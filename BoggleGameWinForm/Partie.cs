@@ -50,12 +50,13 @@ namespace BoggleGameWinForm
 
                     // Test des paramètres choisis
                     MessageBox.Show($"Taille du plateau : {this.taillePlateau}");
-                    MessageBox.Show(plateau.ToString());
 
                     //////////////////////////////////////////////////////////////////////
                     /// Voir pour faire l'affichage directement dans la classe Plateau ///
                     //////////////////////////////////////////////////////////////////////
-                    AfficherPlateau(plateau);
+                    ConfigurerTableLayoutPanel(this.taillePlateau);
+                    RemplirTableLayoutPanel(plateau);
+                    MessageBox.Show(plateau.toString());
                 }
                 else
                 {
@@ -73,12 +74,6 @@ namespace BoggleGameWinForm
         #endregion
 
         #region Methodes
-
-        private void AfficherPlateau(Plateau plateau)
-        {
-            ConfigurerTableLayoutPanel(this.taillePlateau);
-            RemplirTableLayoutPanel(plateau);
-        }
 
         ////////////////////////////////////////////////////////
         /// voir pour le mettre dans Partir.Designer.cs ???? ///
@@ -105,15 +100,15 @@ namespace BoggleGameWinForm
             {
                 for (int j = 0; j < this.taillePlateau; j++)
                 {
-                    // Place une face aléatoire (parmi les 6) dans la grille du plateau
-                    char face = plateau.Matrice[i, j].Faces[rand.Next(6)];
+                    // Placer les faces visibles dans la grille du plateau
+                    char face = plateau.Matrice[i, j].FaceVisible;
                     Label label = new Label
                     {
                         Text = face.ToString(),
                         TextAlign = ContentAlignment.MiddleCenter,
                         Dock = DockStyle.Fill,
                         BorderStyle = BorderStyle.FixedSingle,
-                        Font = new Font("Arial", 16, FontStyle.Bold) // Plus grand pour la lisibilité
+                        Font = new Font("Arial", 16, FontStyle.Bold)
                     };
 
                     PlateauPartie.Controls.Add(label, j, i);
@@ -145,5 +140,10 @@ namespace BoggleGameWinForm
         }
 
         #endregion
+
+        private void PlateauPartie_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
