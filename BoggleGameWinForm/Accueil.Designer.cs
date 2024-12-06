@@ -32,7 +32,7 @@
             Titre = new Label();
             contextMenuStrip1 = new ContextMenuStrip(components);
             newGameBtn = new Button();
-            buttonRules = new Button();;
+            buttonRules = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -63,7 +63,7 @@
             newGameBtn.Location = new Point(10, 79);
             newGameBtn.Margin = new Padding(10);
             newGameBtn.Name = "newGameBtn";
-            newGameBtn.Size = new Size(283, 70);
+            newGameBtn.Size = new Size(436, 70);
             newGameBtn.TabIndex = 1;
             newGameBtn.Text = "Nouvelle partie";
             newGameBtn.UseVisualStyleBackColor = true;
@@ -73,10 +73,10 @@
             // 
             buttonRules.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             buttonRules.Font = new Font("Segoe UI", 15F);
-            buttonRules.Location = new Point(313, 79);
+            buttonRules.Location = new Point(466, 79);
             buttonRules.Margin = new Padding(10);
             buttonRules.Name = "buttonRules";
-            buttonRules.Size = new Size(283, 70);
+            buttonRules.Size = new Size(436, 70);
             buttonRules.TabIndex = 2;
             buttonRules.Text = "Règles du jeu";
             buttonRules.UseVisualStyleBackColor = true;
