@@ -32,8 +32,7 @@
             Titre = new Label();
             contextMenuStrip1 = new ContextMenuStrip(components);
             newGameBtn = new Button();
-            buttonRules = new Button();
-            buttonConfig = new Button();
+            buttonRules = new Button();;
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -83,30 +82,15 @@
             buttonRules.UseVisualStyleBackColor = true;
             buttonRules.Click += buttonRulesClick;
             // 
-            // buttonConfig
-            // 
-            buttonConfig.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            buttonConfig.Font = new Font("Segoe UI", 15F);
-            buttonConfig.Location = new Point(616, 79);
-            buttonConfig.Margin = new Padding(10);
-            buttonConfig.Name = "buttonConfig";
-            buttonConfig.Size = new Size(286, 70);
-            buttonConfig.TabIndex = 3;
-            buttonConfig.Text = "Configurations";
-            buttonConfig.UseVisualStyleBackColor = true;
-            buttonConfig.Click += buttonConfigClick;
-            // 
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tableLayoutPanel1.AutoSize = true;
-            tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.Controls.Add(buttonRules, 1, 0);
             tableLayoutPanel1.Controls.Add(newGameBtn, 0, 0);
-            tableLayoutPanel1.Controls.Add(buttonConfig, 2, 0);
             tableLayoutPanel1.Cursor = Cursors.Hand;
             tableLayoutPanel1.Location = new Point(0, 263);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -137,7 +121,6 @@
         public Label Titre;
         private Button newGameBtn;
         private Button buttonRules;
-        private Button buttonConfig;
         private TableLayoutPanel tableLayoutPanel1;
     }
 }

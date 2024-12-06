@@ -6,7 +6,7 @@ namespace BoggleGame
     internal static class Program
     {
         /// <summary>
-        ///  The main entry point for the application.
+        ///  Entree principale du jeu
         /// </summary>
         [STAThread]
         static void Main()

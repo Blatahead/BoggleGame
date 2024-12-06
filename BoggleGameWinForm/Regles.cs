@@ -12,9 +12,11 @@ namespace BoggleGameWinForm
 {
     public partial class Regles : Form
     {
+        #region Constructeur
         public Regles()
         {
             InitializeComponent();
         }
+        #endregion
     }
 }

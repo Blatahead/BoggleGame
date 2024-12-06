@@ -28,12 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Partie";
+            PlateauPartie = new TableLayoutPanel();
+            SuspendLayout();
+            // 
+            // PlateauPartie
+            // 
+            PlateauPartie.Name = "PlateauPartie";
+            PlateauPartie.TabIndex = 0;
+            PlateauPartie.Dock = System.Windows.Forms.DockStyle.Fill;
+            PlateauPartie.Location = new System.Drawing.Point(0, 0);
+            PlateauPartie.Size = new System.Drawing.Size(800, 600);
+
+            // 
+            // Partie
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(PlateauPartie);
+            Name = "Partie";
+            Text = "Partie";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private TableLayoutPanel PlateauPartie;
     }
 }
