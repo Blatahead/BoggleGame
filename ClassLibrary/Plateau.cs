@@ -62,6 +62,7 @@ namespace ClassLibrary
             }
         }
 
+        //peut-être à faire dans la classe dico
         private Dictionary<char, int> ChargerDicoConfigLettres(string cheminFichier)
         {
             if (!File.Exists(cheminFichier))

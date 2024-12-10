@@ -42,6 +42,7 @@ namespace BoggleGameWinForm
         public Configurations()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.comboBoxLangue.SelectedItem = "Français";//Remplissage par défaut
             this.comboBoxTaille.SelectedItem = "4x4";//Remplissage par défaut
 
