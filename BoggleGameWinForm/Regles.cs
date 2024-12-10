@@ -16,6 +16,7 @@ namespace BoggleGameWinForm
         public Regles()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
         #endregion
     }

@@ -145,5 +145,12 @@ namespace BoggleGameWinForm
         {
 
         }
+
+        private void Partie_Load(object sender, EventArgs e)
+        {
+            inputBoxMots.Left = (this.ClientSize.Width - inputBoxMots.Width) / 2;
+            inputBoxMots.Top = (this.ClientSize.Height - inputBoxMots.Height) / 2;
+            inputBoxMots.Anchor = AnchorStyles.None;
+        }
     }
 }

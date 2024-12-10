@@ -15,7 +15,8 @@ namespace BoggleGameWinForm
         public CreationJoueurs()
         {
             InitializeComponent();
-            // Initialisez les joueurs avec des valeurs par défaut ou null
+            this.StartPosition = FormStartPosition.CenterScreen;
+            // Initialiser les joueurs avec des valeurs par défaut ou null
             this.joueursPartie = new Joueur[2];
         }
         #endregion
