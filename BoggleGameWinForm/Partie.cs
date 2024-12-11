@@ -22,6 +22,7 @@ namespace BoggleGameWinForm
         int taillePlateau;
         Joueur[] joueurs;
         Joueur currentJoueur;
+
         private System.Windows.Forms.Timer clockPartie;
         private System.Windows.Forms.Timer clockJoueur;
 

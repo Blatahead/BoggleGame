@@ -16,6 +16,8 @@ namespace BoggleGameWinForm
         public Regles()
         {
             InitializeComponent();
+            this.BackgroundImage = Image.FromFile("./../../../../background.jpg");
+            this.BackgroundImageLayout = ImageLayout.Stretch;
             this.StartPosition = FormStartPosition.CenterScreen;
         }
         #endregion

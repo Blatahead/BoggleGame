@@ -31,17 +31,22 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Regles));
             detailsRegles = new Label();
             label2 = new Label();
+            tableLayoutPanelRules = new TableLayoutPanel();
+            tableLayoutPanelRules.SuspendLayout();
             SuspendLayout();
             // 
             // detailsRegles
             // 
             detailsRegles.AllowDrop = true;
             detailsRegles.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            detailsRegles.Font = new Font("Segoe UI", 15F);
-            detailsRegles.Location = new Point(0, 0);
+            detailsRegles.AutoSize = true;
+            detailsRegles.BackColor = Color.Transparent;
+            detailsRegles.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            detailsRegles.ForeColor = Color.White;
+            detailsRegles.Location = new Point(0, 281);
             detailsRegles.Margin = new Padding(0);
             detailsRegles.Name = "detailsRegles";
-            detailsRegles.Size = new Size(913, 510);
+            detailsRegles.Size = new Size(959, 282);
             detailsRegles.TabIndex = 0;
             detailsRegles.Text = resources.GetString("detailsRegles.Text");
             detailsRegles.TextAlign = ContentAlignment.MiddleLeft;
@@ -49,33 +54,57 @@
             // 
             // label2
             // 
-            label2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
             label2.Font = new Font("Young Serif", 30F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(318, 47);
+            label2.Location = new Point(3, 0);
             label2.Name = "label2";
-            label2.Size = new Size(299, 67);
+            label2.Size = new Size(953, 281);
             label2.TabIndex = 1;
             label2.Text = "Règles du jeu";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanelRules
+            // 
+            tableLayoutPanelRules.BackColor = Color.Transparent;
+            tableLayoutPanelRules.ColumnCount = 1;
+            tableLayoutPanelRules.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F)); // Une colonne à 100%
+
+            // Configuration des lignes
+            tableLayoutPanelRules.RowStyles.Clear(); // Effacer les styles existants
+            tableLayoutPanelRules.RowStyles.Add(new RowStyle(SizeType.AutoSize)); // Ligne 1 : Hauteur automatique
+            tableLayoutPanelRules.RowStyles.Add(new RowStyle(SizeType.Percent, 100F)); // Ligne 2 : Prend l'espace restant
+
+            tableLayoutPanelRules.Controls.Add(label2, 0, 0);
+            tableLayoutPanelRules.Controls.Add(detailsRegles, 0, 1);
+            tableLayoutPanelRules.Dock = DockStyle.Fill;
+            tableLayoutPanelRules.Location = new Point(0, 0);
+            tableLayoutPanelRules.Name = "tableLayoutPanelRules";
+            tableLayoutPanelRules.RowCount = 2;
+            tableLayoutPanelRules.Size = new Size(959, 563);
+            tableLayoutPanelRules.TabIndex = 2;
             // 
             // Regles
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlDark;
-            ClientSize = new Size(913, 510);
-            Controls.Add(label2);
-            Controls.Add(detailsRegles);
+            ClientSize = new Size(959, 563);
+            Controls.Add(tableLayoutPanelRules);
             Name = "Regles";
             Text = "Regles";
+            tableLayoutPanelRules.ResumeLayout(false);
+            tableLayoutPanelRules.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
+
 
         #endregion
 
         private Label detailsRegles;
         private Label label2;
+        private TableLayoutPanel tableLayoutPanelRules;
     }
 }

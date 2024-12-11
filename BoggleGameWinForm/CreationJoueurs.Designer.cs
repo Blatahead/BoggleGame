@@ -40,26 +40,32 @@
             // 
             label1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Font = new Font("Young Serif", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(296, 39);
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Young Serif", 30F, FontStyle.Bold);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(176, 31);
             label1.Name = "label1";
-            label1.Size = new Size(239, 33);
+            label1.Size = new Size(457, 67);
             label1.TabIndex = 0;
             label1.Text = "Création des joueurs";
             // 
             // pseudo1title
             // 
             pseudo1title.AutoSize = true;
+            pseudo1title.BackColor = Color.Transparent;
             pseudo1title.Cursor = Cursors.SizeAll;
-            pseudo1title.Location = new Point(160, 131);
+            pseudo1title.Font = new Font("Young Serif", 20F, FontStyle.Bold);
+            pseudo1title.ForeColor = Color.White;
+            pseudo1title.Location = new Point(85, 131);
             pseudo1title.Name = "pseudo1title";
-            pseudo1title.Size = new Size(92, 15);
+            pseudo1title.Size = new Size(242, 45);
             pseudo1title.TabIndex = 1;
-            pseudo1title.Text = "pseudo joueur 1";
+            pseudo1title.Text = "Pseudo joueur 1";
             // 
             // pseudoJoueur1
             // 
             pseudoJoueur1.Location = new Point(152, 183);
+            pseudoJoueur1.MinimumSize = new Size(0, 30);
             pseudoJoueur1.Name = "pseudoJoueur1";
             pseudoJoueur1.Size = new Size(100, 23);
             pseudoJoueur1.TabIndex = 2;
@@ -67,24 +73,29 @@
             // pseudo2title
             // 
             pseudo2title.AutoSize = true;
-            pseudo2title.Location = new Point(471, 131);
+            pseudo2title.BackColor = Color.Transparent;
+            pseudo2title.Font = new Font("Young Serif", 20F, FontStyle.Bold);
+            pseudo2title.ForeColor = Color.White;
+            pseudo2title.Location = new Point(403, 131);
             pseudo2title.Name = "pseudo2title";
-            pseudo2title.Size = new Size(92, 15);
+            pseudo2title.Size = new Size(246, 45);
             pseudo2title.TabIndex = 3;
-            pseudo2title.Text = "pseudo joueur 2";
+            pseudo2title.Text = "Pseudo joueur 2";
             // 
             // pseudoJoueur2
             // 
-            pseudoJoueur2.Location = new Point(463, 174);
+            pseudoJoueur2.Location = new Point(463, 183);
+            pseudoJoueur2.MinimumSize = new Size(0, 30);
             pseudoJoueur2.Name = "pseudoJoueur2";
             pseudoJoueur2.Size = new Size(100, 23);
             pseudoJoueur2.TabIndex = 4;
             // 
             // confirmCreationJoueurs
             // 
-            confirmCreationJoueurs.Location = new Point(346, 254);
+            confirmCreationJoueurs.Font = new Font("Young Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            confirmCreationJoueurs.Location = new Point(309, 255);
             confirmCreationJoueurs.Name = "confirmCreationJoueurs";
-            confirmCreationJoueurs.Size = new Size(75, 23);
+            confirmCreationJoueurs.Size = new Size(200, 50);
             confirmCreationJoueurs.TabIndex = 5;
             confirmCreationJoueurs.Text = "Confirmer";
             confirmCreationJoueurs.UseVisualStyleBackColor = true;
