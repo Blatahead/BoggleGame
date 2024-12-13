@@ -9,17 +9,37 @@ namespace BoggleGame
 {
     public partial class Accueil : Form
     {
+        private Image backgroundImage;
+
         public Accueil()
         {
             InitializeComponent();
             CustomizeButtons();
 
-            this.BackgroundImage = Image.FromFile("./../../../../background.jpg");
-            this.BackgroundImageLayout = ImageLayout.Stretch;
+            // Afficher un délai avant de charger l'image
+            this.Load += async (s, e) =>
+            {
+                try
+                {
+                    // Simuler un délai (optionnel)
+                    await Task.Delay(250);
 
-            // Ajuster la taille de la fenêtre
-            this.Load += Chargement_Accueil;
+                    // Charger l'image
+                    backgroundImage = Image.FromFile("./../../../../background.jpg");
+
+                    // Appliquer l'image comme fond
+                    this.BackgroundImage = backgroundImage;
+                    this.BackgroundImageLayout = ImageLayout.Stretch;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erreur lors du chargement de l'image : " + ex.Message);
+                }
+            };
         }
+
+
+
 
         private void CustomizeButtons()
         {

@@ -12,7 +12,7 @@ namespace ClassLibrary
         #region Attributs
 
         string pseudo;
-        List<string> listeMotsTrouves;
+        List<Mot> listeMotsTrouves;
         TimeSpan tempsRestant;
         int compteurBonsMots;
         int compteurMauvaisMots;
@@ -24,12 +24,13 @@ namespace ClassLibrary
         public Joueur(string pseudo1)
         {
             this.pseudo = pseudo1;
+            this.listeMotsTrouves = new List<Mot>(); //sécurité car nulle au début
         }
 
-        public Joueur(string pseudo1, List<string> listeMotTrouves1, int compteurBonsMots1, int compteurMauvaisMots1)
+        public Joueur(string pseudo1, List<Mot> listeMotTrouves1, int compteurBonsMots1, int compteurMauvaisMots1)
         {
             this.pseudo = pseudo1;
-            this.listeMotsTrouves = listeMotTrouves1;
+            this.listeMotsTrouves = listeMotTrouves1 ?? new List<Mot>(); //sécurité car nulle au début
             this.compteurBonsMots = compteurBonsMots1;
             this.compteurMauvaisMots = compteurMauvaisMots1;
         }
@@ -43,30 +44,33 @@ namespace ClassLibrary
         public TimeSpan TempsRestant
         { get { return this.tempsRestant; } set { this.tempsRestant = value; } }
 
+        public List<Mot> ListeMotsTrouves
+        { get { return this.listeMotsTrouves; } }
+
         #endregion
 
         #region Méthodes
+        ////////////////////////////////
+        ///Timer joueurs à bouger ici///
+        /////////////////////////////////
+        
 
-        /// <summary>
-        /// Fonction qui lance un chrono pour chaque joueur durant son tour
-        /// </summary>
-        public void TimerJoueur()
+        //utiliser où ? car l'impression que c'est inutile
+        public void AjouterMotTrouveInList(Mot mot)
         {
-            DateTime timer = DateTime.Now;
-            TimeSpan durée = TimeSpan.FromMinutes(1);
-            while (true)
-            {
-                TimeSpan elapsed = DateTime.Now - timer;
-                Console.Clear();
-                Console.WriteLine("Temps écoulée: " + elapsed.Seconds + "secondes");
-
-                if (elapsed < durée)
-                {
-                    Console.WriteLine("Votre tour est terminé!");
-                    break;
-                }
-            }
+            this.listeMotsTrouves.Add(mot);
         }
+
+        public string toStringListeMotsTrouves()
+        {
+            string liste = "";
+            foreach (Mot ele in this.listeMotsTrouves)
+            {
+                liste += $"{ele.toString()} \n";
+            }
+            return liste;
+        }
+
 
         #endregion
     }

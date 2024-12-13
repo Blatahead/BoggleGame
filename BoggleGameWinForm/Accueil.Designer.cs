@@ -110,14 +110,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlDarkDark;
             ClientSize = new Size(908, 491);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(Titre);
             Name = "Accueil";
             Text = "Form1";
             WindowState = FormWindowState.Maximized;
-            Load += Chargement_Accueil;
+            //Load += Chargement_Accueil;
             tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();

@@ -6,11 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Threading.Tasks.Dataflow;
 using System.Windows.Forms;
 using ClassLibrary;
-using Microsoft.VisualBasic;
-
 
 namespace BoggleGameWinForm
 {
@@ -29,6 +26,10 @@ namespace BoggleGameWinForm
         private TimeSpan tempsRestant;
         private Plateau plateau;
 
+        private Image backgroundImage;
+
+        bool isRunning;
+
         #endregion
 
         #region Constructeur
@@ -36,6 +37,27 @@ namespace BoggleGameWinForm
         public Partie()
         {
             InitializeComponent();
+            // Afficher un délai avant de charger l'image
+            this.Load += async (s, e) =>
+            {
+                try
+                {
+                    // Simuler un délai (optionnel)
+                    await Task.Delay(250);
+
+                    // Charger l'image
+                    backgroundImage = Image.FromFile("./../../../../background.jpg");
+
+                    // Appliquer l'image comme fond
+                    this.BackgroundImage = backgroundImage;
+                    this.BackgroundImageLayout = ImageLayout.Stretch;
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erreur lors du chargement de l'image : " + ex.Message);
+                }
+            };
 
             // Première page : création des joueurs
             CreationJoueurs creationJoueurs = new CreationJoueurs();
@@ -54,15 +76,12 @@ namespace BoggleGameWinForm
                     // Test des paramètres choisis
                     MessageBox.Show($"Taille du plateau : {this.taillePlateau}");
 
-                    //////////////////////////////////////////////////////////////////////
-                    /// Voir pour faire l'affichage directement dans la classe Plateau ///
-                    //////////////////////////////////////////////////////////////////////
                     ConfigurerTableLayoutPanel(this.taillePlateau);
                     RemplirTableLayoutPanel(plateau);
 
                     DemarrerTimerPartie();
 
-                    //Démarrer les tours
+                    // Démarrer les tours
                     NouveauTourJoueur();
                     MessageBox.Show(plateau.toString());
                 }
@@ -81,11 +100,8 @@ namespace BoggleGameWinForm
 
         #endregion
 
-        #region Methodes
+        #region Méthodes
 
-        ////////////////////////////////////////////////////////
-        /// voir pour le mettre dans Partir.Designer.cs ???? ///
-        ////////////////////////////////////////////////////////
         private void ConfigurerTableLayoutPanel(int taille)
         {
             PlateauPartie.Controls.Clear();
@@ -103,12 +119,10 @@ namespace BoggleGameWinForm
 
         private void RemplirTableLayoutPanel(Plateau plateau)
         {
-            Random rand = new Random();
             for (int i = 0; i < this.taillePlateau; i++)
             {
                 for (int j = 0; j < this.taillePlateau; j++)
                 {
-                    // Placer les faces visibles dans la grille du plateau
                     char face = plateau.Matrice[i, j].FaceVisible;
                     Label label = new Label
                     {
@@ -135,9 +149,7 @@ namespace BoggleGameWinForm
 
             this.clockPartie.Tick += (s, e) =>
             {
-                //soustraire d'une seconde
                 this.tempsRestant = this.tempsRestant.Subtract(TimeSpan.FromSeconds(1));
-                //remplacer la valeur du chrono à chaque seconde
                 this.chronoPartie.Text = tempsRestant.ToString();
                 if (tempsRestant <= TimeSpan.Zero)
                 {
@@ -148,17 +160,18 @@ namespace BoggleGameWinForm
 
             this.clockPartie.Start();
         }
+
         private void NouveauTourJoueur()
         {
-            //next joueur
+            this.isRunning = true;
             this.currentJoueur = this.joueurs[0];
             this.peudoJoueur.Text = this.currentJoueur.Pseudo;
-            DemarrerTimerJoueur();
+            TimerJoueur();
         }
-        private void DemarrerTimerJoueur()
+
+        private void TimerJoueur()
         {
-            TimeSpan tempsRestantJoueur = this.currentJoueur.TempsRestant;
-            tempsRestantJoueur = TimeSpan.FromMinutes(1);
+            TimeSpan tempsRestantJoueur = TimeSpan.FromMinutes(1);
 
             this.clockJoueur = new System.Windows.Forms.Timer
             {
@@ -167,27 +180,84 @@ namespace BoggleGameWinForm
 
             this.clockJoueur.Tick += (s, e) =>
             {
-                //soustraire d'une seconde
                 tempsRestantJoueur = tempsRestantJoueur.Subtract(TimeSpan.FromSeconds(1));
-                //remplacer la valeur du chrono à chaque seconde
                 this.chronoJoueur.Text = tempsRestantJoueur.ToString();
                 if (tempsRestantJoueur <= TimeSpan.Zero)
                 {
                     clockJoueur.Stop();
-                    MessageBox.Show("Temps écoulé !");
+
+                    // MessageBox pour afficher les mots trouvés
+                    MessageBox.Show($"Tour terminé ! Voici les mots trouvés par {currentJoueur.Pseudo} :\n" +
+                        $"{currentJoueur.toStringListeMotsTrouves()}");
+
+                    // Passer au prochain joueur (ou arrêter la partie)
+                    PasserAuProchainJoueur();
                 }
             };
+
             this.clockJoueur.Start();
         }
 
-        #endregion
-
-        private void Partie_Load(object sender, EventArgs e)
+        private void PasserAuProchainJoueur()
         {
-            inputBoxMots.Left = (this.ClientSize.Width - inputBoxMots.Width) / 2;
-            inputBoxMots.Top = (this.ClientSize.Height - inputBoxMots.Height) / 2;
-            inputBoxMots.Anchor = AnchorStyles.None;
+            int indexCurrent = Array.IndexOf(joueurs, currentJoueur);
+            int nextIndex = (indexCurrent + 1) % joueurs.Length;
+            this.currentJoueur = joueurs[nextIndex];
+
+            // Démarrer le tour du prochain joueur
+            this.peudoJoueur.Text = this.currentJoueur.Pseudo;
+            TimerJoueur();
         }
 
+        private void inputBoxMots_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                string saisie = this.inputBoxMots.Text.Trim();
+                this.inputBoxMots.Clear();
+
+                Dictionary<char, int> valeursLettres = Plateau.ChargerDicoValeursLettres("./../../../../Lettres.txt");
+
+                // Conditions de validité
+                bool estValide = !string.IsNullOrWhiteSpace(saisie) &&
+                                 saisie.Length > 2 &&
+                                 !saisie.Contains(" ");
+                                 //&& DictionnaireContientMot(saisie); // Remplacez par votre méthode de vérification dans le dictionnaire
+
+                // Calculs
+                int longueur = estValide ? saisie.Length : 0;
+                string? valeur = estValide ? saisie : null;
+                char premiereLettre = estValide ? saisie[0] : '\0';
+                int points = 0;
+
+                if (estValide)
+                {
+                    foreach (char lettre in saisie.ToUpper())
+                    {
+                        if (valeursLettres.ContainsKey(lettre))
+                        {
+                            points += valeursLettres[lettre];
+                        }
+                    }
+                }
+
+                // Créer et l'ajouter
+                Mot motTrouve = new Mot(estValide, valeur, points, premiereLettre, longueur);
+                this.currentJoueur.ListeMotsTrouves.Add(motTrouve);
+
+                // Message de confirmation
+                //if (estValide)
+                //{
+                //    MessageBox.Show($"Mot ajouté : {motTrouve.Valeur} (Points : {motTrouve.Points})");
+                //}
+                //else
+                //{
+                //    MessageBox.Show($"Mot invalide : {saisie}");
+                //}
+            }
+        }
+
+
+        #endregion
     }
 }

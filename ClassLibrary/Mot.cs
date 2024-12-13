@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    internal class Mot
+    public class Mot
     {
         #region Attributs
         bool bon;
@@ -38,6 +38,17 @@ namespace ClassLibrary
         #region Methodes
         // Méthode de recherche dans le dico (à voir si on la fait là ou dans la classe
         // Dictionnaire
+
+        public string toString()
+        {
+            if (!this.bon)
+            {
+                return "Mot invalide";
+            }
+
+            return $"{this.valeur} (Points : {this.points}, Longueur : {this.longueur}, Première lettre : {this.premiereLettre})";
+        }
+
         #endregion
     }
 }

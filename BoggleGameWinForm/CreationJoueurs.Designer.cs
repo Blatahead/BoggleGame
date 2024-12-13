@@ -56,7 +56,7 @@
             pseudo1title.Cursor = Cursors.SizeAll;
             pseudo1title.Font = new Font("Young Serif", 20F, FontStyle.Bold);
             pseudo1title.ForeColor = Color.White;
-            pseudo1title.Location = new Point(85, 131);
+            pseudo1title.Location = new Point(118, 131);
             pseudo1title.Name = "pseudo1title";
             pseudo1title.Size = new Size(242, 45);
             pseudo1title.TabIndex = 1;
@@ -64,10 +64,10 @@
             // 
             // pseudoJoueur1
             // 
-            pseudoJoueur1.Location = new Point(152, 183);
+            pseudoJoueur1.Location = new Point(181, 183);
             pseudoJoueur1.MinimumSize = new Size(0, 30);
             pseudoJoueur1.Name = "pseudoJoueur1";
-            pseudoJoueur1.Size = new Size(100, 23);
+            pseudoJoueur1.Size = new Size(100, 30);
             pseudoJoueur1.TabIndex = 2;
             // 
             // pseudo2title
@@ -76,7 +76,7 @@
             pseudo2title.BackColor = Color.Transparent;
             pseudo2title.Font = new Font("Young Serif", 20F, FontStyle.Bold);
             pseudo2title.ForeColor = Color.White;
-            pseudo2title.Location = new Point(403, 131);
+            pseudo2title.Location = new Point(429, 131);
             pseudo2title.Name = "pseudo2title";
             pseudo2title.Size = new Size(246, 45);
             pseudo2title.TabIndex = 3;
@@ -84,16 +84,17 @@
             // 
             // pseudoJoueur2
             // 
-            pseudoJoueur2.Location = new Point(463, 183);
+            pseudoJoueur2.Location = new Point(500, 183);
             pseudoJoueur2.MinimumSize = new Size(0, 30);
             pseudoJoueur2.Name = "pseudoJoueur2";
-            pseudoJoueur2.Size = new Size(100, 23);
+            pseudoJoueur2.Size = new Size(100, 30);
             pseudoJoueur2.TabIndex = 4;
             // 
             // confirmCreationJoueurs
             // 
+            confirmCreationJoueurs.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             confirmCreationJoueurs.Font = new Font("Young Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            confirmCreationJoueurs.Location = new Point(309, 255);
+            confirmCreationJoueurs.Location = new Point(292, 275);
             confirmCreationJoueurs.Name = "confirmCreationJoueurs";
             confirmCreationJoueurs.Size = new Size(200, 50);
             confirmCreationJoueurs.TabIndex = 5;

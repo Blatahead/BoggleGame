@@ -46,7 +46,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Young Serif", 30F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(300, 51);
+            label1.Location = new Point(324, 46);
             label1.Name = "label1";
             label1.Size = new Size(343, 67);
             label1.TabIndex = 0;
@@ -55,9 +55,10 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
             label2.Font = new Font("Young Serif", 15F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(61, 201);
+            label2.ForeColor = Color.DeepSkyBlue;
+            label2.Location = new Point(61, 242);
             label2.Name = "label2";
             label2.Size = new Size(212, 33);
             label2.TabIndex = 1;
@@ -66,9 +67,10 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
             label3.Font = new Font("Young Serif", 15F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(61, 148);
+            label3.ForeColor = Color.DeepSkyBlue;
+            label3.Location = new Point(61, 170);
             label3.Name = "label3";
             label3.Size = new Size(99, 33);
             label3.TabIndex = 2;
@@ -78,7 +80,7 @@
             // 
             comboBoxLangue.FormattingEnabled = true;
             comboBoxLangue.Items.AddRange(new object[] { "Anglais", "Français" });
-            comboBoxLangue.Location = new Point(276, 158);
+            comboBoxLangue.Location = new Point(276, 181);
             comboBoxLangue.Name = "comboBoxLangue";
             comboBoxLangue.Size = new Size(121, 23);
             comboBoxLangue.TabIndex = 3;
@@ -87,9 +89,10 @@
             // isTrieText
             // 
             isTrieText.AutoSize = true;
+            isTrieText.BackColor = Color.Transparent;
             isTrieText.Font = new Font("Young Serif", 15F, FontStyle.Regular, GraphicsUnit.Point, 0);
             isTrieText.ForeColor = Color.Red;
-            isTrieText.Location = new Point(276, 201);
+            isTrieText.Location = new Point(276, 242);
             isTrieText.Name = "isTrieText";
             isTrieText.Size = new Size(98, 33);
             isTrieText.TabIndex = 4;
@@ -97,7 +100,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(400, 208);
+            button1.Location = new Point(400, 252);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 5;
@@ -107,9 +110,10 @@
             // label5
             // 
             label5.AutoSize = true;
+            label5.BackColor = Color.Transparent;
             label5.Font = new Font("Young Serif", 15F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.White;
-            label5.Location = new Point(61, 257);
+            label5.ForeColor = Color.DeepSkyBlue;
+            label5.Location = new Point(61, 313);
             label5.Name = "label5";
             label5.Size = new Size(191, 33);
             label5.TabIndex = 6;
@@ -120,7 +124,7 @@
             // 
             comboBoxTaille.FormattingEnabled = true;
             comboBoxTaille.Items.AddRange(new object[] { "4x4", "5x5", "6x6", "7x7", "8x8", "9x9", "10x10" });
-            comboBoxTaille.Location = new Point(276, 267);
+            comboBoxTaille.Location = new Point(276, 324);
             comboBoxTaille.Name = "comboBoxTaille";
             comboBoxTaille.Size = new Size(121, 23);
             comboBoxTaille.TabIndex = 7;
@@ -128,9 +132,10 @@
             // 
             // saveConfigButton
             // 
-            saveConfigButton.Location = new Point(432, 422);
+            saveConfigButton.Font = new Font("Young Serif", 12F);
+            saveConfigButton.Location = new Point(400, 414);
             saveConfigButton.Name = "saveConfigButton";
-            saveConfigButton.Size = new Size(97, 23);
+            saveConfigButton.Size = new Size(200, 50);
             saveConfigButton.TabIndex = 8;
             saveConfigButton.Text = "Sauvegarder";
             saveConfigButton.UseVisualStyleBackColor = true;
