@@ -52,26 +52,34 @@ namespace ClassLibrary
             int total = 0;
             foreach(string word in listeMotsTrouves)
             {
-                if (word.Length<5)
+                int taille = word.Length;
+                switch (taille)
                 {
+                    case (<5):
                     total+=1;
-                }
-                if (word.Length==5)
-                {
-                    total+=2;
-                }
-                if (word.Length==6)
-                {
+                    break;
+
+                    case(5):
+                        total+=2;
+                    break;
+
+                    case (6):
                     total+=3;
-                }
-                if (word.Length==7)
-                {
+                    break;
+
+                case (7):
                     total+=5;
-                }
-                if (word.Length>=8)
-                {
+                    break;
+
+                case (>=8):
                     total+=11;
+                    break;
+
+                      
+                
+                
                 }
+                
 
             }
             return total;
