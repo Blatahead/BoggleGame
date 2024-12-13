@@ -87,6 +87,29 @@ namespace ClassLibrary
             return dicoConfigLettres;
         }
 
+        //A déplacere peut-être dans la classe dico
+        public static Dictionary<char, int> ChargerDicoValeursLettres(string cheminFichier)
+        {
+            if (!File.Exists(cheminFichier))
+            {
+                throw new FileNotFoundException($"Fichier introuvable : {cheminFichier}");
+            }
+
+            var dicoValeursLettres = new Dictionary<char, int>();
+
+            foreach (string ligne in File.ReadAllLines(cheminFichier))
+            {
+                var parties = ligne.Split(';');
+                if (parties.Length >= 2 && char.IsLetter(parties[0][0]) && int.TryParse(parties[1], out int valeur))
+                {
+                    dicoValeursLettres[parties[0][0]] = valeur;
+                }
+            }
+
+            return dicoValeursLettres;
+        }
+
+
         //////////////////////////
         /// A voir si on garde ///
         //////////////////////////

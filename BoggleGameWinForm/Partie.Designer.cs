@@ -195,6 +195,7 @@
             inputBoxMots.TabIndex = 2;
             inputBoxMots.Text = "Rentrez vos mots";
             inputBoxMots.TextAlign = HorizontalAlignment.Center;
+            inputBoxMots.KeyDown += inputBoxMots_KeyDown;
             // 
             // peudoJoueur
             // 
@@ -216,7 +217,6 @@
             Name = "Partie";
             Text = "Partie";
             WindowState = FormWindowState.Maximized;
-            Load += Partie_Load;
             tableLayoutGeneral.ResumeLayout(false);
             tableLayoutTopChronos.ResumeLayout(false);
             tableLayoutTextChronos.ResumeLayout(false);
