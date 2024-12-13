@@ -35,7 +35,6 @@ namespace BoggleGameWinForm
         public Partie()
         {
             InitializeComponent();
-
             // Première page : création des joueurs
             CreationJoueurs creationJoueurs = new CreationJoueurs();
             if (creationJoueurs.ShowDialog() == DialogResult.OK)
@@ -147,6 +146,11 @@ namespace BoggleGameWinForm
 
             this.clockPartie.Start();
         }
+
+
+        #endregion
+
+
         private void NouveauTourJoueur()
         {
             //next joueur
@@ -155,6 +159,7 @@ namespace BoggleGameWinForm
             DemarrerTimerJoueur();
         }
         private void DemarrerTimerJoueur()
+
         {
             TimeSpan tempsRestantJoueur = this.currentJoueur.TempsRestant;
             tempsRestantJoueur = TimeSpan.FromMinutes(1);

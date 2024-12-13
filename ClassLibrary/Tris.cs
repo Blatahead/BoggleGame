@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    class Tris
+    public class Tris
     {
         #region Tri Fusion
-        static void TriFusion(int[] tab, int debut, int fin)
+        public static void TriFusion(int[] tab, int debut, int fin)
         {
             int milieu;
             if (debut < fin)
@@ -27,7 +27,7 @@ namespace ClassLibrary
         /// <param name="debut"></param>
         /// <param name="fin"></param>
         /// <param name="milieu"></param>
-        static void Fusion(int[] tab, int debut, int fin, int milieu)
+        public static void Fusion(int[] tab, int debut, int fin, int milieu)
         {
             int indGauche = milieu - debut + 1;
             int indDroite = fin - milieu;
@@ -74,7 +74,7 @@ namespace ClassLibrary
         /// Méthode qui trie de manière croissante un tableau d'éléments en inversant ses valeurs décroissantes deux à deux
         /// </summary>
         /// <param name="tab"></param>
-        static void Tri_bulle(int[] tab)
+        public static void Tri_bulle(int[] tab)
         {
             if (tab != null && tab.Length > 0)
             {
@@ -101,10 +101,10 @@ namespace ClassLibrary
 
         #region tri Insertion
         /// <summary>
-        /// Méthode qui trie dans l'ordre croissante en comparant chaque valeur à celles à sa gauche  
+        /// Méthode qui trie dans l'ordre croissante en comparant un pivot aux autres valeurs 
         /// </summary>
         /// <param name="tab"></param>
-        static void Tri_Insertion(int[] tab)
+        public static void Tri_Insertion(int[] tab)
         {
             if (tab != null && tab.Length > 0)
             {
