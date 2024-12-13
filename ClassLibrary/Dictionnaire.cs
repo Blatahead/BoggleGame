@@ -16,13 +16,19 @@ namespace ClassLibrary
         SortedList<string,SortedList<string,string>> list;
         string langue_Dico;
 
-
+        #region Constructeur
         public Dictionnaire(string langue_Dico, SortedList<string,SortedList<string,string>> list)
         {
             this.langue_Dico=langue_Dico;
             this.list=list;
         }
+        #endregion
 
+
+        #region Fonctions
+        /// <summary>
+        /// Fonction qui permet de lire le bon dictionnaire en fonction de la langue souhaitée
+        /// </summary>
         public void Recuperation_Dico()
         {
             string line;
@@ -61,6 +67,15 @@ namespace ClassLibrary
 
 
         }
+
+
+
+
+
+
+
+
+        #endregion
 
 
 
