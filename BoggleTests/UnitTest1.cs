@@ -8,7 +8,7 @@ namespace ClassLibrary
         [TestMethod]
          public void Test_dico()
          {
-            Assert.IsTrue(File.Exists("./../../../../MotsPossiblesFR.txt"), "Le fichier des mots français devrait exister.");
+            Assert.IsTrue(File.Exists("./../../../../MotsPossiblesFR.txt"), "Le fichier des mots franÃ§ais devrait exister.");
             Assert.IsTrue(File.Exists("./../../../../MotsPossiblesEN.txt"), "Le fichier des mots anglais devrait exister.");
          }
 
@@ -17,8 +17,8 @@ namespace ClassLibrary
         {
 
             string[] tab = { "a", "b", "c", "d", "e" };
-            string cherché = "c";
-            bool result = Dictionnaire.dichotomie(tab, cherché, 0, tab.Length-1);
+            string cherchÃ© = "c";
+            bool result = Dictionnaire.dichotomie(tab, cherchÃ©, 0, tab.Length-1);
             Assert.IsTrue(result);
         }
 
@@ -26,8 +26,8 @@ namespace ClassLibrary
         public void dichotomie_nonexistant()
         {
             string[] tab = { "a", "b", "c", "d", "e" };
-            string cherché = "k";
-            bool result = Dictionnaire.dichotomie(tab, cherché, 0, tab.Length-1);
+            string cherchÃ© = "k";
+            bool result = Dictionnaire.dichotomie(tab, cherchÃ©, 0, tab.Length-1);
             Assert.IsFalse(result);
         }
 
@@ -35,8 +35,8 @@ namespace ClassLibrary
         public void dichotomie_unique()
         {
             string[] tab = {"a"};
-            string cherché = "a";
-            bool result = Dictionnaire.dichotomie(tab, cherché, 0, tab.Length-1);
+            string cherchÃ© = "a";
+            bool result = Dictionnaire.dichotomie(tab, cherchÃ©, 0, tab.Length-1);
             Assert.IsTrue(result);
 
         }
@@ -45,13 +45,10 @@ namespace ClassLibrary
         {
             int[] tab = { 3, 5, 2, 1, 7, 6, 4 };
             Tris.Tri_Insertion(tab);
-            int[] trié = { 1, 2, 3, 4, 5, 6, 7 };
-            CollectionAssert.AreEqual(trié, tab, "Le tableau vide ne doit pas être modifié");
+            int[] triÃ© = { 1, 2, 3, 4, 5, 6, 7 };
+            CollectionAssert.AreEqual(triÃ©, tab, "Le tableau vide ne doit pas Ãªtre modifiÃ©");
             
 
         }
-        
     }
 }
-
-

@@ -13,6 +13,7 @@ namespace ClassLibrary
 
         string pseudo;
         List<string> listeMotsTrouves;
+        TimeSpan tempsRestant;
         int compteurBonsMots;
         int compteurMauvaisMots;
 
@@ -38,6 +39,9 @@ namespace ClassLibrary
 
         public string Pseudo
         { get { return this.pseudo; } }
+
+        public TimeSpan TempsRestant
+        { get { return this.tempsRestant; } set { this.tempsRestant = value; } }
 
         #endregion
 

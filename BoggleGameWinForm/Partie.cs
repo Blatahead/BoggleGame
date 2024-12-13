@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using System.Windows.Forms;
 using ClassLibrary;
+using Microsoft.VisualBasic;
 
 
 namespace BoggleGameWinForm
@@ -21,7 +22,9 @@ namespace BoggleGameWinForm
         int taillePlateau;
         Joueur[] joueurs;
         Joueur currentJoueur;
-        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Timer clockPartie;
+        private System.Windows.Forms.Timer clockJoueur;
+
         private TimeSpan tempsRestant;
         private Plateau plateau;
 
@@ -37,7 +40,6 @@ namespace BoggleGameWinForm
             if (creationJoueurs.ShowDialog() == DialogResult.OK)
             {
                 this.joueurs = creationJoueurs.JoueursPartie;
-                this.currentJoueur = this.joueurs[0];
 
                 // Deuxième page imbriquée : configuration des paramètres
                 Configurations config = new Configurations();
@@ -55,6 +57,11 @@ namespace BoggleGameWinForm
                     //////////////////////////////////////////////////////////////////////
                     ConfigurerTableLayoutPanel(this.taillePlateau);
                     RemplirTableLayoutPanel(plateau);
+
+                    DemarrerTimerPartie();
+
+                    //Démarrer les tours
+                    NouveauTourJoueur();
                     MessageBox.Show(plateau.toString());
                 }
                 else
@@ -119,32 +126,65 @@ namespace BoggleGameWinForm
         {
             this.tempsRestant = TimeSpan.FromMinutes(6);
 
-            this.timer = new System.Windows.Forms.Timer
+            this.clockPartie = new System.Windows.Forms.Timer
             {
                 Interval = 1000
             };
 
-            this.timer.Tick += (s, e) =>
+            this.clockPartie.Tick += (s, e) =>
             {
-                tempsRestant = tempsRestant.Subtract(TimeSpan.FromSeconds(1));
-
+                //soustraire d'une seconde
+                this.tempsRestant = this.tempsRestant.Subtract(TimeSpan.FromSeconds(1));
+                //remplacer la valeur du chrono à chaque seconde
+                this.chronoPartie.Text = tempsRestant.ToString();
                 if (tempsRestant <= TimeSpan.Zero)
                 {
-                    timer.Stop();
+                    clockPartie.Stop();
                     MessageBox.Show("Temps écoulé !");
                 }
             };
 
-            this.timer.Start();
+            this.clockPartie.Start();
         }
+
 
         #endregion
 
 
-        private void PlateauPartie_Paint(object sender, PaintEventArgs e)
+        private void NouveauTourJoueur()
         {
-
+            //next joueur
+            this.currentJoueur = this.joueurs[0];
+            this.peudoJoueur.Text = this.currentJoueur.Pseudo;
+            DemarrerTimerJoueur();
         }
+        private void DemarrerTimerJoueur()
+
+        {
+            TimeSpan tempsRestantJoueur = this.currentJoueur.TempsRestant;
+            tempsRestantJoueur = TimeSpan.FromMinutes(1);
+
+            this.clockJoueur = new System.Windows.Forms.Timer
+            {
+                Interval = 1000
+            };
+
+            this.clockJoueur.Tick += (s, e) =>
+            {
+                //soustraire d'une seconde
+                tempsRestantJoueur = tempsRestantJoueur.Subtract(TimeSpan.FromSeconds(1));
+                //remplacer la valeur du chrono à chaque seconde
+                this.chronoJoueur.Text = tempsRestantJoueur.ToString();
+                if (tempsRestantJoueur <= TimeSpan.Zero)
+                {
+                    clockJoueur.Stop();
+                    MessageBox.Show("Temps écoulé !");
+                }
+            };
+            this.clockJoueur.Start();
+        }
+
+        #endregion
 
         private void Partie_Load(object sender, EventArgs e)
         {
@@ -152,5 +192,6 @@ namespace BoggleGameWinForm
             inputBoxMots.Top = (this.ClientSize.Height - inputBoxMots.Height) / 2;
             inputBoxMots.Anchor = AnchorStyles.None;
         }
+
     }
 }

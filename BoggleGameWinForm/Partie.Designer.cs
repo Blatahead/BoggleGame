@@ -35,10 +35,16 @@
             TimerPartieTitle = new Label();
             label1 = new Label();
             tableLayoutChronos = new TableLayoutPanel();
+            chronoPartie = new Label();
+            chronoJoueur = new Label();
+            tableLayoutPanel1 = new TableLayoutPanel();
             inputBoxMots = new TextBox();
+            peudoJoueur = new Label();
             tableLayoutGeneral.SuspendLayout();
             tableLayoutTopChronos.SuspendLayout();
             tableLayoutTextChronos.SuspendLayout();
+            tableLayoutChronos.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // PlateauPartie
@@ -49,16 +55,16 @@
             PlateauPartie.Name = "PlateauPartie";
             PlateauPartie.Size = new Size(1118, 355);
             PlateauPartie.TabIndex = 0;
-            PlateauPartie.Paint += PlateauPartie_Paint;
             // 
             // tableLayoutGeneral
             // 
             tableLayoutGeneral.AutoSize = true;
             tableLayoutGeneral.ColumnCount = 1;
             tableLayoutGeneral.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutGeneral.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             tableLayoutGeneral.Controls.Add(PlateauPartie, 0, 1);
             tableLayoutGeneral.Controls.Add(tableLayoutTopChronos, 0, 0);
-            tableLayoutGeneral.Controls.Add(inputBoxMots, 0, 2);
+            tableLayoutGeneral.Controls.Add(tableLayoutPanel1, 0, 2);
             tableLayoutGeneral.Dock = DockStyle.Fill;
             tableLayoutGeneral.Location = new Point(0, 0);
             tableLayoutGeneral.Name = "tableLayoutGeneral";
@@ -127,6 +133,8 @@
             // 
             tableLayoutChronos.ColumnCount = 1;
             tableLayoutChronos.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutChronos.Controls.Add(chronoPartie, 0, 0);
+            tableLayoutChronos.Controls.Add(chronoJoueur, 0, 1);
             tableLayoutChronos.Dock = DockStyle.Fill;
             tableLayoutChronos.Location = new Point(562, 3);
             tableLayoutChronos.Name = "tableLayoutChronos";
@@ -136,11 +144,50 @@
             tableLayoutChronos.Size = new Size(553, 121);
             tableLayoutChronos.TabIndex = 1;
             // 
+            // chronoPartie
+            // 
+            chronoPartie.AutoSize = true;
+            chronoPartie.Dock = DockStyle.Fill;
+            chronoPartie.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            chronoPartie.Location = new Point(3, 0);
+            chronoPartie.Name = "chronoPartie";
+            chronoPartie.Size = new Size(547, 60);
+            chronoPartie.TabIndex = 0;
+            chronoPartie.Text = "label2";
+            chronoPartie.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // chronoJoueur
+            // 
+            chronoJoueur.AutoSize = true;
+            chronoJoueur.Dock = DockStyle.Fill;
+            chronoJoueur.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            chronoJoueur.Location = new Point(3, 60);
+            chronoJoueur.Name = "chronoJoueur";
+            chronoJoueur.Size = new Size(547, 61);
+            chronoJoueur.TabIndex = 1;
+            chronoJoueur.Text = "label3";
+            chronoJoueur.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Controls.Add(inputBoxMots, 0, 1);
+            tableLayoutPanel1.Controls.Add(peudoJoueur, 0, 0);
+            tableLayoutPanel1.Location = new Point(3, 497);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Size = new Size(1118, 90);
+            tableLayoutPanel1.TabIndex = 2;
+            // 
             // inputBoxMots
             // 
             inputBoxMots.Anchor = AnchorStyles.None;
             inputBoxMots.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            inputBoxMots.Location = new Point(312, 529);
+            inputBoxMots.Location = new Point(309, 54);
             inputBoxMots.MaximumSize = new Size(500, 40);
             inputBoxMots.MinimumSize = new Size(500, 20);
             inputBoxMots.Name = "inputBoxMots";
@@ -148,6 +195,17 @@
             inputBoxMots.TabIndex = 2;
             inputBoxMots.Text = "Rentrez vos mots";
             inputBoxMots.TextAlign = HorizontalAlignment.Center;
+            // 
+            // peudoJoueur
+            // 
+            peudoJoueur.Anchor = AnchorStyles.None;
+            peudoJoueur.AutoSize = true;
+            peudoJoueur.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            peudoJoueur.Location = new Point(526, 11);
+            peudoJoueur.Name = "peudoJoueur";
+            peudoJoueur.Size = new Size(65, 22);
+            peudoJoueur.TabIndex = 3;
+            peudoJoueur.Text = "label2";
             // 
             // Partie
             // 
@@ -160,10 +218,13 @@
             WindowState = FormWindowState.Maximized;
             Load += Partie_Load;
             tableLayoutGeneral.ResumeLayout(false);
-            tableLayoutGeneral.PerformLayout();
             tableLayoutTopChronos.ResumeLayout(false);
             tableLayoutTextChronos.ResumeLayout(false);
             tableLayoutTextChronos.PerformLayout();
+            tableLayoutChronos.ResumeLayout(false);
+            tableLayoutChronos.PerformLayout();
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -178,5 +239,9 @@
         private Label label1;
         private TextBox inputBoxMots;
         private TableLayoutPanel tableLayoutChronos;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Label peudoJoueur;
+        private Label chronoPartie;
+        private Label chronoJoueur;
     }
 }
