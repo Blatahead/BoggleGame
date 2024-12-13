@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -160,7 +160,7 @@ namespace BoggleGameWinForm
 
             this.clockPartie.Start();
         }
-
+        
         private void NouveauTourJoueur()
         {
             this.isRunning = true;
@@ -257,7 +257,7 @@ namespace BoggleGameWinForm
             }
         }
 
-
         #endregion
+
     }
 }
