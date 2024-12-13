@@ -76,9 +76,9 @@ namespace ClassLibrary
         public int Comptage_Points()
         {
             int total = 0;
-            foreach(string word in listeMotsTrouves)
+            foreach(Mot mot in this.listeMotsTrouves)
             {
-                int taille = word.Length;
+                int taille = mot.Longueur;
                 switch (taille)
                 {
                     case (<5):
@@ -101,12 +101,10 @@ namespace ClassLibrary
                     total+=11;
                     break;
 
-                      
+                //manque le default
                 
                 
                 }
-                
-
             }
             return total;
         }
@@ -121,10 +119,7 @@ namespace ClassLibrary
             {
                 Console.WriteLine(p2.pseudo+" a gagné(e) la partie! Bien joué à tous!");
             }
-
         }
-
         #endregion
     }
-
 }

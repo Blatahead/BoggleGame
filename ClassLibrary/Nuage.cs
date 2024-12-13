@@ -4,68 +4,71 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 
-
-class Nuage
+namespace ClassLibrary
 {
-    private Dictionary<string, int> _frequences;
 
-    public Nuage(List<string> Ensemble_Mots)
-    {
-        _frequences = CalculerFrequences(Ensemble_Mots);
-    }
+    //class Nuage
+    //{
+    //    private Dictionary<string, int> _frequences;
 
-    private Dictionary<string, int> CalculerFrequences(List<string> mots)
-    {
-        return mots.GroupBy(m => m)
-                   .ToDictionary(g => g.Key, g => g.Count());
-    }
+    //    public Nuage(List<string> Ensemble_Mots)
+    //    {
+    //        _frequences = CalculerFrequences(Ensemble_Mots);
+    //    }
 
-    public void AfficherNuage()
-    {
-        foreach (var mot in _frequences.OrderByDescending(kvp => kvp.Value))
-        {
-            int taillePolice = Math.Min(10 + mot.Value * 5, 50); // Taille dynamique
-            Console.WriteLine($"{mot.Key} (taille: {taillePolice})");
-        }
-    }
+    //    private Dictionary<string, int> CalculerFrequences(List<string> mots)
+    //    {
+    //        return mots.GroupBy(m => m)
+    //                   .ToDictionary(g => g.Key, g => g.Count());
+    //    }
 
-    public void GenererImageNuage(string cheminFichier, int largeur, int hauteur)
-    {
-        using (Bitmap bitmap = new Bitmap(largeur, hauteur))
-        using (Graphics graphics = Graphics.FromImage(bitmap))
-        {
-            graphics.Clear(Color.White);
-            Random rand = new Random();
+    //    public void AfficherNuage()
+    //    {
+    //        foreach (var mot in _frequences.OrderByDescending(kvp => kvp.Value))
+    //        {
+    //            int taillePolice = Math.Min(10 + mot.Value * 5, 50); // Taille dynamique
+    //            Console.WriteLine($"{mot.Key} (taille: {taillePolice})");
+    //        }
+    //    }
 
-            foreach (var mot in _frequences)
-            {
-                int taillePolice = Math.Min(10 + mot.Value * 5, 50);
-                using (Font font = new Font("Arial", taillePolice))
-                {
-                    var position = new Point(rand.Next(0, largeur - 100), rand.Next(0, hauteur - 50));
-                    graphics.DrawString(mot.Key, font, Brushes.Black, position);
-                }
-            }
+    //    public void GenererImageNuage(string cheminFichier, int largeur, int hauteur)
+    //    {
+    //        using (Bitmap bitmap = new Bitmap(largeur, hauteur))
+    //        using (Graphics graphics = Graphics.FromImage(bitmap))
+    //        {
+    //            graphics.Clear(Color.White);
+    //            Random rand = new Random();
 
-            bitmap.Save(cheminFichier);
-        }
-    }
-}
+    //            foreach (var mot in _frequences)
+    //            {
+    //                int taillePolice = Math.Min(10 + mot.Value * 5, 50);
+    //                using (Font font = new Font("Arial", taillePolice))
+    //                {
+    //                    var position = new Point(rand.Next(0, largeur - 100), rand.Next(0, hauteur - 50));
+    //                    graphics.DrawString(mot.Key, font, Brushes.Black, position);
+    //                }
+    //            }
 
-class Program
-{
-    static void Main(string[] args)
-    {
-        List<string> Ensemble_Mots = new List<string> { "C#", "nuage", "mots", "programmation", "C#", "nuage", "classe", "nuage", "code" };
+    //            bitmap.Save(cheminFichier);
+    //        }
+    //    }
+    //}
 
-        Nuage nuage = new Nuage(Ensemble_Mots);
-        nuage.AfficherNuage();
+    //class Program
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        List<string> Ensemble_Mots = new List<string> { "C#", "nuage", "mots", "programmation", "C#", "nuage", "classe", "nuage", "code" };
 
-        string cheminFichier = "nuage_de_mots.png";
-        nuage.GenererImageNuage(cheminFichier, 800, 600);
+    //        Nuage nuage = new Nuage(Ensemble_Mots);
+    //        nuage.AfficherNuage();
 
-        Console.WriteLine($"Nuage de mots enregistré sous : {cheminFichier}");
-    }
+    //        string cheminFichier = "nuage_de_mots.png";
+    //        nuage.GenererImageNuage(cheminFichier, 800, 600);
+
+    //        Console.WriteLine($"Nuage de mots enregistré sous : {cheminFichier}");
+    //    }
+    //}
 }
 
 
