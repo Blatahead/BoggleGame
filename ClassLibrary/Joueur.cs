@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace ClassLibrary
 {
@@ -46,6 +47,48 @@ namespace ClassLibrary
         #endregion
 
         #region Méthodes
+        public int Comptage_Points()
+        {
+            int total = 0;
+            foreach(string word in listeMotsTrouves)
+            {
+                if (word.Length<5)
+                {
+                    total+=1;
+                }
+                if (word.Length==5)
+                {
+                    total+=2;
+                }
+                if (word.Length==6)
+                {
+                    total+=3;
+                }
+                if (word.Length==7)
+                {
+                    total+=5;
+                }
+                if (word.Length>=8)
+                {
+                    total+=11;
+                }
+
+            }
+            return total;
+        }
+
+        static void Gagnant(Joueur p1,Joueur p2)
+        {
+            if (p1.Comptage_Points()>p2.Comptage_Points())
+            {
+                Console.WriteLine(p1.pseudo+" a gagné(e) la partie! Bien joué à tous!");
+            }
+            if (p2.Comptage_Points()>p1.Comptage_Points())
+            {
+                Console.WriteLine(p2.pseudo+" a gagné(e) la partie! Bien joué à tous!");
+            }
+
+        }
 
         
 
