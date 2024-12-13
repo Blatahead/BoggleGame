@@ -1,4 +1,5 @@
 using BoggleGameWinForm;
+using ClassLibrary;
 using System.Diagnostics;
 
 namespace BoggleGame
@@ -12,7 +13,11 @@ namespace BoggleGame
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new Accueil());        
+            Application.Run(new Accueil());
+            
+            
         }
+
+        
     }
 }
