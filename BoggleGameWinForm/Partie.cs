@@ -148,7 +148,7 @@ namespace BoggleGameWinForm
         }
 
 
-        #endregion
+        
 
 
         private void NouveauTourJoueur()
@@ -184,7 +184,7 @@ namespace BoggleGameWinForm
             this.clockJoueur.Start();
         }
 
-        #endregion
+        
 
         private void Partie_Load(object sender, EventArgs e)
         {
@@ -192,6 +192,8 @@ namespace BoggleGameWinForm
             inputBoxMots.Top = (this.ClientSize.Height - inputBoxMots.Height) / 2;
             inputBoxMots.Anchor = AnchorStyles.None;
         }
+
+        #endregion
 
     }
 }

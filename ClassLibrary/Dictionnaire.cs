@@ -6,26 +6,23 @@ using System.Threading.Tasks;
 using System.IO;
 
 namespace ClassLibrary
-{
-    /// <summary>
-    /// ytftyffu
-    /// </summary>
+{ 
     public class Dictionnaire
     {
 
-        SortedList<string,SortedList<string,string>> list;
+        SortedList<char,SortedList<int,List<string>>> Sortedlist1;
         string langue_Dico;
 
         #region Constructeur
-        public Dictionnaire(string langue_Dico, SortedList<string,SortedList<string,string>> list)
+        public Dictionnaire(string langue_Dico, SortedList<char,SortedList<int,List<string>>> list)
         {
             this.langue_Dico=langue_Dico;
-            this.list=list;
+            this.Sortedlist1=list;
         }
         #endregion
 
 
-        #region Fonctions
+        #region Méthodes
         /// <summary>
         /// Fonction qui permet de lire le bon dictionnaire en fonction de la langue souhaitée
         /// </summary>
@@ -35,16 +32,28 @@ namespace ClassLibrary
             try
             {
                 StreamReader Dic;
+                char[] separateur = { ' ' };
                 if (this.langue_Dico=="Français")
                 {
-                     Dic = new StreamReader("./../../../../MotsPossiblesFR.txt");
+                    Dic = new StreamReader("./../../../../MotsPossiblesFR.txt");
 
                 }
                 else
                 {
-                     Dic = new StreamReader("./../../../../MotsPossiblesEN.txt");
+                    Dic = new StreamReader("./../../../../MotsPossiblesEN.txt");
                 }
                 line= Dic.ReadLine();
+                string[] s = line.Split(separateur);
+                foreach(string s2 in s)
+                {
+                    SortedList<int, List<string>> tempo = new SortedList<int, List<string>>() ;
+                    List<string> mot = new List<string>();
+                    mot.Add(s2);
+                    tempo.Add(s2.Length, mot);
+                    Sortedlist1.Add(s2[0],tempo);
+                }
+
+
                 while (line!=null)
                 {
                     line=Dic.ReadLine();
@@ -52,21 +61,35 @@ namespace ClassLibrary
                 Dic.Close();
                 Console.ReadLine();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine("Exception : "+e.Message);
             }
             finally
             {
                 Console.WriteLine("Fichier lu.");
+                
+                
+                
             }
 
+        }
+        public void toString()
+        { 
 
-
-
-
+            foreach(KeyValuePair<char,SortedList<int, List<string>>> val in this.Sortedlist1)
+            {
+                Console.WriteLine(val.Key);
+                
+            }
+            
 
         }
+         
+
+
+
+
 
 
 
