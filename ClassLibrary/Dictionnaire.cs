@@ -74,9 +74,9 @@ namespace ClassLibrary
 
 
 
-        static bool dichotomie(string[] tab, string cherché, int debut, int fin)
+        public static bool dichotomie(string[] tab, string cherché, int debut, int fin)
         {
-            if (debut==fin)
+            if (debut>=fin)
             {
                 if (tab[debut]==cherché)
                 {
@@ -84,13 +84,13 @@ namespace ClassLibrary
                 }
                 return false;
             }
-            if (tab[debut]==cherché)
+         
+            int milieu = (debut+fin)/2;
+            if (tab[milieu]==cherché)
             {
                 return true;
             }
-            int milieu = (debut+fin)/2;
-
-            bool CG = dichotomie(tab, cherché, debut+1, milieu);
+            bool CG = dichotomie(tab, cherché, debut, milieu-1);
 
             bool CD = dichotomie(tab, cherché, milieu+1, fin);
             if (CD==true || CG==true)

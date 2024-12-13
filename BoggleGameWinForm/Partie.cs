@@ -32,7 +32,6 @@ namespace BoggleGameWinForm
         public Partie()
         {
             InitializeComponent();
-
             // Première page : création des joueurs
             CreationJoueurs creationJoueurs = new CreationJoueurs();
             if (creationJoueurs.ShowDialog() == DialogResult.OK)
@@ -140,6 +139,7 @@ namespace BoggleGameWinForm
         }
 
         #endregion
+
 
         private void PlateauPartie_Paint(object sender, PaintEventArgs e)
         {
