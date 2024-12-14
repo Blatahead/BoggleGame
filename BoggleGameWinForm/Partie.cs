@@ -187,8 +187,10 @@ namespace BoggleGameWinForm
                     clockJoueur.Stop();
 
                     // MessageBox pour afficher les mots trouvés
-                    MessageBox.Show($"Tour terminé ! Voici les mots trouvés par {currentJoueur.Pseudo} :\n" +
-                        $"{currentJoueur.toStringListeMotsTrouves()}"+"\n Score final: "+currentJoueur.Score);
+                    //MessageBox.Show($"Tour terminé ! Voici les mots trouvés par {currentJoueur.Pseudo} :\n" +
+                    //    $"{currentJoueur.toStringListeMotsTrouves()}"+"\n Score final: "+currentJoueur.Score);
+
+                    MessageBox.Show(this.currentJoueur.toString());
 
                     // Passer au prochain joueur (ou arrêter la partie)
                     PasserAuProchainJoueur();
@@ -243,7 +245,7 @@ namespace BoggleGameWinForm
 
                 // Créer et l'ajouter
                 Mot motTrouve = new Mot(estValide, valeur, points, premiereLettre, longueur);
-                this.currentJoueur.AjouterMotTrouveDansList(motTrouve);
+                this.currentJoueur.AddMot(motTrouve);
                 this.currentJoueur.Score+=points;
 
                 // Message de confirmation

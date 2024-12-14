@@ -67,7 +67,7 @@ namespace ClassLibrary
         
 
         //utiliser où ? car l'impression que c'est inutile
-        public void AjouterMotTrouveDansList(Mot mot)
+        public void AddMot(Mot mot)
         {
             this.listeMotsTrouves.Add(mot);
         }
@@ -81,6 +81,34 @@ namespace ClassLibrary
             }
             return liste;
         }
+
+        public int ComptagePointsDeLongueur()
+        {
+            int total = 0;
+            foreach (Mot word in this.listeMotsTrouves)
+            {
+                int taille = word.Longueur;
+                switch (taille)
+                {
+                    case (< 5):
+                        total += 1;
+                        break;
+                    case (5):
+                        total += 2;
+                        break;
+                    case (6):
+                        total += 3;
+                        break;
+                    case (7):
+                        total += 5;
+                        break;
+                    case (>= 8):
+                        total += 11;
+                        break;
+                }
+            }
+            return total;
+        }
         public static void Gagnant(Joueur p1,Joueur p2)
         {
             if (p1.Score>p2.Score)
@@ -91,6 +119,12 @@ namespace ClassLibrary
             {
                 Console.WriteLine(p2.pseudo+" a gagné(e) la partie! Bien joué à tous!");
             }
+        }
+
+        // pas testée
+        public string toString()
+        {
+            return $"Le joueur {this.pseudo} a {this.score} points et a trouvé {this.listeMotsTrouves.Count()} mots.";
         }
         #endregion
     }

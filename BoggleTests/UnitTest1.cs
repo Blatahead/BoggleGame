@@ -47,10 +47,17 @@ namespace ClassLibrary
             Tris.Tri_Insertion(tab);
             int[] trié = { 1, 2, 3, 4, 5, 6, 7 };
             CollectionAssert.AreEqual(trié, tab, "Le tableau vide ne doit pas être modifié");
-            
-
         }
 
+        [TestMethod]
+        public void MotEgalMot()
+        {
+            Mot mot1 = new Mot(true, "test", 5, 't', 4);
+            Mot mot2 = new Mot(true, "test", 5, 't', 4);
+            Mot mot3 = new Mot(true, "cest", 5, 'c', 4);
 
+            Assert.IsTrue(mot1.Egale(mot2));
+            Assert.IsTrue(!mot1.Egale(mot3));
+        }
     }
 }
