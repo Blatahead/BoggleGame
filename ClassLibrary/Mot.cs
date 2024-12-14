@@ -51,7 +51,11 @@ namespace ClassLibrary
             return $"{this.valeur} (Points : {this.points}, Longueur : {this.longueur}, Première lettre : {this.premiereLettre})";
         }
 
-        
+        public bool Egale(Mot mot2)
+        {
+            return (this.valeur == mot2.Valeur) && (this.longueur == mot2.Longueur) 
+                && (this.points == mot2.Points);
+        }
      
 
 
