@@ -17,6 +17,7 @@ namespace ClassLibrary
         TimeSpan tempsRestant;
         int compteurBonsMots;
         int compteurMauvaisMots;
+        int score;
 
         #endregion
 
@@ -28,14 +29,17 @@ namespace ClassLibrary
             this.listeMotsTrouves = new List<Mot>(); //sécurité car nulle au début
         }
 
-        public Joueur(string pseudo1, List<Mot> listeMotTrouves1, int compteurBonsMots1, int compteurMauvaisMots1)
+        public Joueur(string pseudo1, List<Mot> listeMotTrouves1, int compteurBonsMots1, int compteurMauvaisMots1, int score)
         {
             this.pseudo = pseudo1;
             this.listeMotsTrouves = listeMotTrouves1 ?? new List<Mot>(); //sécurité car nulle au début
             this.compteurBonsMots = compteurBonsMots1;
             this.compteurMauvaisMots = compteurMauvaisMots1;
+            this.score=score;
         }
         #endregion
+
+        
 
         #region Propriétés
 
@@ -47,6 +51,12 @@ namespace ClassLibrary
 
         public List<Mot> ListeMotsTrouves
         { get { return this.listeMotsTrouves; } }
+        
+        public int Score
+        {
+            get { return this.score; }
+            set { score=value; }
+        }
 
         #endregion
 
@@ -71,51 +81,13 @@ namespace ClassLibrary
             }
             return liste;
         }
-
-
-        public int Comptage_Points()
+        public static void Gagnant(Joueur p1,Joueur p2)
         {
-            int total = 0;
-            foreach(Mot mot in this.listeMotsTrouves)
-            {
-                int taille = mot.Longueur;
-                switch (taille)
-                {
-                    case (<5):
-                    total+=1;
-                    break;
-
-                    case(5):
-                        total+=2;
-                    break;
-
-                    case (6):
-                    total+=3;
-                    break;
-
-                case (7):
-                    total+=5;
-                    break;
-
-                case (>=8):
-                    total+=11;
-                    break;
-
-                //manque le default
-                
-                
-                }
-            }
-            return total;
-        }
-
-        static void Gagnant(Joueur p1,Joueur p2)
-        {
-            if (p1.Comptage_Points()>p2.Comptage_Points())
+            if (p1.Score>p2.Score)
             {
                 Console.WriteLine(p1.pseudo+" a gagné(e) la partie! Bien joué à tous!");
             }
-            if (p2.Comptage_Points()>p1.Comptage_Points())
+            if (p2.Score>p1.Score)
             {
                 Console.WriteLine(p2.pseudo+" a gagné(e) la partie! Bien joué à tous!");
             }
