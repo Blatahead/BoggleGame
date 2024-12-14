@@ -243,7 +243,7 @@ namespace BoggleGameWinForm
 
                 // Créer et l'ajouter
                 Mot motTrouve = new Mot(estValide, valeur, points, premiereLettre, longueur);
-                this.currentJoueur.ListeMotsTrouves.Add(motTrouve);
+                this.currentJoueur.AjouterMotTrouveDansList(motTrouve);
                 this.currentJoueur.Score+=points;
 
                 // Message de confirmation

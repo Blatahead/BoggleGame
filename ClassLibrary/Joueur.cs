@@ -67,7 +67,7 @@ namespace ClassLibrary
         
 
         //utiliser où ? car l'impression que c'est inutile
-        public void AjouterMotTrouveInList(Mot mot)
+        public void AjouterMotTrouveDansList(Mot mot)
         {
             this.listeMotsTrouves.Add(mot);
         }
