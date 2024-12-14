@@ -33,6 +33,8 @@ namespace ClassLibrary
             this.premiereLettre = premiereLettre1;
             this.longueur = longueur1;
         }
+
+
         #endregion
 
         #region Methodes
@@ -48,6 +50,13 @@ namespace ClassLibrary
 
             return $"{this.valeur} (Points : {this.points}, Longueur : {this.longueur}, Première lettre : {this.premiereLettre})";
         }
+
+        
+     
+
+
+
+
 
         #endregion
     }
