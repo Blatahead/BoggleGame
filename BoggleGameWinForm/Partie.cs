@@ -140,7 +140,7 @@ namespace BoggleGameWinForm
 
         private void DemarrerTimerPartie()
         {
-            this.tempsRestant = TimeSpan.FromMinutes(6);
+            this.tempsRestant = TimeSpan.FromMinutes(2);
 
             this.clockPartie = new System.Windows.Forms.Timer
             {
@@ -155,10 +155,18 @@ namespace BoggleGameWinForm
                 {
                     clockPartie.Stop();
                     MessageBox.Show("Temps écoulé !");
+                    foreach(Joueur joueur in this.joueurs)
+                    {
+                        joueur.Score += joueur.ComptagePointsParLongueur();
+                    }
+                    MessageBox.Show($"{this.joueurs[0].Pseudo} a {this.joueurs[0].Score} points.\n" +
+                        $"{this.joueurs[1].Pseudo} a {this.joueurs[1].Score} points.");
                 }
             };
 
             this.clockPartie.Start();
+
+            //fin de partie faire le comptage avec les longueur
         }
         
         private void NouveauTourJoueur()
@@ -187,10 +195,10 @@ namespace BoggleGameWinForm
                     clockJoueur.Stop();
 
                     // MessageBox pour afficher les mots trouvés
-                    //MessageBox.Show($"Tour terminé ! Voici les mots trouvés par {currentJoueur.Pseudo} :\n" +
-                    //    $"{currentJoueur.toStringListeMotsTrouves()}"+"\n Score final: "+currentJoueur.Score);
+                    MessageBox.Show($"Tour terminé ! Voici les mots trouvés par {currentJoueur.Pseudo} :\n" +
+                        $"{currentJoueur.toStringListeMotsTrouves()}"+"\n Score final: "+currentJoueur.Score);
 
-                    MessageBox.Show(this.currentJoueur.toString());
+                    //MessageBox.Show(this.currentJoueur.toString());
 
                     // Passer au prochain joueur (ou arrêter la partie)
                     PasserAuProchainJoueur();
@@ -222,7 +230,7 @@ namespace BoggleGameWinForm
 
                 // Conditions de validité
                 bool estValide = !string.IsNullOrWhiteSpace(saisie) &&
-                                 saisie.Length > 2 &&
+                                 saisie.Length >= 2 &&
                                  !saisie.Contains(" ");
                                  //&& DictionnaireContientMot(saisie); // Remplacez par votre méthode de vérification dans le dictionnaire
 
@@ -230,24 +238,14 @@ namespace BoggleGameWinForm
                 int longueur = estValide ? saisie.Length : 0;
                 string? valeur = estValide ? saisie : null;
                 char premiereLettre = estValide ? saisie[0] : '\0';
-                int points = 0;
-
-                if (estValide)
-                {
-                    foreach (char lettre in saisie.ToUpper())
-                    {
-                        if (valeursLettres.ContainsKey(lettre))
-                        {
-                            points += valeursLettres[lettre];
-                        }
-                    }
-                }
+                int points = this.currentJoueur.ComptagePointsParPoids(estValide, saisie, valeursLettres);
 
                 // Créer et l'ajouter
                 Mot motTrouve = new Mot(estValide, valeur, points, premiereLettre, longueur);
                 this.currentJoueur.AddMot(motTrouve);
                 this.currentJoueur.Score+=points;
 
+                
                 // Message de confirmation
                 //if (estValide)
                 //{

@@ -81,8 +81,22 @@ namespace ClassLibrary
             }
             return liste;
         }
-
-        public int ComptagePointsDeLongueur()
+        public int ComptagePointsParPoids(bool estValide, string saisie, Dictionary<char, int> valeursLettres)
+        {
+            int points = 0;
+            if (estValide)
+            {
+                foreach (char lettre in saisie.ToUpper())
+                {
+                    if (valeursLettres.ContainsKey(lettre))
+                    {
+                        points += valeursLettres[lettre];
+                    }
+                }
+            }
+            return points;
+        }
+        public int ComptagePointsParLongueur()
         {
             int total = 0;
             foreach (Mot word in this.listeMotsTrouves)
