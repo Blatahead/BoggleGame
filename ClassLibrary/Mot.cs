@@ -43,12 +43,12 @@ namespace ClassLibrary
 
         public string toString()
         {
-            if (!this.bon)
-            {
-                return "Mot invalide";
-            }
+            //if (!this.bon)
+            //{
+            //    return "Mot invalide";
+            //}
 
-            return $"{this.valeur} (Points : {this.points}, Longueur : {this.longueur}, Première lettre : {this.premiereLettre})";
+            return $"{this.valeur} (Bon : {this.bon}, Points : {this.points}, Longueur : {this.longueur}, Première lettre : {this.premiereLettre})";
         }
 
         public bool Egale(Mot mot2)

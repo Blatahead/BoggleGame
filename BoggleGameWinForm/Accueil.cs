@@ -9,7 +9,7 @@ namespace BoggleGame
 {
     public partial class Accueil : Form
     {
-        private Image backgroundImage;
+        private Image imageFond;
 
         public Accueil()
         {
@@ -25,10 +25,10 @@ namespace BoggleGame
                     await Task.Delay(250);
 
                     // Charger l'image
-                    backgroundImage = Image.FromFile("./../../../../background.jpg");
+                    imageFond = Image.FromFile("./../../../../background.jpg");
 
                     // Appliquer l'image comme fond
-                    this.BackgroundImage = backgroundImage;
+                    this.BackgroundImage = imageFond;
                     this.BackgroundImageLayout = ImageLayout.Stretch;
                 }
                 catch (Exception ex)

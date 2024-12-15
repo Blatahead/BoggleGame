@@ -9,17 +9,18 @@ namespace ClassLibrary
     public class Tris
     {
         #region Tri Fusion
-        public static void TriFusion(int[] tab, int debut, int fin)
+        public static void TriFusion(List<string> liste, int debut, int fin)
         {
-            int milieu;
             if (debut < fin)
             {
-                milieu = (debut + fin) / 2;
-                TriFusion(tab, debut, milieu);
-                TriFusion(tab, debut + 1, fin);
-                Fusion(tab, debut, fin, milieu);
+                int milieu = (debut + fin) / 2;
+
+                TriFusion(liste, debut, milieu);
+                TriFusion(liste, milieu + 1, fin);
+                Fusion(liste, debut, fin, milieu);
             }
         }
+
         /// <summary>
         /// Méthodes (Fusion et TriFusion) qui morcellent un tableau en plusieurs sous-tableaux avant de les trier par ordre croissants un par un puis entre eux
         /// </summary>
@@ -27,46 +28,56 @@ namespace ClassLibrary
         /// <param name="debut"></param>
         /// <param name="fin"></param>
         /// <param name="milieu"></param>
-        public static void Fusion(int[] tab, int debut, int fin, int milieu)
+        public static void Fusion(List<string> liste, int debut, int fin, int milieu)
         {
-            int indGauche = milieu - debut + 1;
-            int indDroite = fin - milieu;
-            int[] gauche = new int[indGauche];
-            int[] droite = new int[indDroite];
+            int tailleGauche = milieu - debut + 1;
+            int tailleDroite = fin - milieu;
 
-            int ind1 = 0;
-            int ind2 = 0;
-            for (int i = 0; i < indGauche; i++)
+            List<string> gauche = new List<string>(tailleGauche);
+            List<string> droite = new List<string>(tailleDroite);
+
+            for (int i = 0; i < tailleGauche; i++)
+                gauche.Add(liste[debut + i]);
+
+            for (int i = 0; i < tailleDroite; i++)
+                droite.Add(liste[milieu + 1 + i]);
+
+            // Fusion par remontée des "feuilles"
+            int indexGauche = 0, indexDroite = 0;
+            int indexListe = debut;
+
+            while (indexGauche < tailleGauche && indexDroite < tailleDroite)
             {
-                gauche[i] = tab[i + debut];
+                if (string.Compare(gauche[indexGauche], droite[indexDroite], StringComparison.Ordinal) <= 0)
+                {
+                    liste[indexListe] = gauche[indexGauche];
+                    indexGauche++;
+                }
+                else
+                {
+                    liste[indexListe] = droite[indexDroite];
+                    indexDroite++;
+                }
+                indexListe++;
             }
-            for (int i = 0; i < indDroite; i++)
+
+            // éléments restants de gauche
+            while (indexGauche < tailleGauche)
             {
-                droite[i] = tab[i + milieu + 1];
+                liste[indexListe] = gauche[indexGauche];
+                indexGauche++;
+                indexListe++;
             }
-            for (int i = debut; i <= fin; i++)
+
+            // éléments restants de droite
+            while (indexDroite < tailleDroite)
             {
-                if ((ind2 < indDroite) && (ind1 < indGauche))
-                {
-                    if (gauche[ind1] <= droite[ind2])
-                    {
-                        tab[i] = gauche[ind1++];
-                    }
-                    else
-                    {
-                        tab[i] = droite[ind2++];
-                    }
-                }
-                else if (ind2 >= indDroite)
-                {
-                    tab[i] = gauche[ind1++];
-                }
-                else if (ind1 >= indGauche)
-                {
-                    tab[i] = droite[ind2++];
-                }
+                liste[indexListe] = droite[indexDroite];
+                indexDroite++;
+                indexListe++;
             }
         }
+
         #endregion
 
         #region Tri bulle

@@ -14,6 +14,32 @@ namespace ClassLibrary
          }
 
         [TestMethod]
+        public void Test_RecuperationDico_Initialisation()
+        {
+            Dictionnaire dictionnaire = new Dictionnaire("Français");
+
+            dictionnaire.Recuperation_Dico();
+
+            Assert.IsNotNull(dictionnaire.SortedList);
+            Assert.IsTrue(dictionnaire.SortedList.Count > 0);
+        }
+
+        [TestMethod]
+        public void Test_RecuperationDico_Clés_Grande_SortedList()
+        {
+            Dictionnaire dictionnaire = new Dictionnaire("Français");
+
+            dictionnaire.Recuperation_Dico();
+
+            foreach (char lettre in "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+            {
+                Assert.IsTrue(dictionnaire.SortedList.ContainsKey(lettre), $"Clé '{lettre}' absente.");
+            }
+        }
+
+
+
+        [TestMethod]
         public void dichotomie_element_existant()
         {
 
@@ -60,11 +86,6 @@ namespace ClassLibrary
             Assert.IsTrue(mot1.Egale(mot2));
             Assert.IsTrue(!mot1.Egale(mot3));
         }
-        //[TestMethod]
-        //public void RecuperationDictionnaire()
-        //{
-        //    Assert.
-        //}
 
         [TestMethod]
         public void MotExistantDansPlateau_RetourneTrue()
@@ -126,5 +147,31 @@ namespace ClassLibrary
 
             Assert.IsFalse(resultat, $"Le mot {mot} utilise deux fois la même lettre du plateau");
         }
+        [TestMethod]
+        public void Test_Score_Final_Joueur()
+        {
+            Dictionary<char, int> valeursLettres = Plateau.ChargerDicoValeursLettres("./../../../../Lettres.txt");
+            Joueur joueur = new Joueur("TestJoueur");
+            string mot1 = "TEST";
+            string mot2 = "LONGUEUR";
+
+            int scoreMot1 = 4 + 1 + 1 + 4;
+            int scoreMot2 = 1 + 1 + 1 + 2 + 3 + 1 + 1 + 4;
+            int bonusLongueur = 1 + 11;
+
+            joueur.AddMot(new Mot(true, mot1, scoreMot1, mot1[0], mot1.Length));
+            joueur.AddMot(new Mot(true, mot2, scoreMot2, mot2[0], mot2.Length));
+
+            joueur.Score += scoreMot1 + scoreMot2;
+            joueur.Score += joueur.ComptagePointsParLongueur();
+
+            // Score total attendu
+            int scoreAttendu = scoreMot1 + scoreMot2 + bonusLongueur;
+
+            // Assert
+            Assert.AreEqual(scoreAttendu, joueur.Score, $"Le score final pour le joueur '{joueur.Pseudo}' est incorrect.");
+        }
+
+
     }
 }
