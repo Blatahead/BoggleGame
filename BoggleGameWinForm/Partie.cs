@@ -19,12 +19,14 @@ namespace BoggleGameWinForm
         int taillePlateau;
         Joueur[] joueurs;
         Joueur currentJoueur;
+        Plateau plateau;
+        Dictionnaire dictionnaire; //sortedlist ?
+
 
         private System.Windows.Forms.Timer clockPartie;
         private System.Windows.Forms.Timer clockJoueur;
 
         private TimeSpan tempsRestant;
-        private Plateau plateau;
 
         private Image backgroundImage;
 
@@ -51,6 +53,7 @@ namespace BoggleGameWinForm
                     // Appliquer l'image comme fond
                     this.BackgroundImage = backgroundImage;
                     this.BackgroundImageLayout = ImageLayout.Stretch;
+                    
 
                 }
                 catch (Exception ex)
@@ -58,7 +61,6 @@ namespace BoggleGameWinForm
                     MessageBox.Show("Erreur lors du chargement de l'image : " + ex.Message);
                 }
             };
-
             // Première page : création des joueurs
             CreationJoueurs creationJoueurs = new CreationJoueurs();
             if (creationJoueurs.ShowDialog() == DialogResult.OK)
@@ -78,6 +80,12 @@ namespace BoggleGameWinForm
 
                     ConfigurerTableLayoutPanel(this.taillePlateau);
                     RemplirTableLayoutPanel(plateau);
+
+                    //creation du dictionnaire de la partie
+                    //ptet mettre un timer d'attente
+                    this.dictionnaire = new Dictionnaire(this.langue);
+                    this.dictionnaire.Recuperation_Dico();
+
 
                     DemarrerTimerPartie();
 
@@ -226,15 +234,16 @@ namespace BoggleGameWinForm
                 string saisie = this.inputBoxMots.Text.Trim();
                 this.inputBoxMots.Clear();
 
-                Dictionary<char, int> valeursLettres = Plateau.ChargerDicoValeursLettres("./../../../../Lettres.txt");
 
                 // Conditions de validité
-                bool estValide = !string.IsNullOrWhiteSpace(saisie) &&
-                                 saisie.Length >= 2 &&
+                bool estValide = saisie.Length >= 2 &&
                                  !saisie.Contains(" ");
-                                 //&& DictionnaireContientMot(saisie); // Remplacez par votre méthode de vérification dans le dictionnaire
+                                 //&& ;
+                                 //&& Dictionnaire.RechDichoRecursif(,saisie,0,);
 
                 // Calculs
+                Dictionary<char, int> valeursLettres = Plateau.ChargerDicoValeursLettres("./../../../../Lettres.txt");
+                
                 int longueur = estValide ? saisie.Length : 0;
                 string? valeur = estValide ? saisie : null;
                 char premiereLettre = estValide ? saisie[0] : '\0';

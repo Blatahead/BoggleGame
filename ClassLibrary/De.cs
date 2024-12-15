@@ -34,6 +34,10 @@ namespace ClassLibrary
         #endregion
 
         #region Constructeurs
+        public De(char faceVisible1)
+        {
+            this.faceVisible = faceVisible1;
+        }
         public De(Dictionary<char, int> dicoConfigLettres, List<char> lettresDisponibles, Random random)
         {
             for (int i = 0; i < 6; i++)

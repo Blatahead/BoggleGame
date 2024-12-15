@@ -1,4 +1,5 @@
 using ClassLibrary;
+using System.Diagnostics;
 
 namespace ClassLibrary
 {
@@ -16,27 +17,27 @@ namespace ClassLibrary
         public void dichotomie_element_existant()
         {
 
-            string[] tab = { "a", "b", "c", "d", "e" };
+            List<string> liste = ["a", "b", "c", "d", "e"];
             string cherché = "c";
-            bool result = Dictionnaire.dichotomie(tab, cherché, 0, tab.Length-1);
-            Assert.IsTrue(result);
+            bool resultat = Dictionnaire.RechDichoRecursif(liste, cherché, 0, liste.Count()- 1);
+            Assert.IsTrue(resultat);
         }
 
         [TestMethod]
         public void dichotomie_nonexistant()
         {
-            string[] tab = { "a", "b", "c", "d", "e" };
+            List<string> liste = ["a", "b", "c", "d", "e"];
             string cherché = "k";
-            bool result = Dictionnaire.dichotomie(tab, cherché, 0, tab.Length-1);
+            bool result = Dictionnaire.RechDichoRecursif(liste, cherché, 0, liste.Count() - 1);
             Assert.IsFalse(result);
         }
 
         [TestMethod]
         public void dichotomie_unique()
         {
-            string[] tab = {"a"};
+            List<string> liste = ["a"];
             string cherché = "a";
-            bool result = Dictionnaire.dichotomie(tab, cherché, 0, tab.Length-1);
+            bool result = Dictionnaire.RechDichoRecursif(liste, cherché, 0, liste.Count() - 1);
             Assert.IsTrue(result);
 
         }
@@ -58,6 +59,72 @@ namespace ClassLibrary
 
             Assert.IsTrue(mot1.Egale(mot2));
             Assert.IsTrue(!mot1.Egale(mot3));
+        }
+        //[TestMethod]
+        //public void RecuperationDictionnaire()
+        //{
+        //    Assert.
+        //}
+
+        [TestMethod]
+        public void MotExistantDansPlateau_RetourneTrue()
+        {
+            Plateau plateau = new Plateau(4, "./../../../../Lettres.txt");
+            plateau.Matrice = new De[4, 4]
+            {
+                { new De('C'), new De('T'), new De('C'), new De('D') },
+                { new De('E'), new De('E'), new De('G'), new De('H') },
+                { new De('I'), new De('S'), new De('C'), new De('C') },
+                { new De('G'), new De('T'), new De('I'), new De('I') }
+            };
+
+            //string mot = "TEST"; //2e colonne
+            //string mot = "CECI"; //diago
+            string mot = "CEIGTSETCGCIICHD"; //colonne 1 puis 2 puis 3 puis 4
+
+            bool result = plateau.TestPlateau(mot);
+
+            Assert.IsTrue(result, $"Le mot {mot} existe dans le plateau.");
+        }
+
+        [TestMethod]
+        public void MotNonExistantDansPlateau_RetourneFalse()
+        {
+            Plateau plateau = new Plateau(4, "./../../../../Lettres.txt");
+            plateau.Matrice = new De[4, 4]
+            {
+                { new De('C'), new De('T'), new De('C'), new De('D') },
+                { new De('E'), new De('E'), new De('G'), new De('H') },
+                { new De('I'), new De('S'), new De('C'), new De('C') },
+                { new De('G'), new De('T'), new De('I'), new De('I') }
+            };
+
+            //string mot = "CEIGTSETCGCIICHDA"; //taille de plateau dépassée
+            //string mot = "CEIGTSETCGCIICHA"; //dernière lettre non présente
+            //string mot = null;
+            string mot = "";
+
+            bool resultat = plateau.TestPlateau(mot);
+
+            Assert.IsFalse(resultat, $"Le mot {mot} n'existe pas dans le plateau.");
+        }
+        [TestMethod]
+        public void MemeLettreRepeteeDansPlateau_RetournTrue()
+        {
+            Plateau plateau = new Plateau(4, "./../../../../Lettres.txt");
+            plateau.Matrice = new De[4, 4]
+            {
+                { new De('C'), new De('T'), new De('C'), new De('D') },
+                { new De('E'), new De('E'), new De('G'), new De('H') },
+                { new De('I'), new De('S'), new De('C'), new De('C') },
+                { new De('G'), new De('T'), new De('I'), new De('I') }
+            };
+
+            string mot = "CEIGG";
+
+            bool resultat = plateau.TestPlateau(mot);
+
+            Assert.IsFalse(resultat, $"Le mot {mot} utilise deux fois la même lettre du plateau");
         }
     }
 }
