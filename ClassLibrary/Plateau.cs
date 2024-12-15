@@ -134,9 +134,9 @@ namespace ClassLibrary
             {
                 for (int j = 0; j < this.taille; j++)
                 {
-                    bool[,] visited = new bool[this.taille, this.taille];
+                    bool[,] lettresParcourues = new bool[this.taille, this.taille];
 
-                    if (ChercherMotRecursif(mot, 0, i, j, visited))
+                    if (ChercherMotRecursif(mot, 0, i, j, lettresParcourues))
                     {
                         return true;
                     }
@@ -145,48 +145,44 @@ namespace ClassLibrary
             return false; 
         }
 
-        // Méthode récursive pour rechercher dans les 8 directions
-        private bool ChercherMotRecursif(string mot, int index, int x, int y, bool[,] visited)
+        private bool ChercherMotRecursif(string mot, int indice, int x, int y, bool[,] lettresParcourues)
         {
-            // Condition d'arrêt : le mot complet a été trouvé
-            if (index == mot.Length)
+            // condition d'arrêt
+            if (indice == mot.Length)
             {
                 return true;
             }
 
-            // Vérifier si les coordonnées sont valides et si la case est déjà visitée
-            if (x < 0 || y < 0 || x >= this.taille || y >= this.taille || visited[x, y])
+            if (x < 0 || y < 0 || x >= this.taille || y >= this.taille || lettresParcourues[x, y])
             {
                 return false;
             }
 
-            // Vérifier si la lettre actuelle correspond
-            if (this.matrice[x, y].FaceVisible != mot[index])
+            if (this.matrice[x, y].FaceVisible != mot[indice])
             {
                 return false;
             }
 
-            // Marquer cette case comme visitée
-            visited[x, y] = true;
+            lettresParcourues[x, y] = true;
 
-            // Définir les 8 directions (haut, bas, gauche, droite et diagonales)
+            // directions côtés et diagonales
             int[] directionsX = { -1, -1, -1, 0, 0, 1, 1, 1 };
             int[] directionsY = { -1, 0, 1, -1, 1, -1, 0, 1 };
 
-            // Explorer les 8 directions
-            for (int d = 0; d < 8; d++)
+            // les parcourir
+            for (int p = 0; p < 8; p++)
             {
-                int newX = x + directionsX[d];
-                int newY = y + directionsY[d];
+                int nouvX = x + directionsX[p];
+                int nouvY = y + directionsY[p];
 
-                if (ChercherMotRecursif(mot, index + 1, newX, newY, visited))
+                if (ChercherMotRecursif(mot, indice + 1, nouvX, nouvY, lettresParcourues))
                 {
-                    return true; // Si une direction mène au mot complet, retourner true
+                    return true;
                 }
             }
 
-            // Backtracking : Décocher cette case pour d'autres chemins possibles
-            visited[x, y] = false;
+            // explorer d'autres chemins à partir du cran précédant
+            lettresParcourues[x, y] = false;
 
             return false;
         }

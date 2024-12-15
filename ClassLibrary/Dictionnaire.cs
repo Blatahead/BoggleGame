@@ -17,6 +17,9 @@ namespace ClassLibrary
         #region Proprietes
         public SortedList<char, SortedList<int, List<string>>> SortedList
         { get { return this.sortedList; } set { this.sortedList = value; } }
+
+        public string LangueDico
+        { get { return this.langueDico; } }
         #endregion
 
         #region Constructeur
@@ -29,6 +32,7 @@ namespace ClassLibrary
         public Dictionnaire(string langueDico1)
         {
             this.langueDico = langueDico1;
+            this.sortedList = new SortedList<char, SortedList<int, List<string>>>();
         }
         #endregion
 
@@ -39,75 +43,74 @@ namespace ClassLibrary
         /// </summary>
         public void Recuperation_Dico()
         {
-            string line;
             try
             {
-                StreamReader Dic;
-                char[] separateur = { ' ' };
-                if (this.langueDico=="Français")
-                {
-                    Dic = new StreamReader("./../../../../MotsPossiblesFR.txt");
+                string cheminFichier = this.langueDico == "Français"
+                    ? "./../../../../MotsPossiblesFR.txt"
+                    : "./../../../../MotsPossiblesEN.txt";
 
-                }
-                else
+                using (StreamReader Dic = new StreamReader(cheminFichier))
                 {
-                    Dic = new StreamReader("./../../../../MotsPossiblesEN.txt");
-                }
-                line= Dic.ReadLine();
-                string[] s = line.Split(separateur);
-                foreach(string s2 in s)
-                {
-                    SortedList<int, List<string>> tempo = new SortedList<int, List<string>>() ;
-                    List<string> mot = new List<string>();
-                    mot.Add(s2);
-                    tempo.Add(s2.Length, mot);
-                    this.sortedList.Add(s2[0],tempo);
+                    string line;
+                    while ((line = Dic.ReadLine()) != null)
+                    {
+                        foreach (string mot in line.Split(' '))
+                        {
+                            //A enlever
+                            if (string.IsNullOrWhiteSpace(mot)) continue; // Ignorer les mots vides
+
+                            string motNettoye = mot.Trim().ToUpper();
+                            char premiereLettre = motNettoye[0];
+
+                            // Vérifiez si la clé pour la lettre existe déjà
+                            if (!this.sortedList.ContainsKey(premiereLettre))
+                            {
+                                this.sortedList[premiereLettre] = new SortedList<int, List<string>>();
+                            }
+
+                            // Vérifiez si la clé pour la longueur existe déjà
+                            if (!this.sortedList[premiereLettre].ContainsKey(motNettoye.Length))
+                            {
+                                this.sortedList[premiereLettre][motNettoye.Length] = new List<string>();
+                            }
+
+                            // Ajouter le mot à la liste correspondante
+                            this.sortedList[premiereLettre][motNettoye.Length].Add(motNettoye);
+                        }
+                    }
                 }
 
-                while (line!=null)
-                {
-                    line=Dic.ReadLine();
-                }
-                Dic.Close();
-                Console.ReadLine();
+                Console.WriteLine("Fichier lu avec succès.");
             }
             catch (Exception e)
             {
-                Console.WriteLine("Exception : "+e.Message);
-            }
-            finally
-            {
-                Console.WriteLine("Fichier lu.");
+                Console.WriteLine($"Erreur lors de la lecture du fichier : {e.Message}");
             }
         }
+
         public static bool RechDichoRecursif(List<string> liste, string cherché, int debut, int fin)
         {
-            if (debut>=fin)
+            if (debut > fin) // Cas de base : indices invalides
             {
-                if (liste[debut]==cherché)
-                {
-                    return true;
-                }
                 return false;
             }
-         
-            int milieu = (debut+fin)/2;
-            if (liste[milieu]==cherché)
-            {
-                return true;
-            }
-            bool CG = RechDichoRecursif(liste, cherché, debut, milieu-1);
 
-            bool CD = RechDichoRecursif(liste, cherché, milieu+1, fin);
-            if (CD==true || CG==true)
+            int milieu = (debut + fin) / 2;
+
+            if (liste[milieu] == cherché) // Mot trouvé
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            // Recherche dans la moitié gauche
+            bool CG = RechDichoRecursif(liste, cherché, debut, milieu - 1);
+
+            // Recherche dans la moitié droite
+            bool CD = RechDichoRecursif(liste, cherché, milieu + 1, fin);
+
+            return CG || CD; // Si trouvé dans l'une des moitiés
         }
+
         //mettre un return type string (pas de console.writeline)
         public void toString()
         { 
