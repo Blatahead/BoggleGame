@@ -126,6 +126,72 @@ namespace ClassLibrary
             return facesVisibles;
         }
 
+        public bool TestPlateau(string mot)
+        {
+            if((mot == null) || (mot.Length <=0) ||
+                (mot.Length > (this.Taille*this.Taille))) return false;
+            for (int i = 0; i < this.taille; i++)
+            {
+                for (int j = 0; j < this.taille; j++)
+                {
+                    bool[,] visited = new bool[this.taille, this.taille];
+
+                    if (ChercherMotRecursif(mot, 0, i, j, visited))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false; 
+        }
+
+        // Méthode récursive pour rechercher dans les 8 directions
+        private bool ChercherMotRecursif(string mot, int index, int x, int y, bool[,] visited)
+        {
+            // Condition d'arrêt : le mot complet a été trouvé
+            if (index == mot.Length)
+            {
+                return true;
+            }
+
+            // Vérifier si les coordonnées sont valides et si la case est déjà visitée
+            if (x < 0 || y < 0 || x >= this.taille || y >= this.taille || visited[x, y])
+            {
+                return false;
+            }
+
+            // Vérifier si la lettre actuelle correspond
+            if (this.matrice[x, y].FaceVisible != mot[index])
+            {
+                return false;
+            }
+
+            // Marquer cette case comme visitée
+            visited[x, y] = true;
+
+            // Définir les 8 directions (haut, bas, gauche, droite et diagonales)
+            int[] directionsX = { -1, -1, -1, 0, 0, 1, 1, 1 };
+            int[] directionsY = { -1, 0, 1, -1, 1, -1, 0, 1 };
+
+            // Explorer les 8 directions
+            for (int d = 0; d < 8; d++)
+            {
+                int newX = x + directionsX[d];
+                int newY = y + directionsY[d];
+
+                if (ChercherMotRecursif(mot, index + 1, newX, newY, visited))
+                {
+                    return true; // Si une direction mène au mot complet, retourner true
+                }
+            }
+
+            // Backtracking : Décocher cette case pour d'autres chemins possibles
+            visited[x, y] = false;
+
+            return false;
+        }
+
+
         ///////////////////////
         /// Ne pas ovveride ///
         ///////////////////////

@@ -9,15 +9,26 @@ namespace ClassLibrary
 { 
     public class Dictionnaire
     {
+        #region Attributs
+        SortedList<char,SortedList<int,List<string>>> sortedList;
+        string langueDico;
+        #endregion
 
-        SortedList<char,SortedList<int,List<string>>> Sortedlist1;
-        string langue_Dico;
+        #region Proprietes
+        public SortedList<char, SortedList<int, List<string>>> SortedList
+        { get { return this.sortedList; } set { this.sortedList = value; } }
+        #endregion
 
         #region Constructeur
-        public Dictionnaire(string langue_Dico, SortedList<char,SortedList<int,List<string>>> list)
+        public Dictionnaire(string langueDico1, SortedList<char,SortedList<int,List<string>>> sortedList1)
         {
-            this.langue_Dico=langue_Dico;
-            this.Sortedlist1=list;
+            this.langueDico= langueDico1;
+            this.sortedList = sortedList1;
+        }
+
+        public Dictionnaire(string langueDico1)
+        {
+            this.langueDico = langueDico1;
         }
         #endregion
 
@@ -33,7 +44,7 @@ namespace ClassLibrary
             {
                 StreamReader Dic;
                 char[] separateur = { ' ' };
-                if (this.langue_Dico=="Français")
+                if (this.langueDico=="Français")
                 {
                     Dic = new StreamReader("./../../../../MotsPossiblesFR.txt");
 
@@ -50,9 +61,8 @@ namespace ClassLibrary
                     List<string> mot = new List<string>();
                     mot.Add(s2);
                     tempo.Add(s2.Length, mot);
-                    Sortedlist1.Add(s2[0],tempo);
+                    this.sortedList.Add(s2[0],tempo);
                 }
-
 
                 while (line!=null)
                 {
@@ -68,55 +78,13 @@ namespace ClassLibrary
             finally
             {
                 Console.WriteLine("Fichier lu.");
-                
-                
-                
             }
-
         }
-        public void toString()
-        { 
-
-            foreach(KeyValuePair<char,SortedList<int, List<string>>> val in this.Sortedlist1)
-            {
-                Console.WriteLine(val.Key);
-                
-            }
-            
-
-        }
-         
-
-
-
-
-
-
-
-
-
-
-
-
-        #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public static bool dichotomie(string[] tab, string cherché, int debut, int fin)
+        public static bool RechDichoRecursif(List<string> liste, string cherché, int debut, int fin)
         {
             if (debut>=fin)
             {
-                if (tab[debut]==cherché)
+                if (liste[debut]==cherché)
                 {
                     return true;
                 }
@@ -124,13 +92,13 @@ namespace ClassLibrary
             }
          
             int milieu = (debut+fin)/2;
-            if (tab[milieu]==cherché)
+            if (liste[milieu]==cherché)
             {
                 return true;
             }
-            bool CG = dichotomie(tab, cherché, debut, milieu-1);
+            bool CG = RechDichoRecursif(liste, cherché, debut, milieu-1);
 
-            bool CD = dichotomie(tab, cherché, milieu+1, fin);
+            bool CD = RechDichoRecursif(liste, cherché, milieu+1, fin);
             if (CD==true || CG==true)
             {
                 return true;
@@ -139,10 +107,15 @@ namespace ClassLibrary
             {
                 return false;
             }
-
         }
-
-
+        //mettre un return type string (pas de console.writeline)
+        public void toString()
+        { 
+            foreach(KeyValuePair<char,SortedList<int, List<string>>> val in this.sortedList)
+            {
+                Console.WriteLine(val.Key);
+            }
+        }
+        #endregion
     }
-   
 }
