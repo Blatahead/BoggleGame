@@ -55,7 +55,6 @@ namespace ClassLibrary
             for (int i = 0; i < tailleDroite; i++)
                 droite.Add(liste[milieu + 1 + i]);
 
-            // Fusion par remontée des "feuilles"
             int indexGauche = 0, indexDroite = 0;
             int indexListe = debut;
 
@@ -74,7 +73,6 @@ namespace ClassLibrary
                 indexListe++;
             }
 
-            // éléments restants de gauche
             while (indexGauche < tailleGauche)
             {
                 liste[indexListe] = gauche[indexGauche];
@@ -82,7 +80,6 @@ namespace ClassLibrary
                 indexListe++;
             }
 
-            // éléments restants de droite
             while (indexDroite < tailleDroite)
             {
                 liste[indexListe] = droite[indexDroite];

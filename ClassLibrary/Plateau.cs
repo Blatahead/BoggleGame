@@ -105,7 +105,6 @@ namespace ClassLibrary
         /// <returns></returns>
         private bool ChercherMotRecursif(string mot, int indice, int x, int y, bool[,] lettresParcourues)
         {
-            // condition d'arrêt
             if (indice == mot.Length)
             {
                 return true;
@@ -123,7 +122,6 @@ namespace ClassLibrary
 
             lettresParcourues[x, y] = true;
 
-            // directions côtés et diagonales
             int[] directionsX = { -1, -1, -1, 0, 0, 1, 1, 1 };
             int[] directionsY = { -1, 0, 1, -1, 1, -1, 0, 1 };
 
@@ -137,7 +135,6 @@ namespace ClassLibrary
                     return true;
                 }
             }
-            // explorer d'autres chemins à partir du cran précédant
             lettresParcourues[x, y] = false;
 
             return false;

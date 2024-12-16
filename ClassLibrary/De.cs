@@ -71,7 +71,6 @@ namespace ClassLibrary
         {
             this.FaceVisible = Faces[random.Next(6)];
 
-            // Réduire le compteur de la lettre si elle est visible
             if (dicoConfigLettres.ContainsKey(this.FaceVisible))
             {
                 dicoConfigLettres[this.FaceVisible]--;

@@ -70,10 +70,13 @@ namespace ClassLibrary
         [TestMethod]
         public void tri_selection()
         {
-            int[] tab = { 3, 5, 2, 1, 7, 6, 4 };
+            int[] tab = { 3, 5, 2, 1, 7, 6, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+            Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
             Tris.Tri_Insertion(tab);
-            int[] trié = { 1, 2, 3, 4, 5, 6, 7 };
+            stopwatch.Stop();
+            int[] trié = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
             CollectionAssert.AreEqual(trié, tab, "Le tableau vide ne doit pas être modifié");
+            Console.WriteLine($"Temps d'exécution : {stopwatch.ElapsedMilliseconds} ms");
         }
 
         [TestMethod]
@@ -101,7 +104,7 @@ namespace ClassLibrary
 
             //string mot = "TEST"; //2e colonne
             //string mot = "CECI"; //diago
-            string mot = "CEIGTSETCGCIICHD"; //colonne 1 puis 2 puis 3 puis 4
+            string mot = "CEIGTSETCGCIICHD";
 
             bool result = plateau.TestPlateau(mot);
 
@@ -180,12 +183,9 @@ namespace ClassLibrary
             joueur.Score += scoreMot1 + scoreMot2;
             joueur.Score += joueur.ComptagePointsParLongueur();
 
-            // Score total attendu
             int scoreAttendu = scoreMot1 + scoreMot2 + bonusLongueur;
 
             Assert.AreEqual(scoreAttendu, joueur.Score, $"Le score final pour le joueur '{joueur.Pseudo}' est incorrect.");
         }
-
-
     }
 }

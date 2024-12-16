@@ -38,10 +38,6 @@ namespace BoggleGameWinForm
 
             this.nbTours = 0;
 
-            
-
-
-            // Délai avant de charger l'image
             this.Load += async (s, e) =>
             {
                 try
@@ -57,18 +53,16 @@ namespace BoggleGameWinForm
                 }
             };
 
-            // Première page : création des joueurs
             CreationJoueurs creationJoueurs = new CreationJoueurs();
             if (creationJoueurs.ShowDialog() == DialogResult.OK)
             {
                 this.joueurs = creationJoueurs.JoueursPartie;
                 this.motsTrouvesTourActuel = new Dictionary<Joueur, List<Mot>>();
-                foreach (var joueur in this.joueurs)
+                foreach (Joueur joueur in this.joueurs)
                 {
                     this.motsTrouvesTourActuel[joueur] = new List<Mot>();
                 }
 
-                // Deuxième page imbriquée : configuration des paramètres
                 Configurations config = new Configurations();
                 if (config.ShowDialog() == DialogResult.OK)
                 {
@@ -81,7 +75,6 @@ namespace BoggleGameWinForm
 
                     ConfigurerTableLayoutPanel(this.taillePlateau);
 
-                    //Troisième page imbriquée : la partie s'affiche quand la config part
                     RemplirTableLayoutPanel(plateau);
 
                     DemarrerTimerPartie();
@@ -174,12 +167,10 @@ namespace BoggleGameWinForm
                         Nuage nuage = new Nuage(Mot.ListeDeMotsEnListeDeString(joueur.ListeMotsTrouves));
                         string cheminFichier = $"nuage_de_mots{joueur.Pseudo}.png";
                         nuage.GenererImageNuage(cheminFichier, 400, 300);
-                        //MessageBox.Show($"Nuage de mots enregistré sous : {cheminFichier}");
                     }
 
                     Gagnant(this.joueurs[0], this.joueurs[1]);
                     
-                    // Génération du nuage complet
                     string cheminFichierNuageBest = "nuage_de_mots_tous.png";
                     Nuage.GenererNuageDepuisPlateau(cheminFichierNuageBest, this.plateau, this.dictionnaire);
 
@@ -284,7 +275,7 @@ namespace BoggleGameWinForm
 
                 this.plateau = new Plateau(this.taillePlateau, "./../../../../Lettres.txt");
 
-                foreach (var joueur in this.joueurs)
+                foreach (Joueur joueur in this.joueurs)
                 {
                     motsTrouvesTourActuel[joueur].Clear();
                 }
@@ -331,7 +322,6 @@ namespace BoggleGameWinForm
                 string saisie = this.inputBoxMots.Text.Trim().ToUpper();
                 this.inputBoxMots.Clear();
 
-                // Conditions de validité
                 bool estValide = saisie.Length >= 2
                     && !saisie.Contains(" ")
                     && this.plateau.TestPlateau(saisie)
@@ -344,7 +334,6 @@ namespace BoggleGameWinForm
                         0,
                         this.dictionnaire.SortedList[saisie[0]][saisie.Length].Count - 1);
 
-                // Calculs
                 Dictionary<char, int> valeursLettres = Dictionnaire.ChargerDicoValeursLettres("./../../../../Lettres.txt");
 
                 char premiereLettre = estValide ? char.ToUpper(saisie[0]) : '\0';
@@ -356,7 +345,6 @@ namespace BoggleGameWinForm
                 {
                     Mot motTrouve = new Mot(estValide, saisie, points, premiereLettre, longueur);
 
-                    // Vérifier si le mot a été trouvé dans le tour actuel
                     if (!motsTrouvesTourActuel[this.currentJoueur].Any(m => m.Egale(motTrouve)))
                     {
                         motsTrouvesTourActuel[this.currentJoueur].Add(motTrouve);

@@ -40,7 +40,7 @@ namespace ClassLibrary
                     Random rand = new Random();
                     List<Rectangle> zonesOccupees = new List<Rectangle>();
 
-                    foreach (var mot in _frequences.OrderByDescending(kvp => kvp.Value))
+                    foreach (KeyValuePair<string,int> mot in _frequences.OrderByDescending(kvp => kvp.Value))
                     {
                         int taillePolice = Math.Min(10 + mot.Value * 5, 50);
                         using (Font font = new Font("Arial", taillePolice))
@@ -76,10 +76,10 @@ namespace ClassLibrary
             {
                 List<string> motsValides = new List<string>();
 
-                foreach (var entree in dictionnaire.SortedList)
+                foreach (KeyValuePair<char,SortedList<int, List<string>>> entree in dictionnaire.SortedList)
                 {
                     char lettre = entree.Key;
-                    foreach (var listeParLongueur in entree.Value)
+                    foreach (KeyValuePair<int,List<string>> listeParLongueur in entree.Value)
                     {
                         foreach (string mot in listeParLongueur.Value)
                         {
@@ -112,22 +112,3 @@ namespace ClassLibrary
         }
     }
 }
-
-
-//Explications
-//Classe Nuage :
-
-//La classe contient un dictionnaire _frequences qui stocke chaque mot et son nombre d'occurrences.
-//La méthode CalculerFrequences utilise LINQ pour calculer la fréquence des mots.
-//Affichage texte du nuage :
-
-//La méthode AfficherNuage imprime les mots avec une taille de police relative à leur fréquence.
-//Génération d'image :
-
-//La méthode GenererImageNuage crée une image PNG où chaque mot est dessiné avec une taille de police basée sur sa fréquence.
-//Un Random est utilisé pour positionner les mots de manière aléatoire.
-//Exemple dans Main:
-
-//Une liste de mots est donnée.
-//Le nuage est affiché dans la console et sauvegardé en tant qu’image.
-//Ce code génère un nuage de mots visuel et textuel adapté à vos besoins. Vous pouvez le personnaliser pour ajouter plus d'options graphiques.

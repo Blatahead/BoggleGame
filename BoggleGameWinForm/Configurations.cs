@@ -38,11 +38,11 @@ namespace BoggleGameWinForm
             this.BackgroundImage = Image.FromFile("./../../../../background.jpg");
             this.BackgroundImageLayout = ImageLayout.Stretch;
 
-            this.comboBoxLangue.SelectedItem = "Français";//Remplissage par défaut
-            this.comboBoxTaille.SelectedItem = "4x4";//Remplissage par défaut
+            this.comboBoxLangue.SelectedItem = "Français";
+            this.comboBoxTaille.SelectedItem = "4x4";
 
-            this.langue = "Français";//Par défaut
-            this.taillePlateau = 4;//Par défaut
+            this.langue = "Français";
+            this.taillePlateau = 4;
         }
         #endregion
 
@@ -56,7 +56,6 @@ namespace BoggleGameWinForm
         {
             ConfigureButton(this.saveConfigButton);
 
-            // Responsive
             this.Resize += (s, e) =>
             {
                 PositionButton(this.saveConfigButton, 2, -100);
@@ -69,13 +68,12 @@ namespace BoggleGameWinForm
         /// <param name="button"></param>
         private void ConfigureButton(Button button)
         {
-            button.BackColor = Color.FromArgb(128, 45, 156, 219); // Bleu doux avec opacité
-            button.ForeColor = Color.White; // Texte en blanc
+            button.BackColor = Color.FromArgb(128, 45, 156, 219);
+            button.ForeColor = Color.White; 
             button.Font = new Font("Young Serif", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button.FlatStyle = FlatStyle.Flat;
             button.FlatAppearance.BorderSize = 0;
 
-            // Coins arrondis
             button.Paint += Button_Paint;
         }
 
@@ -88,13 +86,12 @@ namespace BoggleGameWinForm
         {
             Button btn = (Button)sender;
 
-            // Coins arrondis
             using (GraphicsPath path = new GraphicsPath())
             {
-                path.AddArc(0, 0, 20, 20, 180, 90); // Haut gauche
-                path.AddArc(btn.Width - 20, 0, 20, 20, 270, 90); // Haut droit
-                path.AddArc(btn.Width - 20, btn.Height - 20, 20, 20, 0, 90); // Bas droit
-                path.AddArc(0, btn.Height - 20, 20, 20, 90, 90); // Bas gauche
+                path.AddArc(0, 0, 20, 20, 180, 90);
+                path.AddArc(btn.Width - 20, 0, 20, 20, 270, 90);
+                path.AddArc(btn.Width - 20, btn.Height - 20, 20, 20, 0, 90);
+                path.AddArc(0, btn.Height - 20, 20, 20, 90, 90);
                 path.CloseAllFigures();
 
                 btn.Region = new Region(path);
@@ -111,10 +108,10 @@ namespace BoggleGameWinForm
         /// <param name="decalageVertical"></param>
         private void PositionButton(Button button, int diviseurDeLargeur, int decalageVertical)
         {
-            int largeur = this.ClientSize.Width / diviseurDeLargeur; // Fraction de largeur disponible
-            int hauteur = 90; // Hauteur fixe
-            int posX = (this.ClientSize.Width - largeur) / 2; // Centré horizontalement
-            int posY = (this.ClientSize.Height / 2) + decalageVertical; // Décalage vertical
+            int largeur = this.ClientSize.Width / diviseurDeLargeur;
+            int hauteur = 90;
+            int posX = (this.ClientSize.Width - largeur) / 2;
+            int posY = (this.ClientSize.Height / 2) + decalageVertical;
 
             button.Size = new Size(largeur, hauteur);
             button.Location = new Point(posX, posY);
