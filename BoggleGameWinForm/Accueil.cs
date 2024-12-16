@@ -95,14 +95,14 @@ namespace BoggleGame
         /// Sert au responsive d'un bouton.
         /// </summary>
         /// <param name="button"></param>
-        /// <param name="widthDivider"></param>
-        /// <param name="verticalOffset"></param>
-        private void PositionButton(Button button, int widthDivider, int verticalOffset)
+        /// <param name="diviseurDeLargeur"></param>
+        /// <param name="decalageVertical"></param>
+        private void PositionButton(Button button, int diviseurDeLargeur, int decalageVertical)
         {
-            int largeur = this.ClientSize.Width / widthDivider; // Fraction de largeur disponible
+            int largeur = this.ClientSize.Width / diviseurDeLargeur; // Fraction de largeur disponible
             int hauteur = 90; // Hauteur fixe
             int posX = (this.ClientSize.Width - largeur) / 2; // Centré horizontalement
-            int posY = (this.ClientSize.Height / 2) + verticalOffset; // Décalage vertical
+            int posY = (this.ClientSize.Height / 2) + decalageVertical; // Décalage vertical
 
             button.Size = new Size(largeur, hauteur);
             button.Location = new Point(posX, posY);

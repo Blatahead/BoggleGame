@@ -42,10 +42,9 @@ namespace BoggleGameWinForm
         {
             ConfigureButton(this.confirmCreationJoueurs);
 
-            // Ajuster la taille et la position des boutons dynamiquement
+            // Responsive
             this.Resize += (s, e) =>
             {
-                // Bouton "Nouvelle partie" : centré en haut
                 PositionButton(this.confirmCreationJoueurs, 2, -100);
             };
         }
@@ -74,24 +73,16 @@ namespace BoggleGameWinForm
         {
             Button btn = (Button)sender;
 
-            // Créer un pinceau pour les coins arrondis
+            // Coins arrondis
             using (GraphicsPath path = new GraphicsPath())
             {
-                path.AddArc(0, 0, 20, 20, 180, 90); // Coin supérieur gauche
-                path.AddArc(btn.Width - 20, 0, 20, 20, 270, 90); // Coin supérieur droit
-                path.AddArc(btn.Width - 20, btn.Height - 20, 20, 20, 0, 90); // Coin inférieur droit
-                path.AddArc(0, btn.Height - 20, 20, 20, 90, 90); // Coin inférieur gauche
+                path.AddArc(0, 0, 20, 20, 180, 90); // Haut gauche
+                path.AddArc(btn.Width - 20, 0, 20, 20, 270, 90); // Haut droit
+                path.AddArc(btn.Width - 20, btn.Height - 20, 20, 20, 0, 90); // Bas droit
+                path.AddArc(0, btn.Height - 20, 20, 20, 90, 90); // Bas gauche
                 path.CloseAllFigures();
 
-                // Appliquer la région arrondie
                 btn.Region = new Region(path);
-
-                // Dessiner un contour
-                using (Pen pen = new Pen(Color.FromArgb(35, 135, 200), 2))
-                {
-                    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                    e.Graphics.DrawPath(pen, path);
-                }
             }
         }
         #endregion
@@ -101,14 +92,14 @@ namespace BoggleGameWinForm
         /// Sert au responsive d'un bouton.
         /// </summary>
         /// <param name="button"></param>
-        /// <param name="widthDivider"></param>
-        /// <param name="verticalOffset"></param>
-        private void PositionButton(Button button, int widthDivider, int verticalOffset)
+        /// <param name="diviseurDeLargeur"></param>
+        /// <param name="decalageVertical"></param>
+        private void PositionButton(Button button, int diviseurDeLargeur, int decalageVertical)
         {
-            int largeur = this.ClientSize.Width / widthDivider; // Fraction de largeur disponible
+            int largeur = this.ClientSize.Width / diviseurDeLargeur; // Fraction de largeur disponible
             int hauteur = 90; // Hauteur fixe
             int posX = (this.ClientSize.Width - largeur) / 2; // Centré horizontalement
-            int posY = (this.ClientSize.Height / 2) + verticalOffset; // Décalage vertical
+            int posY = (this.ClientSize.Height / 2) + decalageVertical; // Décalage vertical
 
             button.Size = new Size(largeur, hauteur);
             button.Location = new Point(posX, posY);
