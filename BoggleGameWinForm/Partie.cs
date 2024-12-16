@@ -139,7 +139,7 @@ namespace BoggleGameWinForm
         /// </summary>
         private void DemarrerTimerPartie()
         {
-            this.tempsRestant = TimeSpan.FromMinutes(0.2);
+            this.tempsRestant = TimeSpan.FromMinutes(6);
 
             this.horlogePartie = new System.Windows.Forms.Timer
             {
