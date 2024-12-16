@@ -26,12 +26,20 @@ namespace BoggleGameWinForm
         private System.Windows.Forms.Timer horlogeJoueur;
 
         private TimeSpan tempsRestant;
+        int nbTours;
+        private Dictionary<Joueur, List<Mot>> motsTrouvesTourActuel;
+
         #endregion
 
         #region Constructeur
         public Partie()
         {
             InitializeComponent();
+
+            this.nbTours = 0;
+
+            
+
 
             // Délai avant de charger l'image
             this.Load += async (s, e) =>
@@ -54,6 +62,11 @@ namespace BoggleGameWinForm
             if (creationJoueurs.ShowDialog() == DialogResult.OK)
             {
                 this.joueurs = creationJoueurs.JoueursPartie;
+                this.motsTrouvesTourActuel = new Dictionary<Joueur, List<Mot>>();
+                foreach (var joueur in this.joueurs)
+                {
+                    this.motsTrouvesTourActuel[joueur] = new List<Mot>();
+                }
 
                 // Deuxième page imbriquée : configuration des paramètres
                 Configurations config = new Configurations();
@@ -139,7 +152,7 @@ namespace BoggleGameWinForm
         /// </summary>
         private void DemarrerTimerPartie()
         {
-            this.tempsRestant = TimeSpan.FromMinutes(6);
+            this.tempsRestant = TimeSpan.FromMinutes(4);
 
             this.horlogePartie = new System.Windows.Forms.Timer
             {
@@ -256,10 +269,25 @@ namespace BoggleGameWinForm
         /// </summary>
         private void PasserAuProchainJoueur()
         {
-            int indexCurrent = Array.IndexOf(joueurs, currentJoueur);
-            int nextIndex = (indexCurrent + 1) % joueurs.Length;
-            this.currentJoueur = joueurs[nextIndex];
+            int indiceActuel = Array.IndexOf(joueurs, currentJoueur);
+            int indiceDapres = (indiceActuel + 1) % joueurs.Length;
+            this.currentJoueur = joueurs[indiceDapres];
 
+            nbTours++;
+
+            if (nbTours % 2 == 0)
+            {
+                PlateauPartie.Controls.Clear();
+
+                this.plateau = new Plateau(this.taillePlateau, "./../../../../Lettres.txt");
+
+                foreach (var joueur in this.joueurs)
+                {
+                    motsTrouvesTourActuel[joueur].Clear();
+                }
+
+                RemplirTableLayoutPanel(this.plateau);
+            }
             this.peudoJoueur.Text = this.currentJoueur.Pseudo;
             TimerJoueur();
         }
@@ -300,10 +328,11 @@ namespace BoggleGameWinForm
                 string saisie = this.inputBoxMots.Text.Trim().ToUpper();
                 this.inputBoxMots.Clear();
 
+                // Conditions de validité
                 bool estValide = saisie.Length >= 2
                     && !saisie.Contains(" ")
                     && this.plateau.TestPlateau(saisie)
-                    && this.dictionnaire.SortedList.ContainsKey(saisie[0]) 
+                    && this.dictionnaire.SortedList.ContainsKey(saisie[0])
                     && this.dictionnaire.SortedList[saisie[0]].ContainsKey(saisie.Length)
                     && this.dictionnaire.SortedList[saisie[0]][saisie.Length].Count > 0
                     && Dictionnaire.RechDichoRecursif(
@@ -314,7 +343,7 @@ namespace BoggleGameWinForm
 
                 // Calculs
                 Dictionary<char, int> valeursLettres = Dictionnaire.ChargerDicoValeursLettres("./../../../../Lettres.txt");
-                
+
                 char premiereLettre = estValide ? char.ToUpper(saisie[0]) : '\0';
                 int longueur = estValide ? saisie.Length : 0;
                 string? valeur = estValide ? saisie : saisie;
@@ -324,14 +353,17 @@ namespace BoggleGameWinForm
                 {
                     Mot motTrouve = new Mot(estValide, saisie, points, premiereLettre, longueur);
 
-                    if (!this.currentJoueur.ListeMotsTrouves.Any(m => m.Egale(motTrouve)))
+                    // Vérifier si le mot a été trouvé dans le tour actuel
+                    if (!motsTrouvesTourActuel[this.currentJoueur].Any(m => m.Egale(motTrouve)))
                     {
+                        motsTrouvesTourActuel[this.currentJoueur].Add(motTrouve);
                         this.currentJoueur.AddMot(motTrouve);
                         this.currentJoueur.Score += points;
                     }
                 }
             }
         }
+
         #endregion
     }
 }

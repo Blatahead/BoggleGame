@@ -11,6 +11,7 @@ namespace ClassLibrary
         #region Attributs
         De[,] matrice;
         int taille;
+        List<char> listeFacesVisibles;
         #endregion
 
         #region Proprietes
@@ -25,6 +26,7 @@ namespace ClassLibrary
             this.taille = taille1;
             this.matrice = new De[taille1, taille1];
             RemplirPlateau(fichierConfigLetttres);
+            this.listeFacesVisibles = RecupListFaceVisibles();
         }
         #endregion
 
@@ -72,6 +74,23 @@ namespace ClassLibrary
                 }
             }
             return false; 
+        }
+
+        /// <summary>
+        /// Récupère les faces visibles d'un plateau sous forme de liste de charactères
+        /// </summary>
+        /// <returns></returns>
+        public List<char> RecupListFaceVisibles()
+        {
+            List<char> liste = new List<char>();
+            for(int i = 0; i < this.taille; i++)
+            {
+                for(int j = 0; j < this.taille; j++)
+                {
+                    liste.Add(this.matrice[i,j].FaceVisible);
+                }
+            }
+            return liste;
         }
 
         /// <summary>

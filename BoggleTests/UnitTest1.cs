@@ -147,10 +147,25 @@ namespace ClassLibrary
 
             Assert.IsFalse(resultat, $"Le mot {mot} utilise deux fois la même lettre du plateau");
         }
+
+        [TestMethod]
+        public void RecuperationFacesVisiblesPlateau_RetourneTrue()
+        {
+            Plateau plateau = new Plateau(2, "./../../../../Lettres.txt");
+            plateau.Matrice = new De[2, 2]
+            {
+                { new De('C'), new De('T') },
+                { new De('E'), new De('E') }
+            };
+            List<char> liste = ['C', 'T', 'E', 'E'] ;
+
+            CollectionAssert.AreEqual(plateau.RecupListFaceVisibles(), liste, "Les deux listes ne sont pas égales");
+        }
+
         [TestMethod]
         public void Test_Score_Final_Joueur()
         {
-            Dictionary<char, int> valeursLettres = Plateau.ChargerDicoValeursLettres("./../../../../Lettres.txt");
+            Dictionary<char, int> valeursLettres = Dictionnaire.ChargerDicoValeursLettres("./../../../../Lettres.txt");
             Joueur joueur = new Joueur("TestJoueur");
             string mot1 = "TEST";
             string mot2 = "LONGUEUR";
