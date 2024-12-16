@@ -109,23 +109,6 @@ namespace ClassLibrary
             return dicoValeursLettres;
         }
 
-
-        //////////////////////////
-        /// A voir si on garde ///
-        //////////////////////////
-        public char[,] RecupFacesVisibles()
-        {
-            char[,] facesVisibles = new char[this.taille, this.taille];
-            for (int i = 0; i < this.taille; i++)
-            {
-                for (int j = 0; j < this.taille; j++)
-                {
-                    facesVisibles[i, j] = this.matrice[i, j].FaceVisible;
-                }
-            }
-            return facesVisibles;
-        }
-
         public bool TestPlateau(string mot)
         {
             if((mot == null) || (mot.Length <=0) ||
@@ -187,10 +170,6 @@ namespace ClassLibrary
             return false;
         }
 
-
-        ///////////////////////
-        /// Ne pas ovveride ///
-        ///////////////////////
         public string toString()
         {
             string lignes = "";
@@ -204,7 +183,6 @@ namespace ClassLibrary
             }
             return lignes;
         }
-
         #endregion
     }
 }

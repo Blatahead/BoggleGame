@@ -39,7 +39,8 @@ namespace ClassLibrary
 
         #region Méthodes
         /// <summary>
-        /// Fonction qui permet de lire le bon dictionnaire en fonction de la langue souhaitée
+        /// Fonction qui permet de lire le bon dictionnaire en fonction de la langue souhaitée.
+        /// Stock les mots du dictionnaire dans l'attribut sortedList en fonction des clés
         /// </summary>
         public void Recuperation_Dico()
         {
@@ -56,30 +57,25 @@ namespace ClassLibrary
                     {
                         foreach (string mot in line.Split(' '))
                         {
-                            //A enlever
-                            if (string.IsNullOrWhiteSpace(mot)) continue; // Ignorer les mots vides
+                            if (string.IsNullOrWhiteSpace(mot)) continue;
 
                             string motNettoye = mot.Trim().ToUpper();
                             char premiereLettre = motNettoye[0];
 
-                            // Vérifiez si la clé pour la lettre existe déjà
                             if (!this.sortedList.ContainsKey(premiereLettre))
                             {
                                 this.sortedList[premiereLettre] = new SortedList<int, List<string>>();
                             }
 
-                            // Vérifiez si la clé pour la longueur existe déjà
                             if (!this.sortedList[premiereLettre].ContainsKey(motNettoye.Length))
                             {
                                 this.sortedList[premiereLettre][motNettoye.Length] = new List<string>();
                             }
 
-                            // Ajouter le mot à la liste correspondante
                             this.sortedList[premiereLettre][motNettoye.Length].Add(motNettoye);
                         }
                     }
                 }
-
                 Console.WriteLine("Fichier lu avec succès.");
             }
             catch (Exception e)
@@ -88,6 +84,15 @@ namespace ClassLibrary
             }
         }
 
+        /// <summary>
+        /// Cherche si un mot est présent dans la liste de chemin :
+        /// Key = premiereLettre > Key = nombre de lettre dans le mot
+        /// </summary>
+        /// <param name="liste"></param>
+        /// <param name="cherché"></param>
+        /// <param name="debut"></param>
+        /// <param name="fin"></param>
+        /// <returns></returns>
         public static bool RechDichoRecursif(List<string> liste, string cherché, int debut, int fin)
         {
             if (debut > fin) // Cas de base : indices invalides
@@ -102,22 +107,25 @@ namespace ClassLibrary
                 return true;
             }
 
-            // Recherche dans la moitié gauche
             bool CG = RechDichoRecursif(liste, cherché, debut, milieu - 1);
 
-            // Recherche dans la moitié droite
             bool CD = RechDichoRecursif(liste, cherché, milieu + 1, fin);
 
-            return CG || CD; // Si trouvé dans l'une des moitiés
+            return CG || CD;
         }
 
-        //mettre un return type string (pas de console.writeline)
-        public void toString()
-        { 
+        /// <summary>
+        /// Affiche les clés de la grande sortedList d'un dictionnaire
+        /// </summary>
+        /// <returns></returns>
+        public string toString()
+        {
+            string sortie = "";
             foreach(KeyValuePair<char,SortedList<int, List<string>>> val in this.sortedList)
             {
-                Console.WriteLine(val.Key);
+                sortie += $"{val.Key}\n";
             }
+            return sortie;
         }
         #endregion
     }
