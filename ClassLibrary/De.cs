@@ -49,20 +49,9 @@ namespace ClassLibrary
                 else { Faces[i] = '-'; }
             }
 
-            // Prendre une face visible aléatoirement
             if (lettresDisponibles.Count > 0)
             {
-                this.FaceVisible = Faces[random.Next(6)];
-
-                // Réduire le compteur de la lettre si elle est visible
-                if (dicoConfigLettres.ContainsKey(this.FaceVisible))
-                {
-                    dicoConfigLettres[this.FaceVisible]--;
-                    if (dicoConfigLettres[this.FaceVisible] == 0)
-                    {
-                        lettresDisponibles.Remove(this.FaceVisible);
-                    }
-                }
+                this.Lance(dicoConfigLettres, lettresDisponibles, random);
             }
             else
             {
@@ -72,6 +61,27 @@ namespace ClassLibrary
         #endregion
 
         #region Methodes
+        /// <summary>
+        /// Méthode qui lance un Dé pour définir sa face visible
+        /// </summary>
+        /// <param name="dicoConfigLettres"></param>
+        /// <param name="lettresDisponibles"></param>
+        /// <param name="random"></param>
+        public void Lance(Dictionary<char, int> dicoConfigLettres, List<char> lettresDisponibles, Random random)
+        {
+            this.FaceVisible = Faces[random.Next(6)];
+
+            // Réduire le compteur de la lettre si elle est visible
+            if (dicoConfigLettres.ContainsKey(this.FaceVisible))
+            {
+                dicoConfigLettres[this.FaceVisible]--;
+                if (dicoConfigLettres[this.FaceVisible] == 0)
+                {
+                    lettresDisponibles.Remove(this.FaceVisible);
+                }
+            }
+        }
+
         public string toString()
         {
             return $"Visible: {FaceVisible}, Faces: {string.Join(", ", Faces)}";
