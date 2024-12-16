@@ -13,8 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Éléments de solution", "�
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
-		C:\Users\ajx20\Downloads\background.jpg = C:\Users\ajx20\Downloads\background.jpg
+		background.jpg = background.jpg
 		Lettres.txt = Lettres.txt
+		MotsPossiblesEN.txt = MotsPossiblesEN.txt
+		MotsPossiblesFR.txt = MotsPossiblesFR.txt
 		README.md = README.md
 		TODO.md = TODO.md
 	EndProjectSection

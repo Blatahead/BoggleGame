@@ -128,11 +128,11 @@ namespace ClassLibrary
                 throw new FileNotFoundException($"Fichier introuvable : {cheminFichier}");
             }
 
-            var dicoConfigLettres = new Dictionary<char, int>();
+            Dictionary<char, int> dicoConfigLettres = new Dictionary<char, int>();
 
             foreach (string ligne in File.ReadAllLines(cheminFichier))
             {
-                var parties = ligne.Split(';');
+                string[] parties = ligne.Split(';');
                 if (parties.Length != 3 || !char.IsLetter(parties[0][0]) || !int.TryParse(parties[2], out int maxApparitions) || maxApparitions <= 0)
                 {
                     throw new FormatException($"Ligne mal formatée : {ligne}");
@@ -159,11 +159,11 @@ namespace ClassLibrary
                 throw new FileNotFoundException($"Fichier introuvable : {cheminFichier}");
             }
 
-            var dicoValeursLettres = new Dictionary<char, int>();
+            Dictionary<char,int> dicoValeursLettres = new Dictionary<char, int>();
 
             foreach (string ligne in File.ReadAllLines(cheminFichier))
             {
-                var parties = ligne.Split(';');
+                string[] parties = ligne.Split(';');
                 if (parties.Length >= 2 && char.IsLetter(parties[0][0]) && int.TryParse(parties[1], out int valeur))
                 {
                     dicoValeursLettres[parties[0][0]] = valeur;

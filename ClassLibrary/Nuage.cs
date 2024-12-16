@@ -40,7 +40,7 @@ namespace ClassLibrary
                     Random rand = new Random();
                     List<Rectangle> zonesOccupees = new List<Rectangle>();
 
-                    foreach (var mot in _frequences.OrderByDescending(kvp => kvp.Value))
+                    foreach (KeyValuePair<string,int> mot in _frequences.OrderByDescending(kvp => kvp.Value))
                     {
                         int taillePolice = Math.Min(10 + mot.Value * 5, 50);
                         using (Font font = new Font("Arial", taillePolice))
@@ -76,10 +76,10 @@ namespace ClassLibrary
             {
                 List<string> motsValides = new List<string>();
 
-                foreach (var entree in dictionnaire.SortedList)
+                foreach (KeyValuePair<char,SortedList<int, List<string>>> entree in dictionnaire.SortedList)
                 {
                     char lettre = entree.Key;
-                    foreach (var listeParLongueur in entree.Value)
+                    foreach (KeyValuePair<int,List<string>> listeParLongueur in entree.Value)
                     {
                         foreach (string mot in listeParLongueur.Value)
                         {

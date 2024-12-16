@@ -63,7 +63,7 @@ namespace BoggleGameWinForm
             {
                 this.joueurs = creationJoueurs.JoueursPartie;
                 this.motsTrouvesTourActuel = new Dictionary<Joueur, List<Mot>>();
-                foreach (var joueur in this.joueurs)
+                foreach (Joueur joueur in this.joueurs)
                 {
                     this.motsTrouvesTourActuel[joueur] = new List<Mot>();
                 }
@@ -152,7 +152,7 @@ namespace BoggleGameWinForm
         /// </summary>
         private void DemarrerTimerPartie()
         {
-            this.tempsRestant = TimeSpan.FromMinutes(1.5);
+            this.tempsRestant = TimeSpan.FromMinutes(3);
 
             this.horlogePartie = new System.Windows.Forms.Timer
             {
@@ -167,6 +167,9 @@ namespace BoggleGameWinForm
                 if (tempsRestant <= TimeSpan.Zero)
                 {
                     horlogePartie.Stop();
+                    horlogeJoueur.Stop();
+                    this.Close();
+
 
                     foreach (Joueur joueur in this.joueurs)
                     {
@@ -180,10 +183,9 @@ namespace BoggleGameWinForm
                     Gagnant(this.joueurs[0], this.joueurs[1]);
                     
                     // Génération du nuage complet
-                    string cheminFichierNuageBest = "nuage_de_mots_tous.png";
+                    string cheminFichierNuageBest = "nuage_tous_mots_dernier_plateau.png";
                     Nuage.GenererNuageDepuisPlateau(cheminFichierNuageBest, this.plateau, this.dictionnaire);
 
-                    this.Close();
                     Application.Exit();
                 }
             };
@@ -236,7 +238,7 @@ namespace BoggleGameWinForm
         /// </summary>
         private void TimerJoueur()
         {
-            TimeSpan tempsRestantJoueur = TimeSpan.FromMinutes(0.25);
+            TimeSpan tempsRestantJoueur = TimeSpan.FromMinutes(0.5);
 
             this.horlogeJoueur = new System.Windows.Forms.Timer
             {
@@ -284,7 +286,7 @@ namespace BoggleGameWinForm
 
                 this.plateau = new Plateau(this.taillePlateau, "./../../../../Lettres.txt");
 
-                foreach (var joueur in this.joueurs)
+                foreach (Joueur joueur in this.joueurs)
                 {
                     motsTrouvesTourActuel[joueur].Clear();
                 }
