@@ -34,6 +34,8 @@ namespace BoggleGame
         #endregion
 
         #region Méthodes
+
+        #region Design Bouton
         /// <summary>
         /// Design de tous les boutons de l'accueil
         /// </summary>
@@ -86,6 +88,7 @@ namespace BoggleGame
                 btn.Region = new Region(path);
             }
         }
+        #endregion
 
         /// <summary>
         /// Méthode qui gère la position et la taille d'un bouton.

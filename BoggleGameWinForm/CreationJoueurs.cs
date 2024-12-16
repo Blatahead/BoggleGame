@@ -22,7 +22,6 @@ namespace BoggleGameWinForm
             this.BackgroundImage = Image.FromFile("./../../../../background.jpg");
             this.BackgroundImageLayout = ImageLayout.Stretch;
 
-            // Initialiser les joueurs avec des valeurs par défaut ou null
             this.joueursPartie = new Joueur[2];
         }
         #endregion
@@ -34,6 +33,11 @@ namespace BoggleGameWinForm
         }
         #endregion
 
+        #region Méthodes
+        #region Design Bouton
+        /// <summary>
+        /// Design du bouton de la page de creation des joueurs
+        /// </summary>
         private void CustomizeButtons()
         {
             ConfigureButton(this.confirmCreationJoueurs);
@@ -45,16 +49,11 @@ namespace BoggleGameWinForm
                 PositionButton(this.confirmCreationJoueurs, 2, -100);
             };
         }
-        private void PositionButton(Button button, int widthDivider, int verticalOffset)
-        {
-            int largeur = this.ClientSize.Width / widthDivider; // Fraction de largeur disponible
-            int hauteur = 90; // Hauteur fixe
-            int posX = (this.ClientSize.Width - largeur) / 2; // Centré horizontalement
-            int posY = (this.ClientSize.Height / 2) + verticalOffset; // Décalage vertical
 
-            button.Size = new Size(largeur, hauteur);
-            button.Location = new Point(posX, posY);
-        }
+        /// <summary>
+        /// Design d'un bouton
+        /// </summary>
+        /// <param name="button"></param>
         private void ConfigureButton(Button button)
         {
             button.BackColor = Color.FromArgb(128, 45, 156, 219); // Bleu doux avec opacité
@@ -66,6 +65,11 @@ namespace BoggleGameWinForm
             // Coins arrondis
             button.Paint += Button_Paint;
         }
+        /// <summary>
+        /// Méthode qui arrondi les coins d'un bouton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Paint(object sender, PaintEventArgs e)
         {
             Button btn = (Button)sender;
@@ -90,7 +94,26 @@ namespace BoggleGameWinForm
                 }
             }
         }
-        #region Méthodes
+        #endregion
+
+        /// <summary>
+        /// Méthode qui gère la position et la taille d'un bouton.
+        /// Sert au responsive d'un bouton.
+        /// </summary>
+        /// <param name="button"></param>
+        /// <param name="widthDivider"></param>
+        /// <param name="verticalOffset"></param>
+        private void PositionButton(Button button, int widthDivider, int verticalOffset)
+        {
+            int largeur = this.ClientSize.Width / widthDivider; // Fraction de largeur disponible
+            int hauteur = 90; // Hauteur fixe
+            int posX = (this.ClientSize.Width - largeur) / 2; // Centré horizontalement
+            int posY = (this.ClientSize.Height / 2) + verticalOffset; // Décalage vertical
+
+            button.Size = new Size(largeur, hauteur);
+            button.Location = new Point(posX, posY);
+        }
+
         /// <summary>
         /// Crée un tableau de joueurs en fonction des champs texte.
         /// </summary>

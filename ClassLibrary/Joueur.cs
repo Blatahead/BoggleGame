@@ -26,13 +26,13 @@ namespace ClassLibrary
         public Joueur(string pseudo1)
         {
             this.pseudo = pseudo1;
-            this.listeMotsTrouves = new List<Mot>(); //sécurité car nulle au début
+            this.listeMotsTrouves = new List<Mot>();
         }
 
         public Joueur(string pseudo1, List<Mot> listeMotTrouves1, int compteurBonsMots1, int compteurMauvaisMots1, int score)
         {
             this.pseudo = pseudo1;
-            this.listeMotsTrouves = listeMotTrouves1 ?? new List<Mot>(); //sécurité car nulle au début
+            this.listeMotsTrouves = listeMotTrouves1 ?? new List<Mot>();
             this.compteurBonsMots = compteurBonsMots1;
             this.compteurMauvaisMots = compteurMauvaisMots1;
             this.score=score;
