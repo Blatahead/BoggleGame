@@ -116,7 +116,6 @@
             Name = "Accueil";
             Text = "Form1";
             WindowState = FormWindowState.Maximized;
-            //Load += Chargement_Accueil;
             tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
