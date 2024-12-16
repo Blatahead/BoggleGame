@@ -18,10 +18,7 @@ namespace ClassLibrary
             get { return this.faces; }
             set
             {
-                if (value == null || value.Length != 6)
-                {
-                    throw new ArgumentException("Un dé doit avoir exactement 6 faces.");
-                }
+                if (value == null || value.Length != 6) throw new ArgumentException("Un dé doit avoir exactement 6 faces.");
                 this.faces = value;
             }
         }
@@ -49,10 +46,7 @@ namespace ClassLibrary
 
                     Faces[i] = lettre;
                 }
-                else
-                {
-                    Faces[i] = '-'; // Quand plus de lettres disponibles
-                }
+                else { Faces[i] = '-'; }
             }
 
             // Prendre une face visible aléatoirement
@@ -72,13 +66,13 @@ namespace ClassLibrary
             }
             else
             {
-                this.FaceVisible = '-'; // Quand lettre non valide
+                this.FaceVisible = '-';
             }
         }
         #endregion
 
         #region Methodes
-        public override string ToString()
+        public string toString()
         {
             return $"Visible: {FaceVisible}, Faces: {string.Join(", ", Faces)}";
         }

@@ -36,7 +36,6 @@ namespace ClassLibrary
         }
         #endregion
 
-
         #region Méthodes
         /// <summary>
         /// Fonction qui permet de lire le bon dictionnaire en fonction de la langue souhaitée.
@@ -112,6 +111,66 @@ namespace ClassLibrary
             bool CD = RechDichoRecursif(liste, cherché, milieu + 1, fin);
 
             return CG || CD;
+        }
+
+        /// <summary>
+        /// Permet de charger les colonnes 0 et 2 du fichier Lettres.txt
+        /// Utilisation dans le cadre de la configuration
+        /// </summary>
+        /// <param name="cheminFichier"></param>
+        /// <returns></returns>
+        /// <exception cref="FileNotFoundException"></exception>
+        /// <exception cref="FormatException"></exception>
+        public static Dictionary<char, int> ChargerDicoConfigLettres(string cheminFichier)
+        {
+            if (!File.Exists(cheminFichier))
+            {
+                throw new FileNotFoundException($"Fichier introuvable : {cheminFichier}");
+            }
+
+            var dicoConfigLettres = new Dictionary<char, int>();
+
+            foreach (string ligne in File.ReadAllLines(cheminFichier))
+            {
+                var parties = ligne.Split(';');
+                if (parties.Length != 3 || !char.IsLetter(parties[0][0]) || !int.TryParse(parties[2], out int maxApparitions) || maxApparitions <= 0)
+                {
+                    throw new FormatException($"Ligne mal formatée : {ligne}");
+                }
+
+                char lettre = parties[0][0];
+                dicoConfigLettres[lettre] = maxApparitions;
+            }
+
+            return dicoConfigLettres;
+        }
+
+        /// <summary>
+        /// Permet de charger les colonnes 0 et 1 du fichier Lettres.txt
+        /// Utilisation dans le cadre du comptage des points
+        /// </summary>
+        /// <param name="cheminFichier"></param>
+        /// <returns></returns>
+        /// <exception cref="FileNotFoundException"></exception>
+        public static Dictionary<char, int> ChargerDicoValeursLettres(string cheminFichier)
+        {
+            if (!File.Exists(cheminFichier))
+            {
+                throw new FileNotFoundException($"Fichier introuvable : {cheminFichier}");
+            }
+
+            var dicoValeursLettres = new Dictionary<char, int>();
+
+            foreach (string ligne in File.ReadAllLines(cheminFichier))
+            {
+                var parties = ligne.Split(';');
+                if (parties.Length >= 2 && char.IsLetter(parties[0][0]) && int.TryParse(parties[1], out int valeur))
+                {
+                    dicoValeursLettres[parties[0][0]] = valeur;
+                }
+            }
+
+            return dicoValeursLettres;
         }
 
         /// <summary>
