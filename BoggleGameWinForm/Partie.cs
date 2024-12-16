@@ -164,10 +164,8 @@ namespace BoggleGameWinForm
                         //MessageBox.Show($"Nuage de mots enregistré sous : {cheminFichier}");
                     }
 
-                    MessageBox.Show("Temps écoulé !\n"
-                        +$"{this.joueurs[0].Pseudo} a {this.joueurs[0].Score} points.\n" 
-                        +$"{this.joueurs[1].Pseudo} a {this.joueurs[1].Score} points.");
-
+                    Gagnant(this.joueurs[0], this.joueurs[1]);
+                    
                     // Génération du nuage complet
                     string cheminFichierNuageBest = "nuage_de_mots_tous.png";
                     Nuage.GenererNuageDepuisPlateau(cheminFichierNuageBest, this.plateau, this.dictionnaire);
@@ -264,6 +262,29 @@ namespace BoggleGameWinForm
 
             this.peudoJoueur.Text = this.currentJoueur.Pseudo;
             TimerJoueur();
+        }
+
+        /// <summary>
+        /// Détermine le gagnant d'une partie
+        /// </summary>
+        /// <param name="p1"></param>
+        /// <param name="p2"></param>
+        private static void Gagnant(Joueur p1, Joueur p2)
+        {
+            if (p1.Score > p2.Score)
+            {
+                MessageBox.Show(p1.Pseudo + " a gagné la partie! Bien joué à tous!\n"
+                    + "Temps écoulé !\n"
+                        + $"{p1.Pseudo} a {p1.Score} points.\n"
+                        + $"{p2.Pseudo} a {p2.Score} points.");
+            }
+            if (p2.Score > p1.Score)
+            {
+                MessageBox.Show(p2.Pseudo + " a gagné la partie! Bien joué à tous!\n"
+                    + "Temps écoulé !\n"
+                        + $"{p1.Pseudo} a {p1.Score} points.\n"
+                        + $"{p2.Pseudo} a {p2.Score} points.");
+            }
         }
 
         /// <summary>

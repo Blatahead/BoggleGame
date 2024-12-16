@@ -11,67 +11,51 @@ namespace ClassLibrary
     public class Joueur
     {
         #region Attributs
-
         string pseudo;
         List<Mot> listeMotsTrouves;
-        TimeSpan tempsRestant;
-        int compteurBonsMots;
-        int compteurMauvaisMots;
         int score;
-
         #endregion
 
         #region Constructeurs
-
         public Joueur(string pseudo1)
         {
             this.pseudo = pseudo1;
             this.listeMotsTrouves = new List<Mot>();
         }
 
-        public Joueur(string pseudo1, List<Mot> listeMotTrouves1, int compteurBonsMots1, int compteurMauvaisMots1, int score)
+        public Joueur(string pseudo1, List<Mot> listeMotTrouves1, int score)
         {
             this.pseudo = pseudo1;
             this.listeMotsTrouves = listeMotTrouves1 ?? new List<Mot>();
-            this.compteurBonsMots = compteurBonsMots1;
-            this.compteurMauvaisMots = compteurMauvaisMots1;
             this.score=score;
         }
         #endregion
 
-        
-
         #region Propriétés
-
         public string Pseudo
         { get { return this.pseudo; } }
-
-        public TimeSpan TempsRestant
-        { get { return this.tempsRestant; } set { this.tempsRestant = value; } }
 
         public List<Mot> ListeMotsTrouves
         { get { return this.listeMotsTrouves; } }
         
         public int Score
-        {
-            get { return this.score; }
-            set { score=value; }
-        }
-
+        { get { return this.score; } set { score=value; } }
         #endregion
 
-        #region Méthodes
-        ////////////////////////////////
-        ///Timer joueurs à bouger ici///
-        /////////////////////////////////
-        
-
-        //utiliser où ? car l'impression que c'est inutile
+        #region Méthodes        
+        /// <summary>
+        /// Permet d'ajouter un Mot à la liste de mot trouvé du joueur
+        /// </summary>
+        /// <param name="mot"></param>
         public void AddMot(Mot mot)
         {
             this.listeMotsTrouves.Add(mot);
         }
 
+        /// <summary>
+        /// Retourne une string de tous les mots trouvé par le joueur
+        /// </summary>
+        /// <returns></returns>
         public string toStringListeMotsTrouves()
         {
             string liste = "";
@@ -81,6 +65,15 @@ namespace ClassLibrary
             }
             return liste;
         }
+
+        /// <summary>
+        /// Calcule les poids de tous les caractères de tous les bons mots entrés par le jouur.
+        /// Ajoute ces points au score du joueur.
+        /// </summary>
+        /// <param name="estValide"></param>
+        /// <param name="saisie"></param>
+        /// <param name="valeursLettres"></param>
+        /// <returns></returns>
         public int ComptagePointsParPoids(bool estValide, string saisie, Dictionary<char, int> valeursLettres)
         {
             int points = 0;
@@ -96,6 +89,12 @@ namespace ClassLibrary
             }
             return points;
         }
+
+        /// <summary>
+        /// Calcule la longueur de tous les mots valides entrés par le joueur.
+        /// Ajoute ces points au score du joueur en fin de partie.
+        /// </summary>
+        /// <returns></returns>
         public int ComptagePointsParLongueur()
         {
             int total = 0;
@@ -123,19 +122,11 @@ namespace ClassLibrary
             }
             return total;
         }
-        public static void Gagnant(Joueur p1,Joueur p2)
-        {
-            if (p1.Score>p2.Score)
-            {
-                Console.WriteLine(p1.pseudo+" a gagné(e) la partie! Bien joué à tous!");
-            }
-            if (p2.Score>p1.Score)
-            {
-                Console.WriteLine(p2.pseudo+" a gagné(e) la partie! Bien joué à tous!");
-            }
-        }
 
-        // pas testée
+        /// <summary>
+        /// Affiche les informations du joueur (pseudo, score, liste des mots trouvés)
+        /// </summary>
+        /// <returns></returns>
         public string toString()
         {
             return $"Le joueur {this.pseudo} a {this.score} points et a trouvé {this.listeMotsTrouves.Count()} mots.";
