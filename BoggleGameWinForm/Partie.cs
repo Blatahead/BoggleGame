@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClassLibrary;
+using ClassLibrary.ClassLibrary;
 
 namespace BoggleGameWinForm
 {
@@ -143,7 +144,7 @@ namespace BoggleGameWinForm
         /// </summary>
         private void DemarrerTimerPartie()
         {
-            this.tempsRestant = TimeSpan.FromMinutes(2);
+            this.tempsRestant = TimeSpan.FromMinutes(0.2);
 
             this.horlogePartie = new System.Windows.Forms.Timer
             {
@@ -165,10 +166,19 @@ namespace BoggleGameWinForm
                     foreach (Joueur joueur in this.joueurs)
                     {
                         joueur.Score += joueur.ComptagePointsParLongueur();
+                        Nuage nuage = new Nuage(Mot.ListeDeMotsEnListeDeString(joueur.ListeMotsTrouves));
+                        string cheminFichier = $"nuage_de_mots{joueur.Pseudo}.png";
+                        nuage.GenererImageNuage(cheminFichier, 400, 300);
+                        MessageBox.Show($"Nuage de mots enregistré sous : {cheminFichier}");
                     }
 
                     MessageBox.Show($"{this.joueurs[0].Pseudo} a {this.joueurs[0].Score} points.\n" +
                                     $"{this.joueurs[1].Pseudo} a {this.joueurs[1].Score} points.");
+
+                    // Appeler la génération du nuage
+                    string cheminFichierNuageBest = "nuage_de_mots_tous.png";
+                    Nuage.GenererNuageDepuisPlateau(cheminFichierNuageBest, this.plateau, this.dictionnaire);
+
                 }
             };
             this.horlogePartie.Start();
