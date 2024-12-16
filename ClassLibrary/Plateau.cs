@@ -10,49 +10,38 @@ namespace ClassLibrary
     public class Plateau
     {
         #region Attributs
-
         De[,] matrice;
         int taille;
-
         #endregion
 
         #region Proprietes
+        public De[,] Matrice { get {return this.matrice; } set {this.matrice = value; }}
 
-        public De[,] Matrice 
-        {
-            get {return this.matrice; }
-            set {this.matrice = value; }
-        }
-        public int Taille 
-        { 
-            get { return this.taille; }
-            set { this.taille = value; }
-        }
-
+        public int Taille { get { return this.taille; } set { this.taille = value; }}
         #endregion
 
         #region Constructeur
-
         public Plateau(int taille1, string fichierConfigLetttres)
         {
             this.taille = taille1;
             this.matrice = new De[taille1, taille1];
             RemplirPlateau(fichierConfigLetttres);
         }
-
         #endregion
 
         #region Méthodes
 
+        /// <summary>
+        /// Remplir la matrice de Dé d'un plateau depuis le fichier de configuration des lettres
+        /// </summary>
+        /// <param name="fichierConfigLetttres"></param>
         private void RemplirPlateau(string fichierConfigLetttres)
         {
-            var dicoConfigLettres = ChargerDicoConfigLettres(fichierConfigLetttres);
-
-            var lettresDisponibles = dicoConfigLettres.Keys.ToList();
+            Dictionary<char, int> dicoConfigLettres = Dictionnaire.ChargerDicoConfigLettres(fichierConfigLetttres);
+            List<char> lettresDisponibles = dicoConfigLettres.Keys.ToList();
 
             Random random = new Random();
 
-            // Générer un dé pour chaque case du plateau
             for (int i = 0; i < this.taille; i++)
             {
                 for (int j = 0; j < this.taille; j++)
@@ -62,53 +51,11 @@ namespace ClassLibrary
             }
         }
 
-        //peut-être à faire dans la classe dico
-        private Dictionary<char, int> ChargerDicoConfigLettres(string cheminFichier)
-        {
-            if (!File.Exists(cheminFichier))
-            {
-                throw new FileNotFoundException($"Fichier introuvable : {cheminFichier}");
-            }
-
-            var dicoConfigLettres = new Dictionary<char, int>();
-
-            foreach (string ligne in File.ReadAllLines(cheminFichier))
-            {
-                var parties = ligne.Split(';');
-                if (parties.Length != 3 || !char.IsLetter(parties[0][0]) || !int.TryParse(parties[2], out int maxApparitions) || maxApparitions <= 0)
-                {
-                    throw new FormatException($"Ligne mal formatée : {ligne}");
-                }
-
-                char lettre = parties[0][0];
-                dicoConfigLettres[lettre] = maxApparitions;
-            }
-
-            return dicoConfigLettres;
-        }
-
-        //A déplacere peut-être dans la classe dico
-        public static Dictionary<char, int> ChargerDicoValeursLettres(string cheminFichier)
-        {
-            if (!File.Exists(cheminFichier))
-            {
-                throw new FileNotFoundException($"Fichier introuvable : {cheminFichier}");
-            }
-
-            var dicoValeursLettres = new Dictionary<char, int>();
-
-            foreach (string ligne in File.ReadAllLines(cheminFichier))
-            {
-                var parties = ligne.Split(';');
-                if (parties.Length >= 2 && char.IsLetter(parties[0][0]) && int.TryParse(parties[1], out int valeur))
-                {
-                    dicoValeursLettres[parties[0][0]] = valeur;
-                }
-            }
-
-            return dicoValeursLettres;
-        }
-
+        /// <summary>
+        /// Teste la présence d'un mot dans le plateau à l'aide de la méthode ChercheMotRecursif
+        /// </summary>
+        /// <param name="mot"></param>
+        /// <returns></returns>
         public bool TestPlateau(string mot)
         {
             if((mot == null) || (mot.Length <=0) ||
@@ -128,6 +75,16 @@ namespace ClassLibrary
             return false; 
         }
 
+        /// <summary>
+        /// Méthode récursive qui parcourt le plateau.
+        /// Revient en arrière si un chemin ne mène à rien de valide.
+        /// </summary>
+        /// <param name="mot"></param>
+        /// <param name="indice"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="lettresParcourues"></param>
+        /// <returns></returns>
         private bool ChercherMotRecursif(string mot, int indice, int x, int y, bool[,] lettresParcourues)
         {
             // condition d'arrêt
@@ -152,7 +109,6 @@ namespace ClassLibrary
             int[] directionsX = { -1, -1, -1, 0, 0, 1, 1, 1 };
             int[] directionsY = { -1, 0, 1, -1, 1, -1, 0, 1 };
 
-            // les parcourir
             for (int p = 0; p < 8; p++)
             {
                 int nouvX = x + directionsX[p];
@@ -163,13 +119,16 @@ namespace ClassLibrary
                     return true;
                 }
             }
-
             // explorer d'autres chemins à partir du cran précédant
             lettresParcourues[x, y] = false;
 
             return false;
         }
 
+        /// <summary>
+        /// Retourne le plateau sous forme de string
+        /// </summary>
+        /// <returns></returns>
         public string toString()
         {
             string lignes = "";

@@ -8,6 +8,19 @@ namespace ClassLibrary
 {
     public class Tris
     {
+        /// <summary>
+        /// Extériorise le tri de la liste passée en paramètre
+        /// </summary>
+        /// <param name="liste"></param>
+        /// <returns></returns>
+        public static List<string> PreparerListePourRecherche(List<string> liste)
+        {
+            if (liste == null || liste.Count() <= 1)
+                return liste;
+
+            Tris.TriFusion(liste, 0, liste.Count() - 1);
+            return liste;
+        }
         #region Tri Fusion
         public static void TriFusion(List<string> liste, int debut, int fin)
         {

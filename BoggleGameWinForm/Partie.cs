@@ -15,7 +15,6 @@ namespace BoggleGameWinForm
     public partial class Partie : Form
     {
         #region Attributs
-
         string langue;
         int taillePlateau;
         Joueur[] joueurs;
@@ -27,13 +26,9 @@ namespace BoggleGameWinForm
         private System.Windows.Forms.Timer horlogeJoueur;
 
         private TimeSpan tempsRestant;
-
-        bool isRunning;
-
         #endregion
 
         #region Constructeur
-
         public Partie()
         {
             InitializeComponent();
@@ -160,25 +155,22 @@ namespace BoggleGameWinForm
                 {
                     horlogePartie.Stop();
 
-                    // fin de partie
-                    MessageBox.Show("Temps écoulé !");
-
                     foreach (Joueur joueur in this.joueurs)
                     {
                         joueur.Score += joueur.ComptagePointsParLongueur();
                         Nuage nuage = new Nuage(Mot.ListeDeMotsEnListeDeString(joueur.ListeMotsTrouves));
                         string cheminFichier = $"nuage_de_mots{joueur.Pseudo}.png";
                         nuage.GenererImageNuage(cheminFichier, 400, 300);
-                        MessageBox.Show($"Nuage de mots enregistré sous : {cheminFichier}");
+                        //MessageBox.Show($"Nuage de mots enregistré sous : {cheminFichier}");
                     }
 
-                    MessageBox.Show($"{this.joueurs[0].Pseudo} a {this.joueurs[0].Score} points.\n" +
-                                    $"{this.joueurs[1].Pseudo} a {this.joueurs[1].Score} points.");
+                    MessageBox.Show("Temps écoulé !\n"
+                        +$"{this.joueurs[0].Pseudo} a {this.joueurs[0].Score} points.\n" 
+                        +$"{this.joueurs[1].Pseudo} a {this.joueurs[1].Score} points.");
 
-                    // Appeler la génération du nuage
+                    // Génération du nuage complet
                     string cheminFichierNuageBest = "nuage_de_mots_tous.png";
                     Nuage.GenererNuageDepuisPlateau(cheminFichierNuageBest, this.plateau, this.dictionnaire);
-
                 }
             };
             this.horlogePartie.Start();
@@ -220,7 +212,6 @@ namespace BoggleGameWinForm
         /// </summary>
         private void NouveauTourJoueur()
         {
-            this.isRunning = true;
             this.currentJoueur = this.joueurs[0];
             this.peudoJoueur.Text = this.currentJoueur.Pseudo;
             TimerJoueur();
@@ -259,7 +250,6 @@ namespace BoggleGameWinForm
                     PasserAuProchainJoueur();
                 }
             };
-
             this.horlogeJoueur.Start();
         }
 
@@ -272,23 +262,8 @@ namespace BoggleGameWinForm
             int nextIndex = (indexCurrent + 1) % joueurs.Length;
             this.currentJoueur = joueurs[nextIndex];
 
-            // Démarrer le tour du prochain joueur
             this.peudoJoueur.Text = this.currentJoueur.Pseudo;
             TimerJoueur();
-        }
-
-        /// <summary>
-        /// Extériorise le tri de la liste passée en paramètre
-        /// </summary>
-        /// <param name="liste"></param>
-        /// <returns></returns>
-        private List<string> PreparerListePourRecherche(List<string> liste)
-        {
-            if (liste == null || liste.Count() <= 1)
-                return liste;
-
-            Tris.TriFusion(liste, 0, liste.Count() - 1);
-            return liste;
         }
 
         /// <summary>
@@ -304,7 +279,6 @@ namespace BoggleGameWinForm
                 string saisie = this.inputBoxMots.Text.Trim().ToUpper();
                 this.inputBoxMots.Clear();
 
-                // Conditions de validité
                 bool estValide = saisie.Length >= 2
                     && !saisie.Contains(" ")
                     && this.plateau.TestPlateau(saisie)
@@ -312,13 +286,13 @@ namespace BoggleGameWinForm
                     && this.dictionnaire.SortedList[saisie[0]].ContainsKey(saisie.Length)
                     && this.dictionnaire.SortedList[saisie[0]][saisie.Length].Count > 0
                     && Dictionnaire.RechDichoRecursif(
-                        PreparerListePourRecherche(this.dictionnaire.SortedList[saisie[0]][saisie.Length]),
+                        Tris.PreparerListePourRecherche(this.dictionnaire.SortedList[saisie[0]][saisie.Length]),
                         saisie,
                         0,
                         this.dictionnaire.SortedList[saisie[0]][saisie.Length].Count - 1);
 
                 // Calculs
-                Dictionary<char, int> valeursLettres = Plateau.ChargerDicoValeursLettres("./../../../../Lettres.txt");
+                Dictionary<char, int> valeursLettres = Dictionnaire.ChargerDicoValeursLettres("./../../../../Lettres.txt");
                 
                 char premiereLettre = estValide ? char.ToUpper(saisie[0]) : '\0';
                 int longueur = estValide ? saisie.Length : 0;
