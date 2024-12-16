@@ -56,12 +56,10 @@ namespace ClassLibrary
             return (this.valeur == mot2.Valeur) && (this.longueur == mot2.Longueur) 
                 && (this.points == mot2.Points);
         }
-     
-
-
-
-
-
+        public static List<string> ListeDeMotsEnListeDeString(List<Mot> listeMots)
+        {
+            return listeMots.Select(m => m.Valeur).ToList();
+        }
         #endregion
     }
 }

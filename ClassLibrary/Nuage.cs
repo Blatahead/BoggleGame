@@ -1,76 +1,117 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 
 namespace ClassLibrary
 {
 
-    //class Nuage
-    //{
-    //    private Dictionary<string, int> _frequences;
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Linq;
+    using System.Text;
 
-    //    public Nuage(List<string> Ensemble_Mots)
-    //    {
-    //        _frequences = CalculerFrequences(Ensemble_Mots);
-    //    }
+    namespace ClassLibrary
+    {
+        public class Nuage
+        {
+            private Dictionary<string, int> _frequences;
 
-    //    private Dictionary<string, int> CalculerFrequences(List<string> mots)
-    //    {
-    //        return mots.GroupBy(m => m)
-    //                   .ToDictionary(g => g.Key, g => g.Count());
-    //    }
+            public Nuage(List<string> Ensemble_Mots)
+            {
+                _frequences = CalculerFrequences(Ensemble_Mots);
+            }
 
-    //    public void AfficherNuage()
-    //    {
-    //        foreach (var mot in _frequences.OrderByDescending(kvp => kvp.Value))
-    //        {
-    //            int taillePolice = Math.Min(10 + mot.Value * 5, 50); // Taille dynamique
-    //            Console.WriteLine($"{mot.Key} (taille: {taillePolice})");
-    //        }
-    //    }
+            private Dictionary<string, int> CalculerFrequences(List<string> mots)
+            {
+                return mots.GroupBy(m => m)
+                           .ToDictionary(g => g.Key, g => g.Count());
+            }
 
-    //    public void GenererImageNuage(string cheminFichier, int largeur, int hauteur)
-    //    {
-    //        using (Bitmap bitmap = new Bitmap(largeur, hauteur))
-    //        using (Graphics graphics = Graphics.FromImage(bitmap))
-    //        {
-    //            graphics.Clear(Color.White);
-    //            Random rand = new Random();
+            public void GenererImageNuage(string cheminFichier, int largeur, int hauteur)
+            {
+                using (Bitmap bitmap = new Bitmap(largeur, hauteur))
+                using (Graphics graphics = Graphics.FromImage(bitmap))
+                {
+                    graphics.Clear(Color.White);
+                    Random rand = new Random();
+                    List<Rectangle> zonesOccupees = new List<Rectangle>();
 
-    //            foreach (var mot in _frequences)
-    //            {
-    //                int taillePolice = Math.Min(10 + mot.Value * 5, 50);
-    //                using (Font font = new Font("Arial", taillePolice))
-    //                {
-    //                    var position = new Point(rand.Next(0, largeur - 100), rand.Next(0, hauteur - 50));
-    //                    graphics.DrawString(mot.Key, font, Brushes.Black, position);
-    //                }
-    //            }
+                    foreach (var mot in _frequences.OrderByDescending(kvp => kvp.Value))
+                    {
+                        int taillePolice = Math.Min(10 + mot.Value * 5, 50);
+                        using (Font font = new Font("Arial", taillePolice))
+                        {
+                            SizeF tailleMot = graphics.MeasureString(mot.Key, font);
+                            Rectangle rectMot;
+                            int essais = 0;
 
-    //            bitmap.Save(cheminFichier);
-    //        }
-    //    }
-    //}
+                            do
+                            {
+                                int x = rand.Next(0, largeur - (int)tailleMot.Width);
+                                int y = rand.Next(0, hauteur - (int)tailleMot.Height);
+                                rectMot = new Rectangle(x, y, (int)tailleMot.Width, (int)tailleMot.Height);
+                                essais++;
 
-    //class Program
-    //{
-    //    static void Main(string[] args)
-    //    {
-    //        List<string> Ensemble_Mots = new List<string> { "C#", "nuage", "mots", "programmation", "C#", "nuage", "classe", "nuage", "code" };
+                                if (essais > 100) break;
 
-    //        Nuage nuage = new Nuage(Ensemble_Mots);
-    //        nuage.AfficherNuage();
+                            } while (zonesOccupees.Any(zone => zone.IntersectsWith(rectMot)));
 
-    //        string cheminFichier = "nuage_de_mots.png";
-    //        nuage.GenererImageNuage(cheminFichier, 800, 600);
+                            if (essais <= 100)
+                            {
+                                graphics.DrawString(mot.Key, font, Brushes.Black, rectMot.Location);
+                                zonesOccupees.Add(rectMot);
+                            }
+                        }
+                    }
 
-    //        Console.WriteLine($"Nuage de mots enregistré sous : {cheminFichier}");
-    //    }
-    //}
+                    bitmap.Save(cheminFichier);
+                }
+            }
+
+            public static List<string> TrouverTousLesMotsValides(Plateau plateau, Dictionnaire dictionnaire)
+            {
+                List<string> motsValides = new List<string>();
+
+                foreach (var entree in dictionnaire.SortedList)
+                {
+                    char lettre = entree.Key;
+                    foreach (var listeParLongueur in entree.Value)
+                    {
+                        foreach (string mot in listeParLongueur.Value)
+                        {
+                            if (plateau.TestPlateau(mot))
+                            {
+                                motsValides.Add(mot);
+                            }
+                        }
+                    }
+                }
+
+                return motsValides.Distinct().ToList();
+            }
+
+            public static void GenererNuageDepuisPlateau(string cheminFichier, Plateau plateau, Dictionnaire dictionnaire)
+            {
+                List<string> motsValides = TrouverTousLesMotsValides(plateau, dictionnaire);
+
+                if (motsValides.Count > 0)
+                {
+                    Nuage nuage = new Nuage(motsValides);
+                    nuage.GenererImageNuage(cheminFichier, 1800, 1100);
+                    Console.WriteLine($"Nuage de mots enregistré sous : {cheminFichier}");
+                }
+                else
+                {
+                    Console.WriteLine("Aucun mot valide trouvé sur le plateau.");
+                }
+            }
+        }
+    }
 }
-
 
 
 //Explications
@@ -90,16 +131,3 @@ namespace ClassLibrary
 //Une liste de mots est donnée.
 //Le nuage est affiché dans la console et sauvegardé en tant qu’image.
 //Ce code génère un nuage de mots visuel et textuel adapté à vos besoins. Vous pouvez le personnaliser pour ajouter plus d'options graphiques.
-
-//IMPORTANT (Pour Antonin car je sais pas faire je suis teuteu). Comme tu l'auras remarqué, "Bitmap" et "Graphics" ne sont pas reconnues dans "System.Drawing".
-//Pour résoudre ce problème:
-//Le problème vient du fait que l'espace de noms System.Drawing n'est pas entièrement pris en charge dans certains contextes .NET modernes (comme .NET Core ou .NET 5/6/7). Voici les étapes pour résoudre ce problème :
-
-//1.Ajouter la bibliothèque appropriée
-//Pour utiliser Bitmap et Graphics, vous devez installer le package NuGet System.Drawing.Common. Pour cela :
-
-//Ouvrez le gestionnaire de packages NuGet de votre projet.
-//Installez System.Drawing.Common via NuGet :
-// dotnet add package System.Drawing.Common
-
-
