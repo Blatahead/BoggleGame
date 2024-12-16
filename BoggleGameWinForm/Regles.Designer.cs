@@ -43,10 +43,10 @@
             detailsRegles.BackColor = Color.Transparent;
             detailsRegles.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             detailsRegles.ForeColor = Color.White;
-            detailsRegles.Location = new Point(0, 281);
+            detailsRegles.Location = new Point(0, 205);
             detailsRegles.Margin = new Padding(0);
             detailsRegles.Name = "detailsRegles";
-            detailsRegles.Size = new Size(959, 282);
+            detailsRegles.Size = new Size(959, 358);
             detailsRegles.TabIndex = 0;
             detailsRegles.Text = resources.GetString("detailsRegles.Text");
             detailsRegles.TextAlign = ContentAlignment.MiddleLeft;
@@ -61,7 +61,7 @@
             label2.ForeColor = Color.White;
             label2.Location = new Point(3, 0);
             label2.Name = "label2";
-            label2.Size = new Size(953, 281);
+            label2.Size = new Size(953, 67);
             label2.TabIndex = 1;
             label2.Text = "Règles du jeu";
             label2.TextAlign = ContentAlignment.MiddleCenter;
@@ -70,19 +70,15 @@
             // 
             tableLayoutPanelRules.BackColor = Color.Transparent;
             tableLayoutPanelRules.ColumnCount = 1;
-            tableLayoutPanelRules.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F)); // Une colonne à 100%
-
-            // Configuration des lignes
-            tableLayoutPanelRules.RowStyles.Clear(); // Effacer les styles existants
-            tableLayoutPanelRules.RowStyles.Add(new RowStyle(SizeType.AutoSize)); // Ligne 1 : Hauteur automatique
-            tableLayoutPanelRules.RowStyles.Add(new RowStyle(SizeType.Percent, 100F)); // Ligne 2 : Prend l'espace restant
-
+            tableLayoutPanelRules.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanelRules.Controls.Add(label2, 0, 0);
             tableLayoutPanelRules.Controls.Add(detailsRegles, 0, 1);
             tableLayoutPanelRules.Dock = DockStyle.Fill;
             tableLayoutPanelRules.Location = new Point(0, 0);
             tableLayoutPanelRules.Name = "tableLayoutPanelRules";
             tableLayoutPanelRules.RowCount = 2;
+            tableLayoutPanelRules.RowStyles.Add(new RowStyle());
+            tableLayoutPanelRules.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanelRules.Size = new Size(959, 563);
             tableLayoutPanelRules.TabIndex = 2;
             // 

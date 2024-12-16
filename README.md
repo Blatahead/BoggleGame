@@ -1,5 +1,7 @@
 # BoggleGame
 
+### L'exécutable se trouve dans `Projet\BoggleGameWinForm\bin\Debug\net8.0-windows`
+
 ## Description
 Ce projet est une version du jeu de mots "Boggle" en C#. 
 Les joueurs découvrent des mots en formant des chaînes de lettres adjacentes sur un plateau de dés. 
