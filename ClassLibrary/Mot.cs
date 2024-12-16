@@ -38,8 +38,6 @@ namespace ClassLibrary
         #endregion
 
         #region Methodes
-        // Méthode de recherche dans le dico (à voir si on la fait là ou dans la classe
-        // Dictionnaire
 
         public string toString()
         {

@@ -183,7 +183,6 @@ namespace ClassLibrary
             // Score total attendu
             int scoreAttendu = scoreMot1 + scoreMot2 + bonusLongueur;
 
-            // Assert
             Assert.AreEqual(scoreAttendu, joueur.Score, $"Le score final pour le joueur '{joueur.Pseudo}' est incorrect.");
         }
 
