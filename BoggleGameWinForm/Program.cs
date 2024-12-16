@@ -14,10 +14,6 @@ namespace BoggleGame
         {
             ApplicationConfiguration.Initialize();
             Application.Run(new Accueil());
-            
-            
         }
-
-        
     }
 }

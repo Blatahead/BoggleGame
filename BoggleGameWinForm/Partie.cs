@@ -152,7 +152,7 @@ namespace BoggleGameWinForm
         /// </summary>
         private void DemarrerTimerPartie()
         {
-            this.tempsRestant = TimeSpan.FromMinutes(4);
+            this.tempsRestant = TimeSpan.FromMinutes(1.5);
 
             this.horlogePartie = new System.Windows.Forms.Timer
             {
@@ -182,6 +182,9 @@ namespace BoggleGameWinForm
                     // Génération du nuage complet
                     string cheminFichierNuageBest = "nuage_de_mots_tous.png";
                     Nuage.GenererNuageDepuisPlateau(cheminFichierNuageBest, this.plateau, this.dictionnaire);
+
+                    this.Close();
+                    Application.Exit();
                 }
             };
             this.horlogePartie.Start();
@@ -233,7 +236,7 @@ namespace BoggleGameWinForm
         /// </summary>
         private void TimerJoueur()
         {
-            TimeSpan tempsRestantJoueur = TimeSpan.FromMinutes(1);
+            TimeSpan tempsRestantJoueur = TimeSpan.FromMinutes(0.25);
 
             this.horlogeJoueur = new System.Windows.Forms.Timer
             {
@@ -254,7 +257,7 @@ namespace BoggleGameWinForm
 
                     MessageBox.Show($"Tour terminé ! Voici les mots trouvés par {currentJoueur.Pseudo} :\n" +
                                     $"{currentJoueur.toStringListeMotsTrouves()}" +
-                                    $"\nScore final : {currentJoueur.Score}");
+                                    $"\nScore intermédiaire (poids) : {currentJoueur.Score}");
 
                     ReprendreTimer(this.horlogePartie, partieEnCours);
 
