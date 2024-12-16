@@ -9,8 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-//using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-
 namespace BoggleGameWinForm
 {
     public partial class Configurations : Form
@@ -18,29 +16,19 @@ namespace BoggleGameWinForm
         #region Attributs
         string langue;
         int taillePlateau;
-        bool isTrie;
         #endregion
 
         #region Proprietes
 
         public string Langue
-        {
-            get { return this.langue; }
-            set { this.langue = value; }
-        }
+        { get { return this.langue; } set { this.langue = value; } }
 
         public int TaillePlateau
-        {
-            get { return this.taillePlateau; }
-        }
+        { get { return this.taillePlateau; }}
 
-        public bool IsTrie
-        {
-            get { return this.isTrie; }
-        }
         #endregion
-        #region Constructeur
 
+        #region Constructeur
         public Configurations()
         {
             InitializeComponent();
@@ -55,25 +43,30 @@ namespace BoggleGameWinForm
 
             this.langue = "Français";//Par défaut
             this.taillePlateau = 4;//Par défaut
-            this.isTrie = true;//Par défaut
         }
-
         #endregion
 
         #region Méthodes
+
+        #region Design Bouton
+        /// <summary>
+        /// Design du bouton de la page de configuration
+        /// </summary>
         private void CustomizeButtons()
         {
-            // Configurer le bouton "Nouvelle partie"
             ConfigureButton(this.saveConfigButton);
 
-            // Ajuster la taille et la position des boutons dynamiquement
+            // Responsive
             this.Resize += (s, e) =>
             {
-                // Bouton "Nouvelle partie" : centré en haut
                 PositionButton(this.saveConfigButton, 2, -100);
             };
         }
 
+        /// <summary>
+        /// Design d'un bouton
+        /// </summary>
+        /// <param name="button"></param>
         private void ConfigureButton(Button button)
         {
             button.BackColor = Color.FromArgb(128, 45, 156, 219); // Bleu doux avec opacité
@@ -86,47 +79,61 @@ namespace BoggleGameWinForm
             button.Paint += Button_Paint;
         }
 
+        /// <summary>
+        /// Méthode qui arrondi les coins d'un bouton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Paint(object sender, PaintEventArgs e)
         {
             Button btn = (Button)sender;
 
-            // Créer un pinceau pour les coins arrondis
+            // Coins arrondis
             using (GraphicsPath path = new GraphicsPath())
             {
-                path.AddArc(0, 0, 20, 20, 180, 90); // Coin supérieur gauche
-                path.AddArc(btn.Width - 20, 0, 20, 20, 270, 90); // Coin supérieur droit
-                path.AddArc(btn.Width - 20, btn.Height - 20, 20, 20, 0, 90); // Coin inférieur droit
-                path.AddArc(0, btn.Height - 20, 20, 20, 90, 90); // Coin inférieur gauche
+                path.AddArc(0, 0, 20, 20, 180, 90); // Haut gauche
+                path.AddArc(btn.Width - 20, 0, 20, 20, 270, 90); // Haut droit
+                path.AddArc(btn.Width - 20, btn.Height - 20, 20, 20, 0, 90); // Bas droit
+                path.AddArc(0, btn.Height - 20, 20, 20, 90, 90); // Bas gauche
                 path.CloseAllFigures();
 
-                // Appliquer la région arrondie
                 btn.Region = new Region(path);
-
-                // Dessiner un contour
-                using (Pen pen = new Pen(Color.FromArgb(35, 135, 200), 2))
-                {
-                    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                    e.Graphics.DrawPath(pen, path);
-                }
             }
         }
+        #endregion
 
-        private void PositionButton(Button button, int widthDivider, int verticalOffset)
+        /// <summary>
+        /// Méthode qui gère la position et la taille d'un bouton.
+        /// Sert au responsive d'un bouton.
+        /// </summary>
+        /// <param name="button"></param>
+        /// <param name="diviseurDeLargeur"></param>
+        /// <param name="decalageVertical"></param>
+        private void PositionButton(Button button, int diviseurDeLargeur, int decalageVertical)
         {
-            int largeur = this.ClientSize.Width / widthDivider; // Fraction de largeur disponible
+            int largeur = this.ClientSize.Width / diviseurDeLargeur; // Fraction de largeur disponible
             int hauteur = 90; // Hauteur fixe
             int posX = (this.ClientSize.Width - largeur) / 2; // Centré horizontalement
-            int posY = (this.ClientSize.Height / 2) + verticalOffset; // Décalage vertical
+            int posY = (this.ClientSize.Height / 2) + decalageVertical; // Décalage vertical
 
             button.Size = new Size(largeur, hauteur);
             button.Location = new Point(posX, posY);
         }
         #region FetchDonnéesDeLaPage
+        /// <summary>
+        /// Récupère la langue entrée dans la boti de dialogue associée
+        /// </summary>
+        /// <returns></returns>
         private string FetchLangue()
         {
             this.langue = this.comboBoxLangue.SelectedItem.ToString();
             return this.langue;
         }
+        /// <summary>
+        /// Récupère la taille de plateau sélectionnée dans la liste
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         private int FetchTaille()
         {
             string taillePlateau = this.comboBoxTaille.SelectedItem.ToString();
@@ -159,22 +166,17 @@ namespace BoggleGameWinForm
             }
         }
 
-        private bool FetchIsTrie()
-        {
-            this.isTrie = this.isTrieText.Text == "Non trié" ? false : true;
-            return this.isTrie;
-        }
-
         #endregion
-        private void label5_Click(object sender, EventArgs e)
-        {
-            //appel d'une fonction de tri
-        }
+        /// <summary>
+        /// Enregistre les données saisies.
+        /// Ferme la page de configuration.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void saveConfigButton_Click(object sender, EventArgs e)
         {;
             FetchLangue();
             FetchTaille();
-            FetchIsTrie();
 
             this.DialogResult = DialogResult.OK;
             this.Close();

@@ -29,11 +29,8 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            label2 = new Label();
             label3 = new Label();
             comboBoxLangue = new ComboBox();
-            isTrieText = new Label();
-            button1 = new Button();
             label5 = new Label();
             comboBoxTaille = new ComboBox();
             saveConfigButton = new Button();
@@ -51,18 +48,6 @@
             label1.Size = new Size(343, 67);
             label1.TabIndex = 0;
             label1.Text = "Configurations";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Young Serif", 15F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.DeepSkyBlue;
-            label2.Location = new Point(61, 242);
-            label2.Name = "label2";
-            label2.Size = new Size(212, 33);
-            label2.TabIndex = 1;
-            label2.Text = "Tri de dictionnaire :";
             // 
             // label3
             // 
@@ -86,27 +71,6 @@
             comboBoxLangue.TabIndex = 3;
             comboBoxLangue.Text = "Sélectionner";
             // 
-            // isTrieText
-            // 
-            isTrieText.AutoSize = true;
-            isTrieText.BackColor = Color.Transparent;
-            isTrieText.Font = new Font("Young Serif", 15F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            isTrieText.ForeColor = Color.Red;
-            isTrieText.Location = new Point(276, 242);
-            isTrieText.Name = "isTrieText";
-            isTrieText.Size = new Size(98, 33);
-            isTrieText.TabIndex = 4;
-            isTrieText.Text = "Non trié";
-            // 
-            // button1
-            // 
-            button1.Location = new Point(400, 252);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 5;
-            button1.Text = "Trier";
-            button1.UseVisualStyleBackColor = true;
-            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -118,7 +82,6 @@
             label5.Size = new Size(191, 33);
             label5.TabIndex = 6;
             label5.Text = "Taille du plateau :";
-            label5.Click += label5_Click;
             // 
             // comboBoxTaille
             // 
@@ -150,11 +113,8 @@
             Controls.Add(saveConfigButton);
             Controls.Add(comboBoxTaille);
             Controls.Add(label5);
-            Controls.Add(button1);
-            Controls.Add(isTrieText);
             Controls.Add(comboBoxLangue);
             Controls.Add(label3);
-            Controls.Add(label2);
             Controls.Add(label1);
             Name = "Configurations";
             Text = "Configurations";
@@ -165,11 +125,8 @@
         #endregion
 
         private Label label1;
-        private Label label2;
         private Label label3;
         private ComboBox comboBoxLangue;
-        private Label isTrieText;
-        private Button button1;
         private Label label5;
         private ComboBox comboBoxTaille;
         private Button saveConfigButton;
